@@ -1,5 +1,7 @@
 package com.sunbeam.ocr;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,15 +15,15 @@ import com.gaurav.services.UserService;
 @SpringBootTest
 @ContextConfiguration(classes = BookstoreManagementSystemApplication.class)
 class BookstoreManagementSystemApplicationTests {
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Test
 	@Rollback(false)
 	void appTest() {
-		UserRegistrationDTO user=new UserRegistrationDTO("gaurav.ghenand@gmail.com","Gaurav@981");
+		UserRegistrationDTO user = new UserRegistrationDTO("gaurav", "ghenand", "9665105760",
+				"gaurav.ghenand@gmail.com", LocalDate.of(1998, 6, 15),"Gaurav@981");
 		userService.registerNewUserAccount(user);
 	}
-
 }

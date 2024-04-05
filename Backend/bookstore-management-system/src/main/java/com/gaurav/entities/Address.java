@@ -1,4 +1,5 @@
 package com.gaurav.entities;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -17,9 +18,13 @@ public class Address extends BaseEntity{
 	
 	@ManyToOne
 	private User user;
+	@Column(length = 50)
 	private String firstLine;
+	@Column(length = 50)
 	private String city;
+	@Column(length = 50)
 	private String state;
+	@Column(length = 6)
 	private String pincode;
 
 }

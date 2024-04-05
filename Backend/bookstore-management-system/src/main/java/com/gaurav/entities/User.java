@@ -1,8 +1,10 @@
 package com.gaurav.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "users")
@@ -21,22 +22,39 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "password")
 public class User extends BaseEntity {
 
+	@Column(length = 50)
+	private String firstName;
+	@Column(length = 50)
+	private String lastName;
+	@Column(length = 10)
+	private String phoneNo;
 	@Column(length = 50, unique = true, nullable = false)
 	private String email;
 	@Column(length = 255)
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	@OneToMany(mappedBy = "user")
+	@Column(length = 12)
+	private LocalDate dob;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Address> addressList = new ArrayList<>();
-	public User(String email, String password) {
+
+	public User(String firstName, String lastName, String phoneNo, String email, String password,LocalDate dob) {
 		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNo = phoneNo;
 		this.email = email;
 		this.password = password;
-		this.role=Role.USER;
+		this.role = Role.USER;
+		this.dob=dob;
+	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
 
 }

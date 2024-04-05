@@ -18,7 +18,7 @@ public class UserService {
 	PasswordEncoder passwordEncoder;
 
 	public User registerNewUserAccount(UserRegistrationDTO userRegDTO) {
-		User user = new User(userRegDTO.getEmail(), passwordEncoder.encode(userRegDTO.getPassword()));
+		User user = new User(userRegDTO.getFirstName(),userRegDTO.getLastName(),userRegDTO.getPhoneNo(),userRegDTO.getEmail(), passwordEncoder.encode(userRegDTO.getPassword()),userRegDTO.getDate());
 		if (emailExists(userRegDTO.getEmail()))
 			throw new EmailExistsException(userRegDTO.getEmail());
 		User registeredUser = userRepo.save(user);
@@ -29,5 +29,7 @@ public class UserService {
 	private boolean emailExists(String email) {
 		return userRepo.existsByEmail(email);
 	}
+	
+	
 
 }
