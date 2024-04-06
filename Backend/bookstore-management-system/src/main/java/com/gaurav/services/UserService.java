@@ -9,6 +9,8 @@ import com.gaurav.dtos.UserRegistrationDTO;
 import com.gaurav.entities.User;
 import com.gaurav.repositories.UserRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class UserService {
 	@Autowired
@@ -17,7 +19,7 @@ public class UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
-	public User registerNewUserAccount(UserRegistrationDTO userRegDTO) {
+	public User registerNewUserAccount(@Valid UserRegistrationDTO userRegDTO) {
 		User user = new User(userRegDTO.getFirstName(),userRegDTO.getLastName(),userRegDTO.getPhoneNo(),userRegDTO.getEmail(), passwordEncoder.encode(userRegDTO.getPassword()),userRegDTO.getDate());
 		if (emailExists(userRegDTO.getEmail()))
 			throw new EmailExistsException(userRegDTO.getEmail());

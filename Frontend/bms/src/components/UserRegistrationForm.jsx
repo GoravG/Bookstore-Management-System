@@ -9,38 +9,109 @@ import Footer from './Footer';
 function UserRegistrationForm() {
     const navigate = useNavigate();
     const baseURL = process.env.REACT_APP_API_URL;
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [dob, setDob] = useState("");
+    const [phoneNo, setPhoneNo] = useState("");
     const [password, setPassword] = useState("");
-    const handleSubmit = (e) => {
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [formErrors, setFormErrors] = useState("");
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        loginCitizen();
-        setEmail("");
-        setPassword("");
+        if (checkPasswords() != true) {
+            setFormErrors("Uh-oh! Passwords don't match. Let's sync them up for a smooth sail ahead. Thanks!");
+            return;
+        }
+        else
+            setFormErrors("");
+        if (formErrors.length == 0 && inputHasValues()) {
+            await registerUser();
+            clearInputs("");
+        }
+        return
     }
-    const loginCitizen = async () => {
-        let data = JSON.stringify({ "email": email, "password": password });
+    const inputHasValues = () => {
+        if (firstName.length == 0)
+            return false;
+        else if (lastName.length == 0)
+            return false;
+        else if (dob.length == 0)
+            return false;
+        else if (phoneNo.length == 0)
+            return false;
+        else if (password.length == 0)
+            return false;
+        else if (confirmPassword.length == 0)
+            return false;
+        else
+            return true;
+    }
+    const checkPasswords = () => {
+        if (confirmPassword != password)
+            return false;
+        else
+            return true;
+    }
+    const handleDobChange = (e) => {
+        setFormErrors("");
+
+        const birth = new Date(e.target.value);
+        const now = new Date();
+        if (birth > now)
+            setFormErrors("Oops! Looks like you're trying to time travel. Enter your real birthdate to join. Thanks!");
+        else {
+            var ageInMiliseconds = Math.abs(birth.getTime() - now.getTime());
+            const age = new Date();
+            age.setTime(ageInMiliseconds);
+            const ageYears = age.getFullYear() - 1970;
+            if (ageYears < 18)
+                setFormErrors("Hey! You've gotta be 18 or older to sign up. Thanks!");
+        }
+        setDob(e.target.value);
+    }
+    const clearInputs = () => {
+        setFirstName("");
+        setLastName("");
+        setDob("");
+        setPhoneNo("");
+        setPassword("");
+        setConfirmPassword("");
+        setEmail("");
+        setFormErrors("");
+    }
+    const registerUser = async () => {
+        let data = JSON.stringify({
+            "firstName": firstName,
+            "lastName": lastName,
+            "phoneNo": phoneNo,
+            "email": email,
+            "date": dob,
+            "password": password
+        });
+
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: baseURL + 'user/signin',
+            url: baseURL + 'user/register',
             headers: {
                 'Content-Type': 'application/json'
             },
             data: data
         };
+
         axios.request(config)
             .then((response) => {
-                sessionStorage.setItem("token", response.data);
-                toast.success("Login Successful");
-                navigate('/user/dashboard');
+                toast.success("User registration successsful");
+                navigate("/user/login");
             })
             .catch((error) => {
-                toast.warn("Login Failed");
+                toast.error("Something went wrong");
             });
     };
     return (
         <>
-            <div className="container container-fluid mt-5">
+            <div className="container container-fluid">
                 <div className="container">
                     <div className="row">
                         <div className="col">
@@ -48,21 +119,40 @@ function UserRegistrationForm() {
                         <div className="col">
                             <div className="container  p-3">
                                 <form action="submit">
-                                    <div className="mb-3">
-                                        <div className="text-center mt-2 fw-bolder"><h1>Register</h1></div>
-                                        <label htmlFor="email" className="form-label">Email ID:</label>
-                                        <input type="email" className="form-control" id="email" placeholder="example@example.com" value={email} onChange={(e) => setEmail(e.target.value)}
-                                            required />
+                                    <div className="text-center mt- fw-bolder"><h1>Register</h1></div>
+                                    <div class="form-floating mb-2">
+                                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name" autoFocus onChange={(e) => setFirstName(e.target.value)} value={firstName} required />
+                                        <label for="firstName">First Name</label>
                                     </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="password" className="form-label">Password:</label>
-                                        <input type="password" className="form-control" id="password" placeholder="Enter Your Password" value={password} onChange={(e) => setPassword(e.target.value)}
-                                            required />
+                                    <div class="form-floating mb-2">
+                                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" onChange={(e) => setLastName(e.target.value)} value={lastName} required />
+                                        <label for="lastName">Last Name</label>
                                     </div>
-                                    <div className="mb-3">
+                                    <div class="form-floating mb-2">
+                                        <input type="date" class="form-control" id="dob" placeholder="Enter date of birth" onChange={handleDobChange} value={dob} required />
+                                        <label for="lastName">Date of Birth</label>
+                                    </div>
+                                    <div class="form-floating mb-2">
+                                        <input type="text" class="form-control" id="phoneNo" placeholder="Enter Phone No" onChange={(e) => setPhoneNo(e.target.value)} value={phoneNo} required />
+                                        <label for="phoneNo">Phone No</label>
+                                    </div>
+                                    <div class="form-floating mb-2">
+                                        <input type="email" class="form-control" id="email" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <div class="form-floating mb-2">
+                                        <input type="password" class="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                        <label for="pass">Password</label>
+                                    </div>
+                                    <div class="form-floating mb-2">
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} required />
+                                        <label for="confirmPassword">Confirm Password</label>
+                                    </div>
+                                    {formErrors.length >= 0 ? (<div className="text-danger fw-bold text-center">{formErrors}</div>) : <></>}
+                                    <div className="mb-2">
                                         <div className="d-grid gap-2 text-center">
-                                            <button type="submit" className="btn btn-primary mt-2" onClick={handleSubmit}>Submit</button>
-                                            <h6 className='mt-2'>Don't have an account? <Link to="/user/register">Register Here</Link></h6>
+                                            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                                            <h6 className='mt-2'>Already Have An Account? <Link to="/user/login">Login Here</Link></h6>
                                         </div>
                                     </div>
                                 </form>

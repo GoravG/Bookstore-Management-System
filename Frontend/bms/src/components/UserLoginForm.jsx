@@ -52,15 +52,15 @@ export default function UserLoginFrom() {
                             <div className="container  p-3">
                                 <form action="submit">
                                     <div className="mb-3">
-                                        <div className="text-center mt-2 fw-bolder"><h1>User Sign In</h1></div>
-                                        <label htmlFor="email" className="form-label">Email ID:</label>
-                                        <input type="email" className="form-control" id="email" placeholder="example@example.com" value={email} onChange={(e) => setEmail(e.target.value)}
-                                            required />
+                                        <div className="text-center mt-2 fw-bolder"><h1>Login</h1></div>
+                                        <div class="form-floating mb-2">
+                                            <input type="email" class="form-control" id="email" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
+                                            <label for="email">Email</label>
+                                        </div>
                                     </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="password" className="form-label">Password:</label>
-                                        <input type="password" className="form-control" id="password" placeholder="Enter Your Password" value={password} onChange={(e) => setPassword(e.target.value)}
-                                            required />
+                                    <div class="form-floating mb-2">
+                                        <input type="password" class="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                        <label for="pass">Password</label>
                                     </div>
                                     <div className="mb-3">
                                         <div className="d-grid gap-2 text-center">
