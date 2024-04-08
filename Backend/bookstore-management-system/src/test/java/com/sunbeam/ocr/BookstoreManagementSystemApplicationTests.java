@@ -24,6 +24,9 @@ class BookstoreManagementSystemApplicationTests {
 	void appTest() {
 		UserRegistrationDTO user = new UserRegistrationDTO("gaurav", "ghenand", "9665105760",
 				"gaurav.ghenand@gmail.com", LocalDate.of(1998, 6, 15),"Gaurav@981");
-		userService.registerNewUserAccount(user);
+		userService.registerNewAdminAccount(user);
+		UserRegistrationDTO user2 = new UserRegistrationDTO("aayush", "aayush", "7798947070",
+				"aayush@gmail.com", LocalDate.of(1998, 6, 26),"Gaurav@981");
+		userService.registerNewUserAccount(user2);
 	}
 }

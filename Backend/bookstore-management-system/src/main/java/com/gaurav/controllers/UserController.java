@@ -28,10 +28,10 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	AuthenticationManager mgr;
-	
+
 	@Autowired
 	JwtUtils utils;
 
@@ -40,20 +40,21 @@ public class UserController {
 		userService.registerNewUserAccount(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body("User registration successful");
 	}
-	
+
 	@PostMapping("/signin")
-	public ResponseEntity<?> userSignIn(@RequestBody @Valid UserSignIn request){
-		Authentication verifiedAuth=mgr.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-		if(verifiedAuth.getAuthorities().iterator().next().getAuthority()!="USER") {
+	public ResponseEntity<?> userSignIn(@RequestBody @Valid UserSignIn request) {
+		Authentication verifiedAuth = mgr
+				.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+		if (verifiedAuth.getAuthorities().iterator().next().getAuthority() != "USER") {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are not A User");
 		}
 		return ResponseEntity.ok(utils.generateJwtToken(verifiedAuth));
 	}
-	
-	@GetMapping("/dashboard") 
-	public ResponseEntity<?> userDashboard(){
-		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-		if(auth!=null)
+
+	@GetMapping("/dashboard")
+	public ResponseEntity<?> userDashboard() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null)
 			return ResponseEntity.ok("Happy");
 		return ResponseEntity.ok("NOt Happy");
 	}

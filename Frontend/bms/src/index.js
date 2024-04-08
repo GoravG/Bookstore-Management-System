@@ -14,7 +14,11 @@ import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import UserSignInPage from './pages/UserSignInPage';
 import UserRegistrationPage from './pages/UserRegistrationPage'
+import AdminSignInPage from './pages/AdminSignInPage'
+import AdminDashboardPage from './pages/AdminDashboardPage';
 import "bootstrap-icons/font/bootstrap-icons.css";
+import AddNewBookPage from './pages/AddNewBookPage';
+import AddNewCategoryPage from './pages/AddNewCategoryPage';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +41,28 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <UserRegistrationPage />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "login",
+        element: <AdminSignInPage />,
+      },
+      {
+        path: "dashboard",
+        element: <AdminDashboardPage />,
+      },
+      {
+        path: "add_book",
+        element: <AddNewBookPage />,
+      },
+      {
+        path: "add_category",
+        element: <AddNewCategoryPage />,
       },
     ],
   },
