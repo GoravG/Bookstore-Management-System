@@ -2,9 +2,11 @@ package com.gaurav.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,10 +30,20 @@ public class Book extends BaseEntity {
 	private String description;
 	@Column
 	private Integer noOfPages;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private byte[] coverImage;
+	
+	@OneToOne(mappedBy = "book")
+	private Inventory inventory;
+	
+	public Book(Long id, String title) {
+		super(id);
+		this.title = title;
+	}
+	
+	
 }

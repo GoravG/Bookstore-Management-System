@@ -19,6 +19,8 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import AddNewBookPage from './pages/AddNewBookPage';
 import AddNewCategoryPage from './pages/AddNewCategoryPage';
+import InventoryPage from './pages/InventoryPage';
+import AddInventoryPage from './pages/AddInventoryPage'
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: "add_category",
         element: <AddNewCategoryPage />,
+      },
+      {
+        path: "add_inventory",
+        element: <AddInventoryPage />,
+      },
+      {
+        path: "inventory",
+        element: <InventoryPage />,
       },
     ],
   },

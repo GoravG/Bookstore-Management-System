@@ -17,6 +17,14 @@ function AdminDashboardPage() {
                         <Link to="/admin/add_category" style={{ color: "black", textDecoration: 'none' }}>Add New Category</Link>
                     </a>
                     <br />
+                    < a className="btn btn-light my-2">
+                        <Link to="/admin/add_inventory" style={{ color: "black", textDecoration: 'none' }}>Add / Update Existing Book From Inventory</Link>
+                    </a>
+                    <br />
+                    < a className="btn btn-light my-2">
+                        <Link to="/admin/inventory" style={{ color: "black", textDecoration: 'none' }}>Inventory</Link>
+                    </a>
+                    <br />
                 </div>
             </div >
         </>

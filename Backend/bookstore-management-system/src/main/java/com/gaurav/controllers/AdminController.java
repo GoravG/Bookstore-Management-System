@@ -1,6 +1,7 @@
 package com.gaurav.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +11,29 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gaurav.custom_exceptions.WannaGetIntoLossException;
 import com.gaurav.dtos.BookDTO;
 import com.gaurav.dtos.CategoryDTO;
+import com.gaurav.dtos.InventoryDTO;
+import com.gaurav.dtos.InventoryWithTitleDTO;
 import com.gaurav.dtos.UserSignIn;
 import com.gaurav.entities.Book;
 import com.gaurav.entities.Category;
+import com.gaurav.entities.Inventory;
 import com.gaurav.security.JwtUtils;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
+import com.gaurav.services.InventoryService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/admin")
@@ -41,6 +50,9 @@ public class AdminController {
 	CategoryService categoryService;
 
 	@Autowired
+	InventoryService inventoryService;
+
+	@Autowired
 	AuthenticationManager mgr;
 
 	@Autowired
@@ -55,6 +67,11 @@ public class AdminController {
 		}
 		return ResponseEntity.ok(utils.generateJwtToken(verifiedAuth));
 	}
+	
+	@GetMapping("/inventory")
+	public List<InventoryWithTitleDTO> getInventory() {
+		return inventoryService.getInventory();
+	}
 
 	@PostMapping("/add_book")
 	public ResponseEntity<?> addBook(BookDTO req) throws IOException {
@@ -66,7 +83,7 @@ public class AdminController {
 		book.setDescription(req.getDescription());
 		book.setNoOfPages(req.getNoOfPages());
 		book.setCoverImage(req.getCoverImage().getBytes());
-		Category cat=categoryService.findByCategoryID(Long.parseLong(req.getCategoryId()));
+		Category cat = categoryService.findByCategoryID(Long.parseLong(req.getCategoryId()));
 		book.setCategory(cat);
 		Book saved = bookService.addNewBook(book);
 		if (saved != null)
@@ -87,5 +104,23 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Unable to add " + req.getName() + " as new category");
 	}
+
+	@PostMapping("/add_or_update_inventory")
+	public ResponseEntity<?> addOrUpdateInventory(@Valid @RequestBody InventoryDTO req) {
+		Long cost = req.getCostPrice();
+		Long selling = req.getSellingPrice();
+		System.out.println(req.getBookId().getClass());
+		if (cost > selling)
+			throw new WannaGetIntoLossException();
+		Book book = bookService.findById(req.getBookId());
+		Inventory inv = inventoryService.findByBook(book);
+		inv.setBook(book);
+		inv.setCostPrice(cost);
+		inv.setSellingPrice(selling);
+		inv.setStock(req.getStock());
+		inventoryService.addOrUpdateInventory(inv); 
+		return ResponseEntity.status(HttpStatus.OK).body("Done");
+	}
+	
 
 }
