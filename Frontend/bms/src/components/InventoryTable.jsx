@@ -33,6 +33,41 @@ function InventoryTable() {
         }
         makeRequest();
     }
+    const handleSortByInventoryID = () => {
+        const copyArray = [...inventory];
+        copyArray.sort((a, b) => {
+            return (a.id - b.id);
+        })
+        setInventory(copyArray);
+    }
+    const handleSortByBookID = () => {
+        const copyArray = [...inventory];
+        copyArray.sort((a, b) => {
+            return (a.bookId - b.bookId);
+        })
+        setInventory(copyArray);
+    }
+    const handleSortByCostPrice = () => {
+        const copyArray = [...inventory];
+        copyArray.sort((a, b) => {
+            return (a.costPrice - b.costPrice);
+        })
+        setInventory(copyArray);
+    }
+    const handleSortByStock = () => {
+        const copyArray = [...inventory];
+        copyArray.sort((a, b) => {
+            return (a.costPrice - b.costPrice);
+        })
+        setInventory(copyArray);
+    }
+    const handleSortBySellingPrice = () => {
+        const copyArray = [...inventory];
+        copyArray.sort((a, b) => {
+            return (a.sellingPrice - b.sellingPrice);
+        })
+        setInventory(copyArray);
+    }
 
     return (
         (inventory.length == 0)
@@ -42,12 +77,33 @@ function InventoryTable() {
             (<table class="table table-hover text-center">
                 <thead>
                     <tr>
-                        <th scope="col">InventoryID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">BookID</th>
-                        <th scope="col">Cost Price</th>
-                        <th scope="col">Selling Price</th>
-                        <th scope="col">Stock</th>
+                        <th scope="col" >InventoryID
+                            <button type="button" class="btn btn-sm" onClick={handleSortByInventoryID}>
+                                <i class="bi bi-sort-numeric-up"></i>
+                            </button>
+                        </th>
+                        <th scope="col">Title
+                        </th>
+                        <th scope="col">BookID
+                            <button type="button" class="btn btn-sm" onClick={handleSortByBookID}>
+                                <i class="bi bi-sort-numeric-up"></i>
+                            </button>
+                        </th>
+                        <th scope="col">Cost Price
+                            <button type="button" class="btn btn-sm" onClick={handleSortByCostPrice}>
+                                <i class="bi bi-sort-numeric-up"></i>
+                            </button>
+                        </th>
+                        <th scope="col">Selling Price
+                            <button type="button" class="btn btn-sm" onClick={handleSortBySellingPrice}>
+                                <i class="bi bi-sort-numeric-up"></i>
+                            </button>
+                        </th>
+                        <th scope="col">Stock
+                            <button type="button" class="btn btn-sm" onClick={handleSortByStock}>
+                                <i class="bi bi-sort-numeric-up"></i>
+                            </button>
+                        </th>
                         <th scope="col">Edit</th>
                         <th scope="col">Remove</th>
                     </tr>
