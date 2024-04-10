@@ -13,4 +13,5 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 	@Query(value = "SELECT b.id, b.title FROM Book b")
 	List<Book> getAllTitles();
 	
+	List<Book> findByTitle(String title);
 }

@@ -12,9 +12,13 @@ function AddNewBookForm() {
     const [coverImage, setCoverImage] = useState();
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [catId, setCatId] = useState();
+    const [catId, setCatId] = useState("");
     const baseURL = process.env.REACT_APP_API_URL;
     useEffect(() => {
+        loadCategories();
+    }, [])
+
+    const loadCategories = async () => {
         setLoading(true);
         let config = {
             method: 'get',
@@ -23,7 +27,7 @@ function AddNewBookForm() {
             headers: {}
         };
 
-        axios.request(config)
+        await axios.request(config)
             .then((response) => {
                 setCategories(response.data);
                 console.log(response.data);
@@ -32,22 +36,22 @@ function AddNewBookForm() {
             .catch((error) => {
                 toast.error("Unable to load categories");
             });
-    }, [])
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("ISBN:" + isbn);
+        console.log("TITLE:" + title);
+        console.log("AUTHOR:" + author);
+        console.log("DESC:" + desc);
+        console.log("NOOFPAGES:" + noOfPages);
+        console.log("COVER:" + coverImage);
+        console.log("CATID:" + catId);
         await uploadFormData();
         clearInputs();
 
     }
     const clearInputs = () => {
-        setIsbn("");
-        setTitle("");
-        setAuthor("");
-        setDesc("");
-        setNoOfPages("");
-        setCatId();
-        setCoverImage();
     }
     const uploadFormData = async (e) => {
         const myHeaders = new Headers();
@@ -84,6 +88,10 @@ function AddNewBookForm() {
         const imageAsFile = e.target.files[0];
         setCoverImage(e.target.files[0]);
     }
+    const handleTextBoxChange = (e) => {
+        console.log(e.target.value);
+        setCatId(e.target.value)
+    }
     return (
         (loading ? <><div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -94,7 +102,7 @@ function AddNewBookForm() {
                     </div>
                     <div className="col-8">
                         <div className="container  p-3">
-                            <form action="submit">
+                            <form action="submit" enctype="multipart/form-data">
                                 <div className="mb-3">
                                     <div className="text-center mt-2 fw-bolder">
                                         <h1>Add New Book</h1>
@@ -138,7 +146,7 @@ function AddNewBookForm() {
                                     <input class="form-control" type="file" id="coverImage" onChange={(e) => handleCoverImageUpload(e)} />
                                 </div>
                                 <div class="form-floating">
-                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => setCatId(e.target.value)}>
+                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => handleTextBoxChange(e)}>
                                         {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
                                     </select>
                                     <label for="floatingSelect">Select a Category</label>

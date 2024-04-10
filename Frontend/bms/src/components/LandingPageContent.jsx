@@ -55,16 +55,22 @@ function LandingPageContent() {
             <div className="container-fluid mt-2">
                 <div class="row">
                     <div class="col">
-                        <BookThumbCard ms={0} me={1} isbn={9780002247399}></BookThumbCard>
+                        <BookThumbCard ms={0} me={1} ttl={"Ikigai"}></BookThumbCard>
                     </div>
                     <div class="col">
-                        <BookThumbCard ms={0} me={1} isbn={9780441172719}></BookThumbCard>
+                        <BookThumbCard ms={0} me={1} ttl={"Blender for Dummies"}></BookThumbCard>
                     </div>
                     <div class="col">
-                        <BookThumbCard ms={0} me={1} isbn={9781471146701}></BookThumbCard>
+                        <BookThumbCard ms={0} me={1} ttl={"Clash of Kings"}></BookThumbCard>
                     </div>
                     <div class="col">
-                        <BookThumbCard ms={0} me={0} isbn={9780007459476}></BookThumbCard>
+                        <BookThumbCard ms={0} me={0} ttl={"A Feast for Crows"}></BookThumbCard>
+                    </div>
+                    <div class="col">
+                        <BookThumbCard ms={0} me={0} ttl={"A Dance with Dragons"}></BookThumbCard>
+                    </div>
+                    <div class="col">
+                        <BookThumbCard ms={0} me={0} ttl={"A Storm of Swords"}></BookThumbCard>
                     </div>
                 </div>
             </div>

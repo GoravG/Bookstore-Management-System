@@ -11,6 +11,16 @@ function AdminLoginForm() {
     const baseURL = process.env.REACT_APP_API_URL;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    var isPassword = true;
+    const showPassword = () => {
+        if (isPassword) {
+            document.getElementById("pass").type = 'text';
+            isPassword = false;
+        } else {
+            document.getElementById("pass").type = 'password';
+            isPassword = true;
+        }
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         await loginCitizen();
@@ -59,6 +69,10 @@ function AdminLoginForm() {
                                         <input type="password" class="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
                                         <label for="pass">Password</label>
                                     </div>
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassword} />
+                                    <label class="form-check-label ms-2" for="flexCheckDefault">
+                                        Show password
+                                    </label>
                                     <div className="mb-3">
                                         <div className="d-grid gap-2 text-center">
                                             <button type="submit" className="btn btn-primary mt-2" onClick={handleSubmit}>Submit</button>

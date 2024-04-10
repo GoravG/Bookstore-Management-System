@@ -32,12 +32,14 @@ import com.gaurav.services.CategoryService;
 import com.gaurav.services.InventoryService;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestParam;
+import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/admin")
 @CrossOrigin("*")
+@Slf4j
 public class AdminController {
 
 	@Autowired
@@ -67,7 +69,7 @@ public class AdminController {
 		}
 		return ResponseEntity.ok(utils.generateJwtToken(verifiedAuth));
 	}
-	
+
 	@GetMapping("/inventory")
 	public List<InventoryWithTitleDTO> getInventory() {
 		return inventoryService.getInventory();
@@ -75,6 +77,12 @@ public class AdminController {
 
 	@PostMapping("/add_book")
 	public ResponseEntity<?> addBook(BookDTO req) throws IOException {
+		log.info(req.getIsbn());
+		log.info(req.getTitle());
+		log.info(req.getAuthor());
+		log.info(req.getDescription());
+		log.info(req.getCoverImage().getContentType());
+		log.info(req.getCategoryId());
 		System.out.println("In Add Book");
 		Book book = new Book();
 		book.setIsbn(req.getIsbn());
@@ -118,9 +126,8 @@ public class AdminController {
 		inv.setCostPrice(cost);
 		inv.setSellingPrice(selling);
 		inv.setStock(req.getStock());
-		inventoryService.addOrUpdateInventory(inv); 
+		inventoryService.addOrUpdateInventory(inv);
 		return ResponseEntity.status(HttpStatus.OK).body("Done");
 	}
-	
 
 }

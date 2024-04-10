@@ -14,16 +14,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category extends BaseEntity{
-	@Column(length = 20, unique = true,nullable = false)
+public class Category extends BaseEntity {
+	@Column(length = 20, unique = true, nullable = false)
 	private String name;
-	@Column(length=100)
+	@Column(length = 200)
 	private String description;
-	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-	private List<Book> addressList=new ArrayList<>();
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	private List<Book> addressList = new ArrayList<>();
+
+	public Category(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
 }

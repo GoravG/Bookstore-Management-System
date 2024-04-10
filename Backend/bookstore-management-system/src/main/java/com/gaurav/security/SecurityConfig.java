@@ -64,7 +64,7 @@ public class SecurityConfig{
         // again replacement for deprecated methods, we are creating stateless session as this is a REST Application 
         .authorizeHttpRequests((authorize)->authorize //again, old method is deprecated so this is the latest API
         		.requestMatchers("/api/user/register","/swagger-ui/**","/v3/api-docs/**","/api/user/signin","/api/services/newsletter","/api/admin/signin"
-        				,"/api/commons/categories","/api/commons/titles").permitAll() // ant matchers is also deprecated, so this is the replacement
+        				,"/api/commons/categories","/api/commons/**").permitAll() // ant matchers is also deprecated, so this is the replacement
         .requestMatchers("/api/admin/add_book","/api/admin/add_or_update_inventory","/api/admin/inventory").hasAuthority("ADMIN")
         .requestMatchers("/api/user/dashboard").hasAuthority("USER")
 //        .requestMatchers( "/common/**").permitAll() // we can also provide allowed methods before the url pattern

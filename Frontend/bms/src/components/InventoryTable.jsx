@@ -57,7 +57,7 @@ function InventoryTable() {
     const handleSortByStock = () => {
         const copyArray = [...inventory];
         copyArray.sort((a, b) => {
-            return (a.costPrice - b.costPrice);
+            return (a.stock - b.stock);
         })
         setInventory(copyArray);
     }
