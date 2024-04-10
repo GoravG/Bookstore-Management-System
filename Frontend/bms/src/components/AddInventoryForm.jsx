@@ -76,9 +76,9 @@ function AddInventoryForm() {
     return (
         (loading
             ?
-            (<><div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
+            (<><div className="d-flex justify-content-center">
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
                 </div>
             </div></>)
             :
@@ -95,22 +95,22 @@ function AddInventoryForm() {
                                             <div className="text-center mt-2 fw-bolder">
                                                 <h1>Add / Update Existing Book From Inventory</h1>
                                             </div>
-                                            <div class="form-floating mb-2">
-                                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => setBookID(e.target.value)}>
+                                            <div className="form-floating mb-2">
+                                                <select className="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => setBookID(e.target.value)}>
                                                     {titles.map((book) => <option key={book.id} value={book.id}>{book.title}</option>)}
                                                 </select>
                                                 <label for="floatingSelect">Select a Title</label>
                                             </div>
-                                            <div class="form-floating mb-2">
-                                                <input type="number" class="form-control" id="costPrice" placeholder="Enter cost price" onChange={(e) => setCostPrice(e.target.value)} value={costPrice} required />
+                                            <div className="form-floating mb-2">
+                                                <input type="number" className="form-control" id="costPrice" placeholder="Enter cost price" onChange={(e) => setCostPrice(e.target.value)} value={costPrice} required />
                                                 <label for="costPrice">Cost Price</label>
                                             </div>
-                                            <div class="form-floating mb-2">
-                                                <input type="number" class="form-control" id="sellingPrice" onChange={(e) => setSellingPrice(e.target.value)} value={sellingPrice} required min={0} step={0.50} placeholder="Enter selling price" />
+                                            <div className="form-floating mb-2">
+                                                <input type="number" className="form-control" id="sellingPrice" onChange={(e) => setSellingPrice(e.target.value)} value={sellingPrice} required min={0} step={0.50} placeholder="Enter selling price" />
                                                 <label for="sellingPrice">Selling Price</label>
                                             </div>
-                                            <div class="form-floating mb-2">
-                                                <input type="number" class="form-control" id="stock" onChange={(e) => setStock(e.target.value)} value={stock} required min={0} step={1} placeholder="Enter stock" />
+                                            <div className="form-floating mb-2">
+                                                <input type="number" className="form-control" id="stock" onChange={(e) => setStock(e.target.value)} value={stock} required min={0} step={1} placeholder="Enter stock" />
                                                 <label for="stock">Stock</label>
                                             </div>
                                         </div>

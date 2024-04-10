@@ -21,8 +21,8 @@ function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice
                 <td>{costPrice}</td>
                 <td>{sellingPrice}</td>
                 <td>{stock}</td>
-                <td><button type="button" class="btn btn-warning btn-sm">Edit</button></td>
-                <td><button type="button" class="btn btn-danger btn-sm" onClick={handleRemoveButton}>Remove</button></td>
+                <td><button type="button" className="btn btn-warning btn-sm">Edit</button></td>
+                <td><button type="button" className="btn btn-danger btn-sm" onClick={handleRemoveButton}>Remove</button></td>
             </tr>
         </>
     )

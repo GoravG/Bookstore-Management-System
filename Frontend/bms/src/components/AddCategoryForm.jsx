@@ -52,13 +52,13 @@ function AddCategoryForm() {
                                 <form action="submit">
                                     <div className="mb-3">
                                         <div className="text-center mt-2 fw-bolder mb-2"><h1>Add New Category</h1></div>
-                                        <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="name" placeholder="Enter category name" onChange={(e) => setName(e.target.value)} value={name} required />
+                                        <div className="form-floating mb-2">
+                                            <input type="text" className="form-control" id="name" placeholder="Enter category name" onChange={(e) => setName(e.target.value)} value={name} required />
                                             <label for="name">Category Name</label>
                                         </div>
                                     </div>
-                                    <div class="form-floating mb-2">
-                                        <textarea type="desc" class="form-control" id="desc" placeholder="Enter description" onChange={(e) => setDesc(e.target.value)} value={desc} required style={{ height: 200 }} />
+                                    <div className="form-floating mb-2">
+                                        <textarea type="desc" className="form-control" id="desc" placeholder="Enter description" onChange={(e) => setDesc(e.target.value)} value={desc} required style={{ height: 200 }} />
                                         <label for="desc">Description</label>
                                     </div>
                                     <div className="mb-3">

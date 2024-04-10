@@ -38,24 +38,24 @@ function Footer() {
 
 
     return (
-        <nav class="navbar bg-body-tertiary fixed-bottom">
-            <div class="container-fluid">
+        <nav className="navbar bg-body-tertiary fixed-bottom">
+            <div className="container-fluid">
                 <div className="d-flex ">
-                    <a class="navbar-brand fw-bold text-end fs-6">
-                        <i class="bi bi-twitter fs-4 me-3"></i>
-                        <i class="bi bi-facebook fs-4 me-3"></i>
-                        <i class="bi bi-instagram fs-4 me-3"></i>
-                        <i class="bi bi-github fs-4 me-3"></i>
-                        <i class="bi bi-linkedin fs-4 me-3"></i>
-                        <i class="bi bi-whatsapp fs-4 me-3"></i>
+                    <a className="navbar-brand fw-bold text-end fs-6">
+                        <i className="bi bi-twitter fs-4 me-3"></i>
+                        <i className="bi bi-facebook fs-4 me-3"></i>
+                        <i className="bi bi-instagram fs-4 me-3"></i>
+                        <i className="bi bi-github fs-4 me-3"></i>
+                        <i className="bi bi-linkedin fs-4 me-3"></i>
+                        <i className="bi bi-whatsapp fs-4 me-3"></i>
                     </a>
                 </div>
                 <div className="d-flex ">
-                    <a class="navbar-brand fw-bold text-end fs-6">Subscribe to our newsletter for more exciting offers</a>
+                    <a className="navbar-brand fw-bold text-end fs-6">Subscribe to our newsletter for more exciting offers</a>
                 </div>
-                <form class="d-flex ">
-                    <input class="form-control me-2" type="email" placeholder="Enter you email" aria-label="email" onChange={(e) => setEmail(e.target.value)} required />
-                    <button class="btn btn-outline-success" onClick={handleSubmitNewsletter}>Subscribe</button>
+                <form className="d-flex ">
+                    <input className="form-control me-2" type="email" placeholder="Enter you email" aria-label="email" onChange={(e) => setEmail(e.target.value)} required />
+                    <button className="btn btn-outline-success" onClick={handleSubmitNewsletter}>Subscribe</button>
                 </form>
             </div>
         </nav>

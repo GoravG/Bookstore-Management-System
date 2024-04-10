@@ -40,27 +40,27 @@ function FooterLarge() {
 
 
     return (
-        <nav class="navbar bg-body-tertiary mt-1">
-            <div class="container-fluid">
+        <nav className="navbar bg-body-tertiary mt-1">
+            <div className="container-fluid">
                 <div className="d-flex ">
-                    <a class="navbar-brand fw-bold text-end fs-6">
-                        <a href='http://www.twitter.com' style={{ color: "black", textDecoration: 'none' }}><i class="bi bi-twitter fs-4 me-3"></i></a>
-                        <a href='http://www.facebook.com' style={{ color: "black", textDecoration: 'none' }}><i class="bi bi-facebook fs-4 me-3"></i></a>
-                        <a href='http://www.instagram.com' style={{ color: "black", textDecoration: 'none' }}><i class="bi bi-instagram fs-4 me-3"></i></a>
-                        <a href='https://github.com/GoravG' style={{ color: "black", textDecoration: 'none' }}><i class="bi bi-github fs-4 me-3"></i></a>
-                        <a href='http://www.linkedin.com' style={{ color: "black", textDecoration: 'none' }}><i class="bi bi-linkedin fs-4 me-3"></i></a>
-                        <a href='https://api.whatsapp.com/send?phone=+919665105760' style={{ color: "black", textDecoration: 'none' }}><i class="bi bi-whatsapp fs-4 me-3"></i></a>
-                        <Link to="/admin/login"><i class="bi bi-gear-fill fs-4 me-3"></i></Link>
-                    </a>
+                    <p className="navbar-brand fw-bold text-end fs-6">
+                        <a href='http://www.twitter.com' style={{ color: "black", textDecoration: 'none' }}><i className="bi bi-twitter fs-4 me-3"></i></a>
+                        <a href='http://www.facebook.com' style={{ color: "black", textDecoration: 'none' }}><i className="bi bi-facebook fs-4 me-3"></i></a>
+                        <a href='http://www.instagram.com' style={{ color: "black", textDecoration: 'none' }}><i className="bi bi-instagram fs-4 me-3"></i></a>
+                        <a href='https://github.com/GoravG' style={{ color: "black", textDecoration: 'none' }}><i className="bi bi-github fs-4 me-3"></i></a>
+                        <a href='http://www.linkedin.com' style={{ color: "black", textDecoration: 'none' }}><i className="bi bi-linkedin fs-4 me-3"></i></a>
+                        <a href='https://api.whatsapp.com/send?phone=+919665105760' style={{ color: "black", textDecoration: 'none' }}><i className="bi bi-whatsapp fs-4 me-3"></i></a>
+                        <Link to="/admin/login"><i className="bi bi-gear-fill fs-4 me-3"></i></Link>
+                    </p>
                 </div>
                 <div className="d-flex mt-2 fw-bold">
                     <p>&copy; 2024 GoravG, Inc. All rights reserved.</p>
                 </div>
                 <div>
-                    <a class="navbar-brand fw-bold text-end fs-6">Subscribe to our newsletter for more exciting offers</a>
-                    <form class="d-flex ">
-                        <input class="form-control me-2" type="email" placeholder="Enter you email" aria-label="email" onChange={(e) => setEmail(e.target.value)} required />
-                        <button class="btn btn-outline-success me-2" onClick={handleSubmitNewsletter}>Subscribe</button>
+                    <a className="navbar-brand fw-bold text-end fs-6">Subscribe to our newsletter for more exciting offers</a>
+                    <form className="d-flex ">
+                        <input className="form-control me-2" type="email" placeholder="Enter you email" aria-label="email" onChange={(e) => setEmail(e.target.value)} required />
+                        <button className="btn btn-outline-success me-2" onClick={handleSubmitNewsletter}>Subscribe</button>
                     </form>
                 </div>
             </div>

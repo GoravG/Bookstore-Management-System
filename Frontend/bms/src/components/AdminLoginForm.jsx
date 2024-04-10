@@ -60,17 +60,17 @@ function AdminLoginForm() {
                                 <form action="submit">
                                     <div className="mb-3">
                                         <div className="text-center mt-2 fw-bolder"><h1>Admin Login</h1></div>
-                                        <div class="form-floating mb-2">
-                                            <input type="email" class="form-control" id="email" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
+                                        <div className="form-floating mb-2">
+                                            <input type="email" className="form-control" id="email" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
                                             <label for="email">Email</label>
                                         </div>
                                     </div>
-                                    <div class="form-floating mb-2">
-                                        <input type="password" class="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                    <div className="form-floating mb-2">
+                                        <input type="password" className="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
                                         <label for="pass">Password</label>
                                     </div>
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassword} />
-                                    <label class="form-check-label ms-2" for="flexCheckDefault">
+                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassword} />
+                                    <label className="form-check-label ms-2" for="flexCheckDefault">
                                         Show password
                                     </label>
                                     <div className="mb-3">

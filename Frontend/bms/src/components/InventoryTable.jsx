@@ -74,34 +74,34 @@ function InventoryTable() {
             ?
             <h1>Looks Like Inventory is Empty</h1>
             :
-            (<table class="table table-hover text-center">
+            (<table className="table table-hover text-center">
                 <thead>
                     <tr>
                         <th scope="col" >InventoryID
-                            <button type="button" class="btn btn-sm" onClick={handleSortByInventoryID}>
-                                <i class="bi bi-sort-numeric-up"></i>
+                            <button type="button" className="btn btn-sm" onClick={handleSortByInventoryID}>
+                                <i className="bi bi-sort-numeric-up"></i>
                             </button>
                         </th>
                         <th scope="col">Title
                         </th>
                         <th scope="col">BookID
-                            <button type="button" class="btn btn-sm" onClick={handleSortByBookID}>
-                                <i class="bi bi-sort-numeric-up"></i>
+                            <button type="button" className="btn btn-sm" onClick={handleSortByBookID}>
+                                <i className="bi bi-sort-numeric-up"></i>
                             </button>
                         </th>
                         <th scope="col">Cost Price
-                            <button type="button" class="btn btn-sm" onClick={handleSortByCostPrice}>
-                                <i class="bi bi-sort-numeric-up"></i>
+                            <button type="button" className="btn btn-sm" onClick={handleSortByCostPrice}>
+                                <i className="bi bi-sort-numeric-up"></i>
                             </button>
                         </th>
                         <th scope="col">Selling Price
-                            <button type="button" class="btn btn-sm" onClick={handleSortBySellingPrice}>
-                                <i class="bi bi-sort-numeric-up"></i>
+                            <button type="button" className="btn btn-sm" onClick={handleSortBySellingPrice}>
+                                <i className="bi bi-sort-numeric-up"></i>
                             </button>
                         </th>
                         <th scope="col">Stock
-                            <button type="button" class="btn btn-sm" onClick={handleSortByStock}>
-                                <i class="bi bi-sort-numeric-up"></i>
+                            <button type="button" className="btn btn-sm" onClick={handleSortByStock}>
+                                <i className="bi bi-sort-numeric-up"></i>
                             </button>
                         </th>
                         <th scope="col">Edit</th>

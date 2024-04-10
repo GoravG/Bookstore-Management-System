@@ -93,8 +93,8 @@ function AddNewBookForm() {
         setCatId(e.target.value)
     }
     return (
-        (loading ? <><div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+        (loading ? <><div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
         </div></> : <div className="container container-fluid mt-1">
             <div className="container">
                 <div className="row">
@@ -107,46 +107,46 @@ function AddNewBookForm() {
                                     <div className="text-center mt-2 fw-bolder">
                                         <h1>Add New Book</h1>
                                     </div>
-                                    <div class="row">
+                                    <div className="row">
                                         <div className="col">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" id="isbn" placeholder="Enter isbn" onChange={(e) => setIsbn(e.target.value)} value={isbn} required />
+                                            <div className="form-floating">
+                                                <input type="text" className="form-control" id="isbn" placeholder="Enter isbn" onChange={(e) => setIsbn(e.target.value)} value={isbn} required />
                                                 <label for="isbn">ISBN</label>
                                             </div>
                                         </div>
                                         <div className="col">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" id="title" placeholder="Enter title" onChange={(e) => setTitle(e.target.value)} value={title} required />
+                                            <div className="form-floating">
+                                                <input type="text" className="form-control" id="title" placeholder="Enter title" onChange={(e) => setTitle(e.target.value)} value={title} required />
                                                 <label for="title">Title</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div className="row">
                                     <div className="col">
-                                        <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="author" placeholder="Enter author" onChange={(e) => setAuthor(e.target.value)} value={author} required />
+                                        <div className="form-floating mb-2">
+                                            <input type="text" className="form-control" id="author" placeholder="Enter author" onChange={(e) => setAuthor(e.target.value)} value={author} required />
                                             <label for="author">Author</label>
                                         </div>
                                     </div>
                                     <div className="col">
-                                        <div class="form-floating mb-2">
-                                            <input type="number" class="form-control" id="noOfPages" placeholder="Enter No Of Pages" onChange={(e) => setNoOfPages(e.target.value)} value={noOfPages} required min={0} />
+                                        <div className="form-floating mb-2">
+                                            <input type="number" className="form-control" id="noOfPages" placeholder="Enter No Of Pages" onChange={(e) => setNoOfPages(e.target.value)} value={noOfPages} required min={0} />
                                             <label for="noOfPages">No of Pages</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-floating mb-2">
-                                    <textarea type="text" class="form-control" id="title" placeholder="Enter desc" onChange={(e) => setDesc(e.target.value)} value={desc} required style={{ height: 150 }} />
+                                <div className="form-floating mb-2">
+                                    <textarea type="text" className="form-control" id="title" placeholder="Enter desc" onChange={(e) => setDesc(e.target.value)} value={desc} required style={{ height: 150 }} />
                                     <label for="desc">Description</label>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="coverImage" class="form-label">Choose Cover Image</label>
-                                    <input class="form-control" type="file" id="coverImage" onChange={(e) => handleCoverImageUpload(e)} />
+                                <div className="mb-3">
+                                    <label for="coverImage" className="form-label">Choose Cover Image</label>
+                                    <input className="form-control" type="file" id="coverImage" onChange={(e) => handleCoverImageUpload(e)} />
                                 </div>
-                                <div class="form-floating">
-                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => handleTextBoxChange(e)}>
+                                <div className="form-floating">
+                                    <select className="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => handleTextBoxChange(e)}>
                                         {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
                                     </select>
                                     <label for="floatingSelect">Select a Category</label>
