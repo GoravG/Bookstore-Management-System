@@ -21,6 +21,8 @@ import AddNewBookPage from './pages/AddNewBookPage';
 import AddNewCategoryPage from './pages/AddNewCategoryPage';
 import InventoryPage from './pages/InventoryPage';
 import AddInventoryPage from './pages/AddInventoryPage'
+import CategoriesPage from './pages/CategoriesPage';
+import CategoryPage from './pages/CategoryPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,16 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <div>Hello Thirs!</div>,
+  },
+  {
+    path: "/categories",
+    element: <CategoriesPage></CategoriesPage>,
+    errorElement: <ErrorPage></ErrorPage>
+  },
+  {
+    path: "/category/:categoryId",
+    element: <CategoryPage></CategoryPage>,
+    errorElement: <ErrorPage></ErrorPage>
   },
   {
     path: "/user",

@@ -57,18 +57,19 @@ function BookThumbCard({ ttl, ms, me }) {
 
     }, [])
     return (
-        (loading == false ? (<div className={"card ms-" + ms + " me-" + me + " h-100 shadow"}>
-            <img src={imgURL} className="card-img-top" alt="..." width={150} />
-            <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                <p className="card-text">{author}</p>
-            </div>
-        </div >) : (<div className={"card ms-" + ms + " me-" + me + " h-100 shadow"}>
-            <div className="card-body">
-                <h5 className="card-title placeholder-glow"><span className={"placeholder col-12"}></span></h5>
-                <p className="card-text placeholder-glow"><span className="placeholder col-4"></span></p>
-            </div>
-        </div >))
+        (loading == false ? (
+            <div className={"card ms-" + ms + " me-" + me + " h-100 shadow"}>
+                <img src={imgURL} className="card-img-top" alt="..." width={150} />
+                <div className="card-body">
+                    <h5 className="card-title">{title}</h5>
+                    <p className="card-text">{author}</p>
+                </div>
+            </div >) : (<div className={"card ms-" + ms + " me-" + me + " h-100 shadow"}>
+                <div className="card-body">
+                    <h5 className="card-title placeholder-glow"><span className={"placeholder col-12"}></span></h5>
+                    <p className="card-text placeholder-glow"><span className="placeholder col-4"></span></p>
+                </div>
+            </div >))
     )
 }
 

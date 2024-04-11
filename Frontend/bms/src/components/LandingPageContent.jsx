@@ -53,7 +53,7 @@ function LandingPageContent() {
             </div>
             <Carousel />
             <div className="container-fluid mt-2">
-                <div className="row">
+                <div className="row g-2">
                     <div className="col">
                         <BookThumbCard ms={0} me={1} ttl={"Ikigai"}></BookThumbCard>
                     </div>

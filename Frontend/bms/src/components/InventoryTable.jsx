@@ -68,6 +68,13 @@ function InventoryTable() {
         })
         setInventory(copyArray);
     }
+    const handleSortByMRP = () => {
+        const copyArray = [...inventory];
+        copyArray.sort((a, b) => {
+            return (a.mrp - b.mrp);
+        })
+        setInventory(copyArray);
+    }
 
     return (
         (inventory.length == 0)
@@ -99,6 +106,11 @@ function InventoryTable() {
                                 <i className="bi bi-sort-numeric-up"></i>
                             </button>
                         </th>
+                        <th scope="col">MRP
+                            <button type="button" className="btn btn-sm" onClick={handleSortByMRP}>
+                                <i className="bi bi-sort-numeric-up"></i>
+                            </button>
+                        </th>
                         <th scope="col">Stock
                             <button type="button" className="btn btn-sm" onClick={handleSortByStock}>
                                 <i className="bi bi-sort-numeric-up"></i>
@@ -116,6 +128,7 @@ function InventoryTable() {
                         costPrice={item.costPrice}
                         sellingPrice={item.sellingPrice}
                         stock={item.stock}
+                        mrp={item.mrp}
                     />)}
                 </tbody>
             </table>)

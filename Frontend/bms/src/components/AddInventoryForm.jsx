@@ -10,6 +10,7 @@ function AddInventoryForm() {
     const [bookId, setBookID] = useState();
     const [costPrice, setCostPrice] = useState("");
     const [sellingPrice, setSellingPrice] = useState("");
+    const [mrp, setMRP] = useState("");
     const [stock, setStock] = useState();
 
     const loadTitles = async () => {
@@ -42,9 +43,10 @@ function AddInventoryForm() {
             "bookId": bookId,
             "costPrice": costPrice,
             "sellingPrice": sellingPrice,
+            "mrp": mrp,
             "stock": stock
         });
-
+        console.log(data);
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
@@ -72,6 +74,7 @@ function AddInventoryForm() {
         setCostPrice("");
         setSellingPrice("");
         setStock("");
+        setMRP("");
     }
     return (
         (loading
@@ -102,12 +105,16 @@ function AddInventoryForm() {
                                                 <label for="floatingSelect">Select a Title</label>
                                             </div>
                                             <div className="form-floating mb-2">
-                                                <input type="number" className="form-control" id="costPrice" placeholder="Enter cost price" onChange={(e) => setCostPrice(e.target.value)} value={costPrice} required />
+                                                <input type="number" className="form-control" id="costPrice" placeholder="Enter cost price" onChange={(e) => setCostPrice(e.target.value)} value={costPrice} min={0} step={1} required />
                                                 <label for="costPrice">Cost Price</label>
                                             </div>
                                             <div className="form-floating mb-2">
-                                                <input type="number" className="form-control" id="sellingPrice" onChange={(e) => setSellingPrice(e.target.value)} value={sellingPrice} required min={0} step={0.50} placeholder="Enter selling price" />
+                                                <input type="number" className="form-control" id="sellingPrice" onChange={(e) => setSellingPrice(e.target.value)} value={sellingPrice} required min={0} step={1} placeholder="Enter selling price" />
                                                 <label for="sellingPrice">Selling Price</label>
+                                            </div>
+                                            <div className="form-floating mb-2">
+                                                <input type="number" className="form-control" id="mrp" onChange={(e) => setMRP(e.target.value)} value={mrp} required min={0} step={1} placeholder="Enter MRP" />
+                                                <label for="mrp">Maximum Retail Price</label>
                                             </div>
                                             <div className="form-floating mb-2">
                                                 <input type="number" className="form-control" id="stock" onChange={(e) => setStock(e.target.value)} value={stock} required min={0} step={1} placeholder="Enter stock" />

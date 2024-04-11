@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { toast } from 'react-toastify'
 
-function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice, stock }) {
+function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice, stock, mrp }) {
     const [show, setShow] = useState(false);
     const handleRemoveButton = () => {
         setShow(true)
@@ -20,6 +20,7 @@ function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice
                 <td>{bookId}</td>
                 <td>{costPrice}</td>
                 <td>{sellingPrice}</td>
+                <td>{mrp}</td>
                 <td>{stock}</td>
                 <td><button type="button" className="btn btn-warning btn-sm">Edit</button></td>
                 <td><button type="button" className="btn btn-danger btn-sm" onClick={handleRemoveButton}>Remove</button></td>
