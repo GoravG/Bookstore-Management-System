@@ -17,6 +17,8 @@ public class InventoryDTO {
 	@NotBlank
 	private Long sellingPrice;
 	@NotBlank
+	private Long mrp;
+	@NotBlank
 	private Integer stock;
 
 }

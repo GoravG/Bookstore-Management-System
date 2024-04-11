@@ -15,6 +15,5 @@ public class BookDetailsDTO {
 	private String author;
 	private String description;
 	private Integer noOfPages;
-	private String categoryName;
 	private byte[] coverImage;
 }

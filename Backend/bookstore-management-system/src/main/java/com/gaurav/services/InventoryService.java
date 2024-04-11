@@ -24,6 +24,6 @@ public class InventoryService {
 	}
 
 	public List<InventoryWithTitleDTO> getInventory() {
-		return inventoryRepo.findAll().stream().map((inventory)->new InventoryWithTitleDTO(inventory.getId(),inventory.getBook().getTitle(),inventory.getBook().getId(),inventory.getCostPrice(),inventory.getSellingPrice(),inventory.getStock())).toList();
+		return inventoryRepo.findAll().stream().map((inventory)->new InventoryWithTitleDTO(inventory.getId(),inventory.getBook().getTitle(),inventory.getBook().getId(),inventory.getCostPrice(),inventory.getSellingPrice(),inventory.getMrp(),inventory.getStock())).toList();
 	}
 }

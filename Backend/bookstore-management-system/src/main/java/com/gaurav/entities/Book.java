@@ -37,7 +37,7 @@ public class Book extends BaseEntity {
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private byte[] coverImage;
 	
-	@OneToOne(mappedBy = "book")
+	@OneToOne(mappedBy = "book",fetch = FetchType.LAZY)
 	private Inventory inventory;
 	
 	public Book(Long id, String title) {

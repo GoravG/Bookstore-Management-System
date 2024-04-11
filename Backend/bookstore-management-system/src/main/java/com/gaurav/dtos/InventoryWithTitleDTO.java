@@ -10,10 +10,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InventoryWithTitleDTO {
-public Long id;
-public String title;
-public Long bookId;
-public Long costPrice;
-public Long sellingPrice;
-public Integer stock;
+	public Long id;
+	public String title;
+	public Long bookId;
+	public Long costPrice;
+	public Long sellingPrice;
+	public Long mrp;
+	public Integer stock;
 }

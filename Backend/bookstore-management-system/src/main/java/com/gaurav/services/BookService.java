@@ -37,9 +37,7 @@ public class BookService {
 	}
 
 	public List<BookDetailsDTO> getByTitle(String title) {
-		return bookRepo.findByTitle(title).stream().map((b) -> new BookDetailsDTO(b.getIsbn(), b.getTitle(),
-				b.getAuthor(), b.getDescription(), b.getNoOfPages(), b.getCategory().getName(), b.getCoverImage()))
-				.toList();
+		return bookRepo.findByTitle(title).stream().toList();
 
 	}
 }

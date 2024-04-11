@@ -23,5 +23,7 @@ public class Inventory extends BaseEntity{
 	@Column(nullable = false)
 	private Long sellingPrice;
 	@Column(nullable = false)
+	private Long mrp;
+	@Column(nullable = false)
 	private Integer stock;
 }

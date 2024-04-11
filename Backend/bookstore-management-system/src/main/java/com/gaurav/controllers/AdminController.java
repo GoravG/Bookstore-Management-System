@@ -118,6 +118,7 @@ public class AdminController {
 		Long cost = req.getCostPrice();
 		Long selling = req.getSellingPrice();
 		System.out.println(req.getBookId().getClass());
+		log.info(req.getMrp().toString());
 		if (cost > selling)
 			throw new WannaGetIntoLossException();
 		Book book = bookService.findById(req.getBookId());
@@ -126,6 +127,7 @@ public class AdminController {
 		inv.setCostPrice(cost);
 		inv.setSellingPrice(selling);
 		inv.setStock(req.getStock());
+		inv.setMrp(req.getMrp());
 		inventoryService.addOrUpdateInventory(inv);
 		return ResponseEntity.status(HttpStatus.OK).body("Done");
 	}
