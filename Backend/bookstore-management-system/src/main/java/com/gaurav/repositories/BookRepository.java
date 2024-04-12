@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.gaurav.dtos.BookCardDTO;
 import com.gaurav.dtos.BookDetailsDTO;
 import com.gaurav.entities.Book;
 
