@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from './Carousel'
 import BookThumbCard from './BookThumbCard'
+import { Link } from 'react-router-dom'
 function LandingPageContent() {
     return (
         <>
@@ -9,6 +10,7 @@ function LandingPageContent() {
                     <div className="container-fluid py-2">
                         <h1 className="display-2 fw-bold">Welcome to Sunbeam Books📚</h1>
                         <p className="col-md-8 fs-4">Dive into a world of diverse genres, from gripping thrillers to heartwarming romances, thought-provoking non-fiction to enchanting fantasy. Our carefully curated selection ensures there's something for every reader's taste and preference.</p>
+                        <Link to="/faq" className="btn btn-secondary">Have Any Questions ?</Link>
                     </div>
                 </div>
             </div>

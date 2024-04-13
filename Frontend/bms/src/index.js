@@ -23,6 +23,7 @@ import InventoryPage from './pages/InventoryPage';
 import AddInventoryPage from './pages/AddInventoryPage'
 import CategoriesPage from './pages/CategoriesPage';
 import CategoryPage from './pages/CategoryPage';
+import FAQPage from './pages/FAQPage';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <div>Hello Thirs!</div>,
+  },
+  {
+    path: "/faq",
+    element: <FAQPage />,
   },
   {
     path: "/categories",
