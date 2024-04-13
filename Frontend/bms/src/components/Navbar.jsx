@@ -1,9 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
     const navigate = useNavigate();
+
+    //selector
+    const cart = useSelector(state => state.cart);
+    console.log(cart);
     const isLoggedIn = () => {
         const token = sessionStorage.getItem("token");
         return token != null
@@ -42,9 +47,13 @@ function Navbar() {
                         {isLoggedOut() && (<li className="d-flex">
                             <button className="btn btn-light me-2" ><Link to="/user/login" style={{ color: "black", textDecoration: 'none' }}>Login</Link></button>
                         </li>)}
+
                         {isLoggedOut() && (<li className="d-flex">
                             <button className="btn btn-light me-2" ><Link to="/user/register" style={{ color: "black", textDecoration: 'none' }}>Register</Link></button>
                         </li>)}
+                        <li className="nav-item">
+                            <button className="btn btn-light me-2" ><Link to="/cart" style={{ color: "black", textDecoration: 'none' }}>Cart ({cart.items.length}) <i class="bi bi-cart3"></i></Link></button>
+                        </li>
                     </div>
                 </div>
             </nav>

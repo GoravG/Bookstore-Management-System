@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../features/cartSlice';
 
 function BookCard({ bookId, title, author, description, noOfPages, coverImage, stock, sellingPrice, mrp }) {
+    const dispatch = useDispatch();
     const [imgURL, setImageURL] = useState("");
     useEffect(() => {
         const coverImg = coverImage;
@@ -23,8 +26,7 @@ function BookCard({ bookId, title, author, description, noOfPages, coverImage, s
         return Math.round(disc, 2);
     }
     const handleAddToCart = () => {
-        //Continue here
-        console.log("Added to cart");
+        dispatch(addItem({ bookId, title, coverImage, sellingPrice, mrp, qty: 1 }));
     }
     return (
         <div className="col">

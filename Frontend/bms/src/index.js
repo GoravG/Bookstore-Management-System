@@ -24,6 +24,9 @@ import AddInventoryPage from './pages/AddInventoryPage'
 import CategoriesPage from './pages/CategoriesPage';
 import CategoryPage from './pages/CategoryPage';
 import FAQPage from './pages/FAQPage';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import CartPage from './pages/CartPage';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <div>Hello Thirs!</div>,
+  },
+  {
+    path: "/cart",
+    element: <CartPage></CartPage>,
   },
   {
     path: "/faq",
@@ -97,8 +104,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <ToastContainer></ToastContainer>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <ToastContainer></ToastContainer>
+    </Provider>
   </React.StrictMode>
 );
 
