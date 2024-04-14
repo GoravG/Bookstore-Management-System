@@ -19,6 +19,8 @@ import com.gaurav.dtos.BookDetailsDTO;
 import com.gaurav.dtos.BookTitleDTO;
 import com.gaurav.dtos.BookTitleSearchDTO;
 import com.gaurav.dtos.CategoryDTO;
+import com.gaurav.dtos.OrderDTO;
+import com.gaurav.dtos.OrderItemDTO;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
 

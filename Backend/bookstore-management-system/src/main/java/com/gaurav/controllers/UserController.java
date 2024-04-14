@@ -1,5 +1,7 @@
 package com.gaurav.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gaurav.dtos.OrderDTO;
+import com.gaurav.dtos.OrderItemDTO;
 import com.gaurav.dtos.UserRegistrationDTO;
 import com.gaurav.dtos.UserSignIn;
+import com.gaurav.entities.Order;
+import com.gaurav.entities.User;
 import com.gaurav.security.JwtUtils;
+import com.gaurav.services.OrderService;
 import com.gaurav.services.UserService;
 
 import jakarta.validation.Valid;
@@ -28,6 +35,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	OrderService orderService;
 
 	@Autowired
 	AuthenticationManager mgr;
@@ -58,5 +68,16 @@ public class UserController {
 			return ResponseEntity.ok("Happy");
 		return ResponseEntity.ok("NOt Happy");
 	}
-
+	//Only for test
+	@PostMapping("/place_order")
+	public ResponseEntity<?> placeOrder(@RequestBody @Valid OrderDTO order){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user=userService.findUserByEmail(auth.getName());
+		//Continue here
+		Order placedOrder=orderService.placeOrder(order, user);
+		if(placedOrder!=null)
+			return ResponseEntity.status(HttpStatus.CREATED).body("Order with Order ID:"+placedOrder.getId()+" placed successfully");
+		else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to Place Order");
+	}
 }

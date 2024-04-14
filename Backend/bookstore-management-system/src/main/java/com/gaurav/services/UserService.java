@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gaurav.custom_exceptions.EmailExistsException;
+import com.gaurav.custom_exceptions.ResourceNotFoundException;
 import com.gaurav.dtos.UserRegistrationDTO;
 import com.gaurav.entities.Role;
 import com.gaurav.entities.User;
@@ -37,5 +38,8 @@ public class UserService {
 
 	private boolean emailExists(String email) {
 		return userRepo.existsByEmail(email);
+	}
+	public User findUserByEmail(String email) {
+		return userRepo.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("User associated with Email:"+email+" does not exist"));
 	}
 }

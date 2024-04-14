@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,8 +39,8 @@ public class User extends BaseEntity {
 	private Role role;
 	@Column(length = 12)
 	private LocalDate dob;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Address> addressList = new ArrayList<>();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Order> orders = new ArrayList<>();
 
 	public User(String firstName, String lastName, String phoneNo, String email, String password,LocalDate dob) {
 		super();

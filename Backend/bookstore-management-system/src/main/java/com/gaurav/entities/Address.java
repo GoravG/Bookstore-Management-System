@@ -1,23 +1,18 @@
 package com.gaurav.entities;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "addresses")
+@Embeddable
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address extends BaseEntity{
-	
-	@ManyToOne
-	private User user;
+public class Address{
+
 	@Column(length = 50)
 	private String firstLine;
 	@Column(length = 50)
