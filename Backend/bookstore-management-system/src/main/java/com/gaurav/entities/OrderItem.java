@@ -19,7 +19,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItem extends BaseEntity{
-
+	//ERROR:"object references an unsaved transient instance - save the transient instance before flushing" error
+	//Otherwise https://stackoverflow.com/questions/2302802/how-to-fix-the-hibernate-object-references-an-unsaved-transient-instance-save
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "order_id")
 	private Order order;

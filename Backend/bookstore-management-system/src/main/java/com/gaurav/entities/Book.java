@@ -3,6 +3,7 @@ package com.gaurav.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -44,7 +45,7 @@ public class Book extends BaseEntity {
 	@OneToOne(mappedBy = "book",fetch = FetchType.LAZY)
 	private Inventory inventory;
 	
-	@OneToMany(mappedBy = "book",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "book",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<OrderItem> orderItem=new ArrayList<>();
 	
 	public Book(Long id, String title) {
