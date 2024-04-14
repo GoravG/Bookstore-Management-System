@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Navbar from '../components/Navbar'
 import CartItemRow from '../components/CartItemRow';
+import { Link } from 'react-router-dom';
 
 function CartPage() {
     const cart = useSelector(state => state.cart);
@@ -17,6 +18,10 @@ function CartPage() {
         setTotalAmount(totalAmt);
         setTotalSaving(totalMRP - totalAmt);
     }, [cart.items])
+    const isLoggedIn = () => {
+        const token = sessionStorage.getItem('token');
+        return token != null;
+    }
     return (
         <>
             <Navbar />
@@ -27,7 +32,7 @@ function CartPage() {
                         "Oops! 🛒 Looks like your cart is empty!<br /> No worries though, it's a blank canvas ready for your exploration.<br /> Dive into our library 📚 and discover your next adventure!<br />Happy browsing! 😊"</h5>
                 </>
                 :
-                <table class="table table-bordered container text-center">
+                <><table class="table table-bordered container text-center">
                     <thead>
                         <tr>
                             <th scope="col">BookID</th>
@@ -54,7 +59,13 @@ function CartPage() {
                         </tr>
                     </tbody>
 
-                </table>}
+                </table>
+                    {isLoggedIn() &&
+                        <div className='container text-center'>
+                            <Link to="/checkout" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Checkout <i class="bi bi-bag-check"></i> </Link>
+                        </div>
+                    }
+                </>}
 
         </>
     )

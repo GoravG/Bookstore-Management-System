@@ -27,6 +27,7 @@ import FAQPage from './pages/FAQPage';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
   {
     path: "/category/:categoryId",
     element: <CategoryPage></CategoryPage>,
+    errorElement: <ErrorPage></ErrorPage>
+  },
+  {
+    path: "/checkout",
+    element: <CheckoutPage></CheckoutPage>,
     errorElement: <ErrorPage></ErrorPage>
   },
   {

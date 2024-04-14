@@ -34,7 +34,7 @@ function CartItemRow({ item }) {
         <tr>
             <td>{item.bookId}</td>
             <td>{item.title}</td>
-            <td><img src={imgURL} alt="" height={100} /></td>
+            <td><img src={imgURL} alt="" className='img-thumbnail' height={100} width={80} /></td>
             <td>{item.sellingPrice}</td>
             <td>{item.qty}</td>
             <td>
