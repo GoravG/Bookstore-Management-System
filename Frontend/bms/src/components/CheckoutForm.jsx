@@ -61,30 +61,30 @@ function CheckoutForm() {
 
     return (
         <form>
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="street" placeholder="Cosmos Complex" onChange={(e) => setStreet(e.target.value)} />
+            <div className="form-floating mb-2">
+                <input type="text" className="form-control" id="street" placeholder="Cosmos Complex" onChange={(e) => setStreet(e.target.value)} />
                 <label for="street">Street</label>
             </div>
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="city" placeholder="Pune" onChange={(e) => setCity(e.target.value)} />
+            <div className="form-floating mb-2">
+                <input type="text" className="form-control" id="city" placeholder="Pune" onChange={(e) => setCity(e.target.value)} />
                 <label for="city">City</label>
             </div>
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="state" placeholder="Maharashtra" onChange={(e) => setState(e.target.value)} />
+            <div className="form-floating mb-2">
+                <input type="text" className="form-control" id="state" placeholder="Maharashtra" onChange={(e) => setState(e.target.value)} />
                 <label for="state">State</label>
             </div>
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="pincode" placeholder="411001" onChange={(e) => setPincode(e.target.value)} />
+            <div className="form-floating mb-2">
+                <input type="text" className="form-control" id="pincode" placeholder="411001" onChange={(e) => setPincode(e.target.value)} />
                 <label for="pincode">Pincode</label>
             </div>
-            <select class="form-select mb-2" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => setPaymentMethod(e.target.value)}>
+            <select className="form-select mb-2" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => setPaymentMethod(e.target.value)}>
                 <option value="CASH">CASH ON DELIVERY</option>
                 <option value="UPI">UPI</option>
                 <option value="CREDIT_CARD">CREDIT CARD</option>
                 <option value="DEBIT_CARD">DEBIT CARD</option>
             </select>
-            <div class="d-grid mb-3">
-                {isLoggedIn() ? <button class="btn btn-secondary" type="button" onClick={handlePlaceOrder}>Place Order</button> : <button class="btn btn-secondary" type="button" disabled>Login to Place Order</button>}
+            <div className="d-grid mb-3">
+                {isLoggedIn() ? <button className="btn btn-secondary" type="button" onClick={handlePlaceOrder}>Place Order</button> : <button className="btn btn-secondary" type="button" disabled>Login to Place Order</button>}
             </div>
         </form>
     )

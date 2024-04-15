@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../features/cartSlice';
+import { toast } from 'react-toastify';
 
 function BookCard({ bookId, title, author, description, noOfPages, coverImage, stock, sellingPrice, mrp }) {
     const dispatch = useDispatch();
@@ -27,23 +28,25 @@ function BookCard({ bookId, title, author, description, noOfPages, coverImage, s
     }
     const handleAddToCart = () => {
         dispatch(addItem({ bookId, title, coverImage, sellingPrice, mrp, qty: 1 }));
+        toast.success("Added " + title + " to cart")
     }
     return (
         <div className="col">
             <div className="card h-100 shadow">
                 <img src={imgURL} className="card-img-top" alt="..." height={450} width={100} />
                 <div className="card-body mb-0">
-                    <h5 className="card-title">{title}</h5>
-                    <p className="card-text">{author}</p>
-                    {stock == 0 ? <><h4 className='text-secondary'>Currently not available</h4></> : <><h4 className='fw-bold'>₹{sellingPrice} ({calcDiscount()}% discount)</h4>
-                        <h5 className='text-decoration-line-through fw-light'>₹ {mrp}</h5></>}
+                    <h5 className="card-title mb-0">{title}</h5>
+                    <p className="card-text mb-1">{author}</p>
+                    {stock == 0 ? <><h6 className='text-secondary'>Currently not available</h6></> :
+                        <><h6 className='fw-bold'>Price: ₹{sellingPrice} ({calcDiscount()}% discount)</h6>
+                            <h6 className='text-decoration-line-through fw-light mb-0'>MRP:₹ {mrp}</h6></>}
                 </div>
                 <div class="card-footer">
                     {stock == 0 ?
-                        <button type="button" class="btn btn-secondary" disabled>Not Available</button>
+                        <button type="button" class="btn btn-secondary me-0" disabled>Not Available</button>
                         :
                         <>
-                            <button type="button" class="btn btn-success" onClick={handleAddToCart} >Add to Cart</button>
+                            <button type="button" class="btn btn-success me-0" onClick={handleAddToCart} >Add to Cart</button>
                         </>}
                 </div>
             </div >

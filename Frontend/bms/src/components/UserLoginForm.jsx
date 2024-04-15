@@ -18,6 +18,16 @@ export default function UserLoginFrom() {
         setEmail("");
         setPassword("");
     }
+    var isPassword = true;
+    const showPassword = () => {
+        if (isPassword) {
+            document.getElementById("pass").type = 'text';
+            isPassword = false;
+        } else {
+            document.getElementById("pass").type = 'password';
+            isPassword = true;
+        }
+    }
     const loginCitizen = async () => {
         let data = JSON.stringify({ "email": email, "password": password });
         let config = {
@@ -62,6 +72,10 @@ export default function UserLoginFrom() {
                                         <input type="password" className="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
                                         <label for="pass">Password</label>
                                     </div>
+                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassword} />
+                                    <label className="form-check-label ms-2" for="flexCheckDefault">
+                                        Show password
+                                    </label>
                                     <div className="mb-3">
                                         <div className="d-grid gap-2 text-center">
                                             <button type="submit" className="btn btn-primary mt-2" onClick={handleSubmit}>Submit</button>

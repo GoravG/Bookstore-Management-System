@@ -18,7 +18,7 @@ function Subtotal() {
     return (
         <>
             <h3 className='text-center mt-3 fw-bolder'>Subtotal</h3>
-            <table class="table table-borderless">
+            <table className="table table-borderless">
                 <thead>
                     <tr>
                         <th scope="col">Order</th>

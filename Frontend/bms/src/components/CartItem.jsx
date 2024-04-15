@@ -49,11 +49,11 @@ function CartItem({ item }) {
                     <div class="card-body text-center mt-2">
                         <h6 class="card-title my-1">Quantity</h6>
                         <p class="card-text my-0 my-3">
-                            <button className="btn btn-outline-success btn-sm"
-                                onClick={addQty}><i class="bi bi-plus-circle"></i></button>
-                            &nbsp; &nbsp;{item.qty} &nbsp; &nbsp;
                             <button className="btn btn-outline-danger btn-sm"
                                 onClick={removeQty}><i class="bi bi-dash-circle"></i></button>
+                            &nbsp; &nbsp;{item.qty} &nbsp; &nbsp;
+                            <button className="btn btn-outline-success btn-sm"
+                                onClick={addQty}><i class="bi bi-plus-circle"></i></button>
                         </p>
                     </div>
                 </div>

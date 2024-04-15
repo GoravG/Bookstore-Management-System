@@ -42,10 +42,10 @@ function CartPage() {
                     </div>
                     {isLoggedIn() ?
                         <div className='container text-center'>
-                            <Link to="/checkout" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Proceed to Checkout <i class="bi bi-bag-check"></i> </Link>
+                            <Link to="/checkout" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Proceed to Checkout <i className="bi bi-bag-check"></i> </Link>
                         </div> :
                         <div className='container text-center'>
-                            <Link to="/user/login" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Login to Checkout <i class="bi bi-bag-check"></i> </Link>
+                            <Link to="/user/login" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Login to Checkout <i className="bi bi-bag-check"></i> </Link>
                         </div>
                     }
                 </>}

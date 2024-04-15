@@ -35,7 +35,7 @@ function Navbar() {
                                 <button className="btn btn-light me-2" ><Link to="/" style={{ color: "black", textDecoration: 'none' }}>Home</Link></button>
                             </li>
                             <li className="nav-item dropdown">
-                                <button className="btn btn-light me-2" ><Link to="/popular" style={{ color: "black", textDecoration: 'none' }}>Popular</Link></button>
+                                <button className="btn btn-light me-2" ><Link to="/discover" style={{ color: "black", textDecoration: 'none' }}>Discover</Link></button>
                             </li>
                             <li className="nav-item dropdown">
                                 <button className="btn btn-light me-2" ><Link to="/categories" style={{ color: "black", textDecoration: 'none' }}>Categories</Link></button>

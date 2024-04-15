@@ -8,10 +8,10 @@ function CheckoutPage() {
     return (
         <>
             <Navbar></Navbar>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-8"><CartItems /></div>
-                    <div class="col-4 mt-2 shadow mb-2 border rounded">
+            <div className="container mt-5">
+                <div className="row">
+                    <div className="col-8"><CartItems /></div>
+                    <div className="col-4 mt-2 shadow mb-2 border rounded">
                         <Subtotal />
                         <CheckoutForm />
                     </div>

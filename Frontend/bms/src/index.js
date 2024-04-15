@@ -28,6 +28,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import DiscoverPage from './pages/DiscoverPage';
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>
   },
   {
-    path: "/dashboard",
-    element: <div>Hello Thirs!</div>,
+    path: "/discover",
+    element: <DiscoverPage />,
   },
   {
     path: "/cart",
