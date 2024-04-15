@@ -23,6 +23,7 @@ import com.gaurav.dtos.OrderDTO;
 import com.gaurav.dtos.OrderItemDTO;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
+import com.gaurav.services.InventoryService;
 
 import jakarta.validation.Valid;
 
@@ -36,6 +37,9 @@ public class CommonController {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	InventoryService inventoryService;
 
 	@Autowired
 	BookService bookService;
@@ -64,5 +68,11 @@ public class CommonController {
 	public ResponseEntity<?> getBooksByCategoryId(@PathVariable Long categoryId) {
 		List<BookCardDTO> list = categoryService.findDetailsByCategoryID(categoryId);
 		return ResponseEntity.status(HttpStatus.OK).body(list);
+	}
+	
+	@GetMapping("/discover")
+	public ResponseEntity<?> getBooksInInventory(){
+		List<BookCardDTO> allBooks = inventoryService.getAllBooks();
+		return ResponseEntity.status(HttpStatus.OK).body(allBooks);
 	}
 }

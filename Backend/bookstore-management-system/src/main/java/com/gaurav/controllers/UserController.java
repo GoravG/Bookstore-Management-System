@@ -68,12 +68,11 @@ public class UserController {
 			return ResponseEntity.ok("Happy");
 		return ResponseEntity.ok("NOt Happy");
 	}
-	//Only for test
+
 	@PostMapping("/place_order")
 	public ResponseEntity<?> placeOrder(@RequestBody @Valid OrderDTO order){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user=userService.findUserByEmail(auth.getName());
-		//Continue here
 		Order placedOrder=orderService.placeOrder(order, user);
 		if(placedOrder!=null)
 			return ResponseEntity.status(HttpStatus.CREATED).body("Order with Order ID:"+placedOrder.getId()+" placed successfully");
