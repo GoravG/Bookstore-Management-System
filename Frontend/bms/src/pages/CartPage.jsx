@@ -32,37 +32,20 @@ function CartPage() {
                         "Oops! 🛒 Looks like your cart is empty!<br /> No worries though, it's a blank canvas ready for your exploration.<br /> Dive into our library 📚 and discover your next adventure!<br />Happy browsing! 😊"</h5>
                 </>
                 :
-                <><table class="table table-bordered container text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">BookID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Cover Image</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Action</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
+                <>
+                    <div className="container">
                         {cart.items.map((item) => {
                             return <CartItemRow item={item} />
                         })}
-                        <tr>
-                            <td colSpan={6} className='text-end'>Total Savings:</td>
-                            <td>{totalSaving}</td>
-                        </tr>
-                        <tr>
-                            <td colSpan={6} className='text-end fw-bold'>Total Amount:</td>
-                            <td className='fw-bold'>{totalAmount}</td>
-                        </tr>
-                    </tbody>
-
-                </table>
-                    {isLoggedIn() &&
+                        <div className='text-center fw-bolder  fs-4 mt-4 mb-2'>Total Amount: ₹ {totalAmount}</div>
+                        <div className='text-center text-success fw-bold  fs-5 mt-2 mb-2'>Total Savings: ₹ {totalSaving}</div>
+                    </div>
+                    {isLoggedIn() ?
                         <div className='container text-center'>
-                            <Link to="/checkout" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Checkout <i class="bi bi-bag-check"></i> </Link>
+                            <Link to="/checkout" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Proceed to Checkout <i class="bi bi-bag-check"></i> </Link>
+                        </div> :
+                        <div className='container text-center'>
+                            <Link to="/user/login" className='btn btn-primary' style={{ color: "white", textDecoration: 'none' }}>Login to Checkout <i class="bi bi-bag-check"></i> </Link>
                         </div>
                     }
                 </>}
