@@ -1,6 +1,7 @@
 package com.gaurav.controllers;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gaurav.custom_exceptions.WannaGetIntoLossException;
 import com.gaurav.dtos.BookDTO;
+import com.gaurav.dtos.BookDetailsDTO;
+import com.gaurav.dtos.BookEditDTO;
 import com.gaurav.dtos.CategoryDTO;
 import com.gaurav.dtos.InventoryDTO;
 import com.gaurav.dtos.InventoryWithTitleDTO;
@@ -130,6 +136,34 @@ public class AdminController {
 		inv.setMrp(req.getMrp());
 		inventoryService.addOrUpdateInventory(inv);
 		return ResponseEntity.status(HttpStatus.OK).body("Done");
+	}
+	
+	@GetMapping("/book/{bookId}")
+	public ResponseEntity<?> getBookDetails(@PathVariable Long bookId){
+		Book book = bookService.findById(bookId);
+		BookDetailsDTO details = mapper.map(book, BookDetailsDTO.class);
+		return ResponseEntity.status(HttpStatus.OK).body(details);
+	}
+	@PatchMapping("/book/edit")
+	public ResponseEntity<?> editBookDetails(@Valid @ModelAttribute BookEditDTO dto) throws IOException{
+		Book book = bookService.findById(dto.getId());
+		if(dto.getAuthor()!=null && dto.getAuthor().compareTo(book.getAuthor())!=0)
+			book.setAuthor(dto.getAuthor());
+		if(dto.getIsbn()!=null && dto.getIsbn().compareTo(book.getIsbn())!=0)
+			book.setIsbn(dto.getIsbn());
+		if(dto.getNoOfPages()!=null && dto.getNoOfPages().compareTo(book.getNoOfPages())!=0)
+			book.setNoOfPages(dto.getNoOfPages());
+		if(dto.getDescription()!=null && dto.getDescription().compareTo(book.getDescription())!=0)
+			book.setDescription(dto.getDescription());
+		if(dto.getTitle()!=null && dto.getTitle().compareTo(book.getTitle())!=0)
+			book.setTitle(dto.getTitle());
+		if(dto.getCoverImage()!=null) {
+			byte[] dtoBytes = dto.getCoverImage().getBytes();
+			if(!Arrays.equals(dtoBytes, book.getCoverImage()))
+				book.setCoverImage(dto.getCoverImage().getBytes());
+		}
+		bookService.addNewBook(book);
+		return ResponseEntity.status(HttpStatus.OK).body("Successfully edited records of "+book.getTitle());
 	}
 
 }
