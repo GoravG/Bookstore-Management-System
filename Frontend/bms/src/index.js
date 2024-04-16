@@ -29,6 +29,7 @@ import { store } from './store';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import DiscoverPage from './pages/DiscoverPage';
+import EditBookPage from './pages/EditBookPage';
 
 const router = createBrowserRouter([
   {
@@ -98,8 +99,12 @@ const router = createBrowserRouter([
         element: <AddNewCategoryPage />,
       },
       {
-        path: "add_inventory",
-        element: <AddInventoryPage />,
+        path: "add_category",
+        element: <AddNewCategoryPage />,
+      },
+      {
+        path: "edit_book",
+        element: <EditBookPage />,
       },
       {
         path: "inventory",
