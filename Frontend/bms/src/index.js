@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>
   },
   {
-    path: "/discover",
+    path: "/discover/:pageNumber",
     element: <DiscoverPage />,
   },
   {
@@ -99,8 +99,8 @@ const router = createBrowserRouter([
         element: <AddNewCategoryPage />,
       },
       {
-        path: "add_category",
-        element: <AddNewCategoryPage />,
+        path: "add_inventory",
+        element: <AddInventoryPage />,
       },
       {
         path: "edit_book",

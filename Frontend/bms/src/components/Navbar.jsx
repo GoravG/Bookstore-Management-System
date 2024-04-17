@@ -35,7 +35,7 @@ function Navbar() {
                                 <button className="btn btn-light me-2" ><Link to="/" style={{ color: "black", textDecoration: 'none' }}>Home</Link></button>
                             </li>
                             <li className="nav-item dropdown">
-                                <button className="btn btn-light me-2" ><Link to="/discover" style={{ color: "black", textDecoration: 'none' }}>Discover</Link></button>
+                                <button className="btn btn-light me-2" ><Link to="/discover/1" style={{ color: "black", textDecoration: 'none' }}>Discover</Link></button>
                             </li>
                             <li className="nav-item dropdown">
                                 <button className="btn btn-light me-2" ><Link to="/categories" style={{ color: "black", textDecoration: 'none' }}>Categories</Link></button>
@@ -52,7 +52,7 @@ function Navbar() {
                             <button className="btn btn-light me-2" ><Link to="/user/register" style={{ color: "black", textDecoration: 'none' }}>Register</Link></button>
                         </li>)}
                         <li className="nav-item">
-                            <button className="btn btn-light me-2" ><Link to="/cart" style={{ color: "black", textDecoration: 'none' }}>Cart ({cart.items.length}) <i class="bi bi-cart3"></i></Link></button>
+                            <button className="btn btn-light me-2" ><Link to="/cart" style={{ color: "black", textDecoration: 'none' }}>Cart {cart.items.length > 0 && <span class="badge text-bg-danger">{cart.items.length}</span>} <i class="bi bi-cart3"></i></Link></button>
                         </li>
                     </div>
                 </div>
