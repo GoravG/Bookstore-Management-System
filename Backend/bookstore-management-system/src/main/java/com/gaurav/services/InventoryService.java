@@ -1,10 +1,13 @@
 package com.gaurav.services;
-
 import java.util.List;
 
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.support.PageableUtils;
 import org.springframework.stereotype.Service;
-
 import com.gaurav.dtos.BookCardDTO;
 import com.gaurav.dtos.InventoryWithTitleDTO;
 import com.gaurav.entities.Book;
@@ -28,8 +31,10 @@ public class InventoryService {
 		return inventoryRepo.findAll().stream().map((inventory)->new InventoryWithTitleDTO(inventory.getId(),inventory.getBook().getTitle(),inventory.getBook().getId(),inventory.getCostPrice(),inventory.getSellingPrice(),inventory.getMrp(),inventory.getStock())).toList();
 	}
 
-	public List<BookCardDTO> getAllBooks() {
-		List<Inventory> entireInventory = inventoryRepo.findAll();
+	public List<BookCardDTO> getAllBooks(int pageNumber) {
+		PageRequest pageRequest=PageRequest.of(pageNumber, 8);
+		Page<Inventory> pages = inventoryRepo.findAll(pageRequest);
+		List<Inventory> entireInventory = pages.getContent();
 		return entireInventory.stream().map((inventory)->
 		{
 			BookCardDTO dto=new BookCardDTO();
@@ -46,5 +51,10 @@ public class InventoryService {
 			return dto;
 		}
 		).toList();
+	}
+
+	public Long getNoOfPages() {
+		// TODO Auto-generated method stub
+		return inventoryRepo.count();
 	}
 }

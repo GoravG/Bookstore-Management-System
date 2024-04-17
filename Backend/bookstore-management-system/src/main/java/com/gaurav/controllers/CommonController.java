@@ -70,9 +70,15 @@ public class CommonController {
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
-	@GetMapping("/discover")
-	public ResponseEntity<?> getBooksInInventory(){
-		List<BookCardDTO> allBooks = inventoryService.getAllBooks();
+	@GetMapping("/discover/{pageNo}")
+	public ResponseEntity<?> getBooksInInventory(@PathVariable int pageNo){
+		List<BookCardDTO> allBooks = inventoryService.getAllBooks(pageNo);
 		return ResponseEntity.status(HttpStatus.OK).body(allBooks);
+	}
+	@GetMapping("/discover/pages")
+	public ResponseEntity<?> getNoOfPages(){
+		Long count=inventoryService.getNoOfPages();
+		Double pages= ((double)count/8);
+		return ResponseEntity.status(HttpStatus.OK).body(Math.ceil(pages));
 	}
 }
