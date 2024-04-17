@@ -6,7 +6,7 @@ function CartItems() {
     const cart = useSelector(state => state.cart);
     return (
         <>
-            <h3 className='container mb-3 text-center fw-bold'>Your Cart</h3>
+            <h3 className='container mb-3 mt-3 text-center fw-bold'>Your Cart</h3>
 
             {cart.items.map((item) =>
                 <CartItem item={item} />)}

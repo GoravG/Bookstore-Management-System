@@ -70,13 +70,37 @@ function DiscoverPageContent() {
         makeRequest();
     }
 
+    const handleSortByPriceAsc = () => {
+        const copyArray = [...books];
+        copyArray.sort((a, b) => {
+            return (a.sellingPrice - b.sellingPrice);
+        })
+        setBooks(copyArray);
+    }
+    const handleSoryByPriceDesc = () => {
+        const copyArray = [...books];
+        copyArray.sort((a, b) => {
+            return -(a.sellingPrice - b.sellingPrice);
+        })
+        setBooks(copyArray);
+    }
+    const handleSoryByDiscount = () => {
+        const copyArray = [...books];
+        copyArray.sort((a, b) => {
+            let discA = ((a.mrp - a.sellingPrice) / a.mrp) * 100;
+            let discB = ((b.mrp - b.sellingPrice) / b.mrp) * 100;
+            return -(discA - discB);
+        })
+        setBooks(copyArray);
+    }
+
     return (
         <div className="container mt-2 mb-2">
             <div className="row">
-                <div className="teext-center border">
-                    <button className="btn btn-primary me-2">Sort By Price Low to High</button>
-                    <button className="btn btn-primary me-2">Sort By Price High to Low</button>
-                    <button className="btn btn-primary me-2">Sort By Discount</button>
+                <div className="teext-center">
+                    <button className="btn btn-light border border-2 me-2" onClick={handleSortByPriceAsc}>Sort By Price Low to High <i class="bi bi-sort-numeric-up"></i></button>
+                    <button className="btn btn-light border border-2 me-2" onClick={handleSoryByPriceDesc}>Sort By Price High to Low <i class="bi bi-sort-numeric-down-alt"></i></button>
+                    <button className="btn btn-light border border-2 me-2" onClick={handleSoryByDiscount}>Sort By Highest Discount <i class="bi bi-sort-numeric-down-alt"></i></button>
                 </div>
                 <div className="container-fluid mt-2 mb-2">
                     <div className="row row-cols-4 g-2">
@@ -95,11 +119,11 @@ function DiscoverPageContent() {
                         })}
                     </div>
                 </div>
-                <nav aria-label="Page navigation example ">
+                <nav className='mt-2'>
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><a class="page-link" onClick={handlePrevButton}>Previous</a></li>
+                        <li class="page-item"><button class="page-link" onClick={handlePrevButton}>Previous</button></li>
                         {pages.map((page) => <li class="page-item"><a class="page-link" href={'/discover/' + page}>{page}</a></li>)}
-                        <li class="page-item"><a class="page-link" onClick={handleNextButton}>Next</a></li>
+                        <li class="page-item"><button class="page-link" onClick={handleNextButton}>Next</button></li>
                     </ul>
                 </nav>
             </div>

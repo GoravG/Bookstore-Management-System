@@ -48,10 +48,10 @@ function CartItemRow({ item }) {
                     <div className="card-body text-center mt-3">
                         <h6 className="card-title my-1">Quantity</h6>
                         <p className="card-text my-0 my-3">
-                            <button className="btn btn-outline-danger btn-sm"
+                            <button className="btn btn-danger btn-sm"
                                 onClick={removeQty}><i className="bi bi-dash-circle"></i></button>
                             &nbsp; &nbsp;{item.qty} &nbsp; &nbsp;
-                            <button className="btn btn-outline-success btn-sm"
+                            <button className="btn btn-success btn-sm"
                                 onClick={addQty}><i className="bi bi-plus-circle"></i></button>
                         </p>
                     </div>
