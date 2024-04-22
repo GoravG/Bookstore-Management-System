@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gaurav.dtos.BookCardDTO;
+import com.gaurav.dtos.BookDetailDTO;
 import com.gaurav.dtos.BookDetailsDTO;
 import com.gaurav.dtos.BookTitleDTO;
 import com.gaurav.dtos.BookTitleSearchDTO;
 import com.gaurav.dtos.CategoryDTO;
 import com.gaurav.dtos.OrderDTO;
 import com.gaurav.dtos.OrderItemDTO;
+import com.gaurav.entities.Book;
+import com.gaurav.entities.Inventory;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
 import com.gaurav.services.InventoryService;
@@ -80,5 +83,29 @@ public class CommonController {
 		Long count=inventoryService.getNoOfPages();
 		Double pages= ((double)count/8);
 		return ResponseEntity.status(HttpStatus.OK).body(Math.ceil(pages));
+	}
+	@GetMapping("/book/{bookId}")
+	public ResponseEntity<?> getBookDetails(@PathVariable Long bookId){
+		Book book=bookService.findById(bookId);
+		BookDetailDTO dto=new BookDetailDTO();
+		dto.setAuthor(book.getAuthor());
+		dto.setBookId(book.getId());
+		dto.setCategoryName(book.getCategory().getName());
+		dto.setCoverImage(book.getCoverImage());
+		dto.setDescription(book.getDescription());
+		dto.setNoOfPages(book.getNoOfPages());
+		Inventory inventory = book.getInventory();
+		dto.setTitle(book.getTitle());
+		if(inventory==null)
+		{
+			dto.setMrp(0L);
+			dto.setSellingPrice(0L);
+			dto.setStock(0);
+			return ResponseEntity.status(HttpStatus.OK).body(dto);
+		}
+		dto.setMrp(inventory.getMrp());
+		dto.setSellingPrice(inventory.getSellingPrice());
+		dto.setStock(inventory.getStock());
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
 	}
 }

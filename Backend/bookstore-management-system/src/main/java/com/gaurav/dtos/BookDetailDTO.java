@@ -9,12 +9,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDetailsDTO {
+public class BookDetailDTO {
 	private Long bookId;
-	private String isbn;
 	private String title;
 	private String author;
 	private String description;
 	private Integer noOfPages;
+	private String categoryName;
 	private byte[] coverImage;
+	private Integer stock;
+	private Long sellingPrice;
+	private Long mrp;
 }
