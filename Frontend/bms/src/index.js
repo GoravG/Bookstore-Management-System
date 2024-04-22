@@ -30,6 +30,7 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import DiscoverPage from './pages/DiscoverPage';
 import EditBookPage from './pages/EditBookPage';
+import BookDetailPage from './pages/BookDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
   {
     path: "/category/:categoryId",
     element: <CategoryPage></CategoryPage>,
+    errorElement: <ErrorPage></ErrorPage>
+  },
+  {
+    path: "/book/:bookId",
+    element: <BookDetailPage />,
     errorElement: <ErrorPage></ErrorPage>
   },
   {
@@ -118,7 +124,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
-      <ToastContainer></ToastContainer>
+      <ToastContainer position='bottom-right'></ToastContainer>
     </Provider>
   </React.StrictMode>
 );

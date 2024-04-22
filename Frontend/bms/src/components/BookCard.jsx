@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../features/cartSlice';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function BookCard({ bookId, title, author, description, noOfPages, coverImage, stock, sellingPrice, mrp }) {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [imgURL, setImageURL] = useState("");
     useEffect(() => {
@@ -30,6 +32,9 @@ function BookCard({ bookId, title, author, description, noOfPages, coverImage, s
         dispatch(addItem({ bookId, title, coverImage, sellingPrice, mrp, qty: 1 }));
         toast.success("Added " + title + " to cart")
     }
+    const handleViewDetails = () => {
+        navigate("/book/" + bookId);
+    }
     return (
         <div className="col">
             <div className="card h-100 shadow">
@@ -41,13 +46,14 @@ function BookCard({ bookId, title, author, description, noOfPages, coverImage, s
                         <><h6 className='fw-bold'>Price: ₹{sellingPrice} ({calcDiscount()}% discount)</h6>
                             <h6 className='text-decoration-line-through fw-light mb-0'>MRP:₹ {mrp}</h6></>}
                 </div>
-                <div class="card-footer">
+                <div class="card-footer text-center">
                     {stock == 0 ?
-                        <button type="button" class="btn btn-secondary me-0" disabled>Not Available</button>
+                        <button type="button" class="btn btn-secondary m-1" disabled>Not Available</button>
                         :
                         <>
-                            <button type="button" class="btn btn-success me-0" onClick={handleAddToCart} >Add to Cart</button>
+                            <button type="button" class="btn btn-success m-1" onClick={handleAddToCart} >Add to Cart</button>
                         </>}
+                    <button type="button" class="btn btn-warning m-1" onClick={handleViewDetails}>View Details</button>
                 </div>
             </div >
         </div>
