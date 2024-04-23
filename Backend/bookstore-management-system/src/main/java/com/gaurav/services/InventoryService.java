@@ -57,4 +57,8 @@ public class InventoryService {
 		// TODO Auto-generated method stub
 		return inventoryRepo.count();
 	}
+
+	public void deleteFromInventory(Long id) {
+		inventoryRepo.deleteById(id);
+	}
 }

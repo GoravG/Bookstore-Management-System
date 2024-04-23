@@ -11,4 +11,6 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 	Optional<Inventory> findByBook(Book book);
 	
 	Optional<Inventory> findByBookId(Long id);
+	
+	void deleteById(Long id);
 }

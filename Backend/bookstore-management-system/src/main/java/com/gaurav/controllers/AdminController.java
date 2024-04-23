@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -164,6 +165,12 @@ public class AdminController {
 		}
 		bookService.addNewBook(book);
 		return ResponseEntity.status(HttpStatus.OK).body("Successfully edited records of "+book.getTitle());
+	}
+	
+	@DeleteMapping("/remove_from_inventory/{id}")
+	public ResponseEntity<?> deleteBookFromInventory(@PathVariable Long id){
+		inventoryService.deleteFromInventory(id);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deleted Inventory With ID: "+id+" successfully");
 	}
 
 }
