@@ -1,13 +1,38 @@
 import React from 'react'
 import { useState } from 'react';
 import { toast } from 'react-toastify'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice, stock, mrp }) {
-    const [show, setShow] = useState(false);
+    const navigate = useNavigate();
+    const baseURL = process.env.REACT_APP_API_URL;
+    const token = sessionStorage.getItem("token");
+    let config = {
+        method: 'delete',
+        maxBodyLength: Infinity,
+        url: baseURL + 'admin/remove_from_inventory/' + inventoryId,
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    };
+
+    async function deleteItem() {
+        try {
+            const response = await axios.request(config);
+            toast.success(response.data);
+        }
+        catch (error) {
+            toast.error(error.data);
+        }
+    }
+
+
+
     const handleRemoveButton = () => {
-        setShow(true)
         if (window.confirm("Are you sure?") == true) {
-            toast.success("Yes");
+            deleteItem();
+            navigate("/admin/dashboard");
         } else {
             toast.warn("No");
         }
