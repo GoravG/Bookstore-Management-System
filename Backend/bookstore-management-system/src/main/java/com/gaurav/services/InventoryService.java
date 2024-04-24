@@ -1,4 +1,5 @@
 package com.gaurav.services;
+
 import java.util.List;
 
 import org.springdoc.core.converters.models.Pageable;
@@ -8,17 +9,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.support.PageableUtils;
 import org.springframework.stereotype.Service;
+
+import com.gaurav.custom_exceptions.ResourceNotFoundException;
 import com.gaurav.dtos.BookCardDTO;
 import com.gaurav.dtos.InventoryWithTitleDTO;
 import com.gaurav.entities.Book;
 import com.gaurav.entities.Inventory;
 import com.gaurav.repositories.InventoryRepository;
+
 @Service
 public class InventoryService {
 
 	@Autowired
 	public InventoryRepository inventoryRepo;
-	
+
 	public Inventory addOrUpdateInventory(Inventory inventory) {
 		return inventoryRepo.save(inventory);
 	}
@@ -28,17 +32,21 @@ public class InventoryService {
 	}
 
 	public List<InventoryWithTitleDTO> getInventory() {
-		return inventoryRepo.findAll().stream().map((inventory)->new InventoryWithTitleDTO(inventory.getId(),inventory.getBook().getTitle(),inventory.getBook().getId(),inventory.getCostPrice(),inventory.getSellingPrice(),inventory.getMrp(),inventory.getStock())).toList();
+		return inventoryRepo.findAll().stream().map((inventory) -> {
+			Book book = inventory.getBook();
+			InventoryWithTitleDTO dto = new InventoryWithTitleDTO(inventory.getId(), book.getTitle(), book.getId(),
+					inventory.getCostPrice(), inventory.getSellingPrice(), inventory.getMrp(), inventory.getStock());
+			return dto;
+		}).toList();
 	}
 
 	public List<BookCardDTO> getAllBooks(int pageNumber) {
-		PageRequest pageRequest=PageRequest.of(pageNumber, 8);
+		PageRequest pageRequest = PageRequest.of(pageNumber, 8);
 		Page<Inventory> pages = inventoryRepo.findAll(pageRequest);
 		List<Inventory> entireInventory = pages.getContent();
-		return entireInventory.stream().map((inventory)->
-		{
-			BookCardDTO dto=new BookCardDTO();
-			Book book=inventory.getBook();
+		return entireInventory.stream().map((inventory) -> {
+			BookCardDTO dto = new BookCardDTO();
+			Book book = inventory.getBook();
 			dto.setAuthor(book.getAuthor());
 			dto.setBookId(book.getId().toString());
 			dto.setCoverImage(book.getCoverImage());
@@ -49,8 +57,7 @@ public class InventoryService {
 			dto.setStock(inventory.getStock());
 			dto.setTitle(book.getTitle());
 			return dto;
-		}
-		).toList();
+		}).toList();
 	}
 
 	public Long getNoOfPages() {
@@ -60,5 +67,11 @@ public class InventoryService {
 
 	public void deleteFromInventory(Long id) {
 		inventoryRepo.deleteById(id);
+	}
+
+	public Inventory findByInventoryId(Long id) {
+		return inventoryRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Inventory with ID:" + id + " not found"));
+
 	}
 }
