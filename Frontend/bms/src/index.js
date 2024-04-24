@@ -31,6 +31,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import DiscoverPage from './pages/DiscoverPage';
 import EditBookPage from './pages/EditBookPage';
 import BookDetailPage from './pages/BookDetailPage';
+import InventoryEditPage from './pages/InventoryEditPage';
 
 const router = createBrowserRouter([
   {
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
       {
         path: "inventory",
         element: <InventoryPage />,
+      },
+      {
+        path: "inventory/edit/:inventoryId",
+        element: <InventoryEditPage />,
       },
     ],
   },

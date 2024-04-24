@@ -34,8 +34,10 @@ function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice
             deleteItem();
             navigate("/admin/dashboard");
         } else {
-            toast.warn("No");
         }
+    }
+    const handleEditButton = () => {
+        navigate("/admin/inventory/edit/" + inventoryId);
     }
     return (
         <>
@@ -47,7 +49,7 @@ function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice
                 <td>{sellingPrice}</td>
                 <td>{mrp}</td>
                 <td>{stock}</td>
-                <td><button type="button" className="btn btn-warning btn-sm">Edit</button></td>
+                <td><button type="button" className="btn btn-warning btn-sm" onClick={handleEditButton}>Edit</button></td>
                 <td><button type="button" className="btn btn-danger btn-sm" onClick={handleRemoveButton}>Remove</button></td>
             </tr>
         </>
