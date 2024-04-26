@@ -30,6 +30,7 @@ import com.gaurav.dtos.CategoryDTO;
 import com.gaurav.dtos.InventoryDTO;
 import com.gaurav.dtos.InventoryEditDTO;
 import com.gaurav.dtos.InventoryWithTitleDTO;
+import com.gaurav.dtos.OrderDetailDTO;
 import com.gaurav.dtos.UserSignIn;
 import com.gaurav.entities.Book;
 import com.gaurav.entities.Category;
@@ -38,6 +39,7 @@ import com.gaurav.security.JwtUtils;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
 import com.gaurav.services.InventoryService;
+import com.gaurav.services.OrderService;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +64,9 @@ public class AdminController {
 	@Autowired
 	InventoryService inventoryService;
 
+	@Autowired
+	OrderService orderService;
+	
 	@Autowired
 	AuthenticationManager mgr;
 
@@ -195,5 +200,10 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED)
 				.body("Inventory with ID: " + req.getInventoryId() + " edited successfully");
 	}
-
+	
+	@GetMapping("/orders")
+	public ResponseEntity<?> getAllOrders(){
+		List<OrderDetailDTO>orders=orderService.findAllOrders();
+		return ResponseEntity.status(HttpStatus.OK).body(orders); 
+	}
 }

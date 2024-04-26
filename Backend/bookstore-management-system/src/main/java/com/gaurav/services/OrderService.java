@@ -11,6 +11,7 @@ import com.gaurav.custom_exceptions.ListingPriceMismatchException;
 import com.gaurav.custom_exceptions.ResourceNotFoundException;
 import com.gaurav.custom_exceptions.StockNotAvailableException;
 import com.gaurav.dtos.OrderDTO;
+import com.gaurav.dtos.OrderDetailDTO;
 import com.gaurav.dtos.OrderItemDTO;
 import com.gaurav.entities.Address;
 import com.gaurav.entities.Book;
@@ -82,6 +83,11 @@ public class OrderService {
 		order.setTotalAmount(totalAmt);
 		Order ordered=orderRepository.save(order);
 		return ordered;
+	}
+
+	public List<OrderDetailDTO> findAllOrders() {
+		return orderRepository.findAll().stream().map(
+		(order)->new OrderDetailDTO(order.getId(), order.getUser().getId(), order.getAddress(), order.getCreatedAt(), order.getUpdatedAt(), order.getPaymentMethod(), order.getPaymentStatus(), order.getOrderStatus(), order.getTotalAmount())).toList();
 	}
 
 }
