@@ -8,7 +8,6 @@ function Navbar() {
 
     //selector
     const cart = useSelector(state => state.cart);
-    console.log(cart);
     const isLoggedIn = () => {
         const token = sessionStorage.getItem("token");
         return token != null

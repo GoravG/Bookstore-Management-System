@@ -32,6 +32,7 @@ import DiscoverPage from './pages/DiscoverPage';
 import EditBookPage from './pages/EditBookPage';
 import BookDetailPage from './pages/BookDetailPage';
 import InventoryEditPage from './pages/InventoryEditPage';
+import OrdersPage from './pages/OrdersPage';
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <AdminDashboardPage />,
+      },
+      {
+        path: "orders",
+        element: <OrdersPage />,
       },
       {
         path: "add_book",
