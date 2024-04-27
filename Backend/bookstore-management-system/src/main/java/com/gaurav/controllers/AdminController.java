@@ -30,11 +30,14 @@ import com.gaurav.dtos.CategoryDTO;
 import com.gaurav.dtos.InventoryDTO;
 import com.gaurav.dtos.InventoryEditDTO;
 import com.gaurav.dtos.InventoryWithTitleDTO;
+import com.gaurav.dtos.OrderCompleteDetailsDTO;
 import com.gaurav.dtos.OrderDetailDTO;
+import com.gaurav.dtos.OrderItemDetailsDTO;
 import com.gaurav.dtos.UserSignIn;
 import com.gaurav.entities.Book;
 import com.gaurav.entities.Category;
 import com.gaurav.entities.Inventory;
+import com.gaurav.entities.Order;
 import com.gaurav.security.JwtUtils;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
@@ -43,8 +46,6 @@ import com.gaurav.services.OrderService;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -66,7 +67,7 @@ public class AdminController {
 
 	@Autowired
 	OrderService orderService;
-	
+
 	@Autowired
 	AuthenticationManager mgr;
 
@@ -200,10 +201,31 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED)
 				.body("Inventory with ID: " + req.getInventoryId() + " edited successfully");
 	}
-	
+
 	@GetMapping("/orders")
-	public ResponseEntity<?> getAllOrders(){
-		List<OrderDetailDTO>orders=orderService.findAllOrders();
-		return ResponseEntity.status(HttpStatus.OK).body(orders); 
+	public ResponseEntity<?> getAllOrders() {
+		List<OrderDetailDTO> orders = orderService.findAllOrders();
+		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}
+
+	@GetMapping("/order/{orderId}")
+	public ResponseEntity<?> getOrderDetailsByOrderId(@PathVariable Long orderId) {
+		Order order = orderService.getOrderById(orderId);
+		OrderCompleteDetailsDTO dto = new OrderCompleteDetailsDTO(order.getId(), order.getUser().getId(),
+				order.getCreatedAt(), order.getPaymentMethod(), order.getPaymentStatus(), order.getOrderStatus(),
+				order.getTotalAmount(),
+				order.getOrderItems().stream().map((item) -> 
+				new OrderItemDetailsDTO(item.getId(),item.getBook().getId(),
+						item.getBook().getTitle(), item.getQuantity(), item.getSellingPrice(), item.getCostPrice()))
+						.toList());
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+
+	}
+
+	private Long id;
+	private Long bookId;
+	private String title;
+	private Integer quantity;
+	private Long sellingPrice;
+	private Long costPrice;
 }

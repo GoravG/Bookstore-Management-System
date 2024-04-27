@@ -29,65 +29,73 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class OrderService {
-	
+
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	private InventoryRepository inventoryRepository;
-	
+
 	@Autowired
 	private OrderItemRepository orderItemRepository;
-	
+
 	@Transactional
-	public Order placeOrder(OrderDTO orderDTO,User user) {
-		BigDecimal totalAmt=BigDecimal.ZERO;
-		List<OrderItem> orderItems=new ArrayList<>();
-		
+	public Order placeOrder(OrderDTO orderDTO, User user) {
+		BigDecimal totalAmt = BigDecimal.ZERO;
+		List<OrderItem> orderItems = new ArrayList<>();
+
 		List<OrderItemDTO> orderItemsDTO = orderDTO.getOrderItems();
-		
-		Address address=orderDTO.getAddress();
-		Order order=new Order();
+
+		Address address = orderDTO.getAddress();
+		Order order = new Order();
 		order.setUser(user);
 		order.setAddress(address);
 		order.setPaymentMethod(orderDTO.getPaymentMethod());
 		order.setOrderStatus(OrderStaus.PENDING);
 		order.setPaymentStatus(PaymentStatus.PENDING);
-		for(int i=0;i<orderItemsDTO.size();i++) {
-			int index=i;
-			//DTO specific
-			Long bookID=orderItemsDTO.get(index).getBookId();
-			Integer quantity=orderItemsDTO.get(index).getQuantity();
+		for (int i = 0; i < orderItemsDTO.size(); i++) {
+			int index = i;
+			// DTO specific
+			Long bookID = orderItemsDTO.get(index).getBookId();
+			Integer quantity = orderItemsDTO.get(index).getQuantity();
 			Long amount = orderItemsDTO.get(index).getAmount();
-			
-			Inventory inventory=inventoryRepository.findByBookId(bookID).orElseThrow(
-					()->new ResourceNotFoundException("Inventory does not have book with ID:"+bookID));
-			Integer stock=inventory.getStock();
-			Long sellingPrice=inventory.getSellingPrice();
-			Long costPrice=inventory.getCostPrice();
-			Book book=inventory.getBook();
-			if(stock<quantity)
-				throw new StockNotAvailableException(bookID,stock,quantity);
-			Long actualAmount=sellingPrice*quantity;
-			if(actualAmount.compareTo(amount)!=0)
-				throw new ListingPriceMismatchException(actualAmount,amount);
-			OrderItem item=new OrderItem(order, book, quantity, sellingPrice, costPrice);
+
+			Inventory inventory = inventoryRepository.findByBookId(bookID)
+					.orElseThrow(() -> new ResourceNotFoundException("Inventory does not have book with ID:" + bookID));
+			Integer stock = inventory.getStock();
+			Long sellingPrice = inventory.getSellingPrice();
+			Long costPrice = inventory.getCostPrice();
+			Book book = inventory.getBook();
+			if (stock < quantity)
+				throw new StockNotAvailableException(bookID, stock, quantity);
+			Long actualAmount = sellingPrice * quantity;
+			if (actualAmount.compareTo(amount) != 0)
+				throw new ListingPriceMismatchException(actualAmount, amount);
+			OrderItem item = new OrderItem(order, book, quantity, sellingPrice, costPrice);
 			orderItems.add(item);
 			orderItemRepository.save(item);
-			totalAmt=totalAmt.add(new BigDecimal(actualAmount));
-			System.out.println("Total Amount:"+totalAmt);
-			inventory.setStock(stock-quantity);
+			totalAmt = totalAmt.add(new BigDecimal(actualAmount));
+			System.out.println("Total Amount:" + totalAmt);
+			inventory.setStock(stock - quantity);
 			inventoryRepository.save(inventory);
 		}
 		order.setOrderItems(orderItems);
 		order.setTotalAmount(totalAmt);
-		Order ordered=orderRepository.save(order);
+		Order ordered = orderRepository.save(order);
 		return ordered;
 	}
 
 	public List<OrderDetailDTO> findAllOrders() {
-		return orderRepository.findAll().stream().map(
-		(order)->new OrderDetailDTO(order.getId(), order.getUser().getId(), order.getAddress(), order.getCreatedAt(), order.getUpdatedAt(), order.getPaymentMethod(), order.getPaymentStatus(), order.getOrderStatus(), order.getTotalAmount())).toList();
+		return orderRepository.findAll().stream()
+				.map((order) -> new OrderDetailDTO(order.getId(), order.getUser().getId(), order.getAddress(),
+						order.getCreatedAt(), order.getUpdatedAt(), order.getPaymentMethod(), order.getPaymentStatus(),
+						order.getOrderStatus(), order.getTotalAmount()))
+				.toList();
 	}
 
+	public Order getOrderById(Long orderId) {
+		return orderRepository.findById(orderId)
+				.orElseThrow(() -> new ResourceNotFoundException("Order associated with ID " + orderId + " not found"));
+
+	}
 }
