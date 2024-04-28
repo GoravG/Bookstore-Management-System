@@ -9,7 +9,7 @@ function CheckoutForm() {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [pincode, setPincode] = useState("");
-    const [paymentMethod, setPaymentMethod] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState("CASH");
 
     const baseURL = process.env.REACT_APP_API_URL;
     const token = sessionStorage.getItem("token");
@@ -78,6 +78,7 @@ function CheckoutForm() {
                 <label for="pincode">Pincode</label>
             </div>
             <select className="form-select mb-2" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => setPaymentMethod(e.target.value)}>
+                <option selected value={paymentMethod}>CASH ON DELIVERY</option>
                 <option value="CASH">CASH ON DELIVERY</option>
                 <option value="UPI">UPI</option>
                 <option value="CREDIT_CARD">CREDIT CARD</option>

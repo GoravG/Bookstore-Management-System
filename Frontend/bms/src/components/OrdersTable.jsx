@@ -1,11 +1,14 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import OrderRow from './OrderRow';
 
 function OrdersTable() {
     const [orders, setOrders] = useState([]);
     const baseURL = process.env.REACT_APP_API_URL;
     const token = sessionStorage.getItem("token");
+
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
@@ -47,18 +50,7 @@ function OrdersTable() {
                 </thead>
                 <tbody>
                     {orders.map((order) =>
-                        <tr key={order.orderId}>
-                            <td>{order.orderId}</td>
-                            <td>{order.userId}</td>
-                            <td>{order.address.pincode}</td>
-                            <td>{new Date(order.createdAt).toLocaleString('en-IN')}</td>
-                            <td>{new Date(order.updatedAt).toLocaleString('en-IN')}</td>
-                            <td >{order.paymentMethod}</td>
-                            <td>{order.paymentStatus}</td>
-                            <td>{order.orderStatus}</td>
-                            <td>{order.totalAmount}</td>
-                            <td><button className="btn btn-primary btn-sm">Update</button></td>
-                        </tr>
+                        <OrderRow key={order.orderId} order={order} />
                     )}
                 </tbody>
             </table >

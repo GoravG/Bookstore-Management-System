@@ -33,6 +33,7 @@ import EditBookPage from './pages/EditBookPage';
 import BookDetailPage from './pages/BookDetailPage';
 import InventoryEditPage from './pages/InventoryEditPage';
 import OrdersPage from './pages/OrdersPage';
+import OrderEditPage from './pages/OrderEditPage';
 
 const router = createBrowserRouter([
   {
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <OrdersPage />,
+      },
+      {
+        path: "orders/update/:orderId",
+        element: <OrderEditPage />,
       },
       {
         path: "add_book",
