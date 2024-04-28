@@ -98,4 +98,22 @@ public class OrderService {
 				.orElseThrow(() -> new ResourceNotFoundException("Order associated with ID " + orderId + " not found"));
 
 	}
+
+	public void updateOrder(Order order) {
+		orderRepository.save(order);
+	}
+	@Transactional
+	public void cancelOrder(Order order) {
+		List<OrderItem> orderItems = order.getOrderItems();
+		for(OrderItem item:orderItems) {
+			Long bookId = item.getBook().getId();
+			Integer quantity=item.getQuantity();
+			Inventory inventory = inventoryRepository.findByBookId(bookId).orElseThrow(()->new ResourceNotFoundException("Book associated with ID:"+bookId+" not found"));
+			inventory.setStock(inventory.getStock()+quantity);
+			inventoryRepository.save(inventory);
+		}
+		order.setPaymentStatus(PaymentStatus.FAILED);
+		order.setOrderStatus(OrderStaus.CANCELLED);
+		orderRepository.save(order);
+	}
 }

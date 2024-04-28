@@ -33,11 +33,13 @@ import com.gaurav.dtos.InventoryWithTitleDTO;
 import com.gaurav.dtos.OrderCompleteDetailsDTO;
 import com.gaurav.dtos.OrderDetailDTO;
 import com.gaurav.dtos.OrderItemDetailsDTO;
+import com.gaurav.dtos.UpdateOrderDTO;
 import com.gaurav.dtos.UserSignIn;
 import com.gaurav.entities.Book;
 import com.gaurav.entities.Category;
 import com.gaurav.entities.Inventory;
 import com.gaurav.entities.Order;
+import com.gaurav.entities.PaymentStatus;
 import com.gaurav.security.JwtUtils;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
@@ -221,11 +223,27 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
 
 	}
-
-	private Long id;
-	private Long bookId;
-	private String title;
-	private Integer quantity;
-	private Long sellingPrice;
-	private Long costPrice;
+	@PatchMapping("/order/update")
+	public ResponseEntity<?> updateOrderDetails(@Valid @RequestBody UpdateOrderDTO req){
+		Order order = orderService.getOrderById(req.getOrderId());
+		if(req.getPaymentStatus().toString()=="FAILED" || req.getOrderStatus().toString()=="CANCELLED")
+		{
+			System.out.println("In Cancel Order");
+			orderService.cancelOrder(order);
+			return ResponseEntity.status(HttpStatus.OK).body("Cancelled Order With ID:"+req.getOrderId());
+		}
+		else
+		{
+			order.setPaymentStatus(req.getPaymentStatus());
+			order.setOrderStatus(req.getOrderStatus());
+			orderService.updateOrder(order);
+			return ResponseEntity.status(HttpStatus.OK).body("Successfully Updated Order With ID:"+req.getOrderId());
+		}
+	}
+	@DeleteMapping("/order/cancel/{orderId}")
+	public ResponseEntity<?> cancelOrderByOrderId(@PathVariable Long orderId){
+		Order order = orderService.getOrderById(orderId);
+		orderService.cancelOrder(order);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Cancelled Order With ID" + orderId + " successfully");
+	}
 }

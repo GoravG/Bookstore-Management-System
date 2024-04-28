@@ -5,5 +5,5 @@ public enum OrderStaus {
     PROCESSING,
     SHIPPED,
     DELIVERED,
-    CANCELED
+    CANCELLED
 }
