@@ -66,7 +66,7 @@ public class SecurityConfig{
         		.requestMatchers("/api/user/register","/swagger-ui/**","/v3/api-docs/**","/api/user/signin","/api/services/newsletter","/api/admin/signin"
         				,"/api/commons/categories","/api/commons/**").permitAll() // ant matchers is also deprecated, so this is the replacement
         .requestMatchers("/api/admin/add_book","/api/admin/add_or_update_inventory","/api/admin/inventory","/api/admin/book/**").hasAuthority("ADMIN")
-        .requestMatchers("/api/user/dashboard","/api/user/place_order").hasAuthority("USER")
+        .requestMatchers("/api/user/dashboard","/api/user/place_order","/api/user/**").hasAuthority("USER")
 //        .requestMatchers( "/common/**").permitAll() // we can also provide allowed methods before the url pattern
         .anyRequest().authenticated()) // rest all the end points are authenticated
         .httpBasic(Customizer.withDefaults()) // httpBasic is a type of security, old method is deprecated

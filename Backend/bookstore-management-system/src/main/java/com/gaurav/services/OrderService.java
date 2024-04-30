@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gaurav.custom_exceptions.ListingPriceMismatchException;
@@ -115,5 +116,17 @@ public class OrderService {
 		order.setPaymentStatus(PaymentStatus.FAILED);
 		order.setOrderStatus(OrderStaus.CANCELLED);
 		orderRepository.save(order);
+	}
+
+	public List<OrderDetailDTO> findOrdersByUserId(Long id) {
+		return orderRepository.findAllByUserId(id,Sort.by(Sort.Direction.DESC,"id")).stream()
+				.map((order) -> new OrderDetailDTO(order.getId(), order.getUser().getId(), order.getAddress(),
+						order.getCreatedAt(), order.getUpdatedAt(), order.getPaymentMethod(), order.getPaymentStatus(),
+						order.getOrderStatus(), order.getTotalAmount()))
+				.toList();
+	}
+
+	public Long getCountOfOrdersByUserId(Long id) {
+		return orderRepository.countByUserId(id);
 	}
 }

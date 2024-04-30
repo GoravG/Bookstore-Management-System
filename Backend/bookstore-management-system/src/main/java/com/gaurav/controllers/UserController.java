@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gaurav.dtos.OrderDTO;
+import com.gaurav.dtos.OrderDetailDTO;
 import com.gaurav.dtos.OrderItemDTO;
 import com.gaurav.dtos.UserRegistrationDTO;
 import com.gaurav.dtos.UserSignIn;
@@ -78,5 +79,19 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.CREATED).body("Order with Order ID:"+placedOrder.getId()+" placed successfully");
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to Place Order");
+	}
+	@GetMapping("/orders")
+	public ResponseEntity<?> getAllOrdersOfUser(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user=userService.findUserByEmail(auth.getName());
+		List<OrderDetailDTO> orders=orderService.findOrdersByUserId(user.getId());
+		return ResponseEntity.status(HttpStatus.OK).body(orders);
+	}
+	@GetMapping("/order_count")
+	public ResponseEntity<?> getNoOfOrdersOfUser(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user=userService.findUserByEmail(auth.getName());
+		Long orderCount=orderService.getCountOfOrdersByUserId(user.getId());
+		return ResponseEntity.status(HttpStatus.OK).body(orderCount);
 	}
 }
