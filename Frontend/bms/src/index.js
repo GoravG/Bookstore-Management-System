@@ -34,6 +34,7 @@ import BookDetailPage from './pages/BookDetailPage';
 import InventoryEditPage from './pages/InventoryEditPage';
 import OrdersPage from './pages/OrdersPage';
 import OrderEditPage from './pages/OrderEditPage';
+import UserOrdersPage from './pages/UserOrdersPage';
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <UserRegistrationPage />,
+      },
+      {
+        path: "orders/:pageNumber",
+        element: <UserOrdersPage />,
       },
     ],
   },

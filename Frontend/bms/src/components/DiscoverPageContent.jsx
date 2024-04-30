@@ -121,9 +121,9 @@ function DiscoverPageContent() {
                 </div>
                 <nav className='mt-2'>
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><button class="page-link" onClick={handlePrevButton}>Previous</button></li>
+                        <li class="page-item"><button class="page-link" onClick={handlePrevButton} disabled={pageNumber == 1}>Previous</button></li>
                         {pages.map((page) => <li class="page-item"><a class="page-link" href={'/discover/' + page}>{page}</a></li>)}
-                        <li class="page-item"><button class="page-link" onClick={handleNextButton}>Next</button></li>
+                        <li class="page-item"><button class="page-link btn-primary" onClick={handleNextButton} disabled={pageNumber == pages.length}>Next</button></li>
                     </ul>
                 </nav>
             </div>

@@ -53,11 +53,22 @@ function Navbar() {
                         <li className="nav-item">
                             <button className="btn btn-light me-2" ><Link to="/cart" style={{ color: "black", textDecoration: 'none' }}>Cart {cart.items.length > 0 && <span class="badge text-bg-danger">{cart.items.length}</span>} <i class="bi bi-cart3"></i></Link></button>
                         </li>
+                        {isLoggedIn() && (<li className="d-flex">
+                            <div class="btn-group dropstart">
+                                <button className="btn btn-light btn-sm me-2 fs-5" data-bs-toggle="dropdown" aria-expanded="false" style={{ borderRadius: '50%' }}><i class="bi bi-person-circle fs-5">
+                                </i></button>
+                                <ul class="dropdown-menu">
+                                    <li><Link to="/user/orders/1" className='dropdown-item' style={{ color: "black", textDecoration: 'none' }}>My Orders</Link></li>
+                                </ul>
+                            </div>
+                        </li>)}
                     </div>
                 </div>
             </nav>
         </>
     )
 }
+
+
 
 export default Navbar
