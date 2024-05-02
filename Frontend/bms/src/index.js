@@ -35,6 +35,7 @@ import InventoryEditPage from './pages/InventoryEditPage';
 import OrdersPage from './pages/OrdersPage';
 import OrderEditPage from './pages/OrderEditPage';
 import UserOrdersPage from './pages/UserOrdersPage';
+import UserOrderDetailsPage from './pages/UserOrderDetailsPage';
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: "orders/:pageNumber",
         element: <UserOrdersPage />,
+      },
+      {
+        path: "order/:orderNumber",
+        element: <UserOrderDetailsPage />,
       },
     ],
   },
