@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.gaurav.custom_exceptions.ResourceNotFoundException;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice
@@ -40,5 +41,4 @@ public class GlobalExceptionHandler {
 		log.info(message);
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
 	}
-
 }

@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gaurav.custom_exceptions.ListingPriceMismatchException;
 import com.gaurav.custom_exceptions.ResourceNotFoundException;
 import com.gaurav.custom_exceptions.StockNotAvailableException;
+import com.gaurav.dtos.OrderCompleteDetailsDTO;
 import com.gaurav.dtos.OrderDTO;
 import com.gaurav.dtos.OrderDetailDTO;
 import com.gaurav.dtos.OrderItemDTO;
@@ -118,8 +121,9 @@ public class OrderService {
 		orderRepository.save(order);
 	}
 
-	public List<OrderDetailDTO> findOrdersByUserId(Long id) {
-		return orderRepository.findAllByUserId(id,Sort.by(Sort.Direction.DESC,"id")).stream()
+	public List<OrderDetailDTO> findOrdersByUserId(Long id,Integer pageNumber) {
+		PageRequest pageRequest = PageRequest.of(pageNumber, 4,Sort.by(Sort.Direction.DESC,"id"));
+		return orderRepository.findAll(pageRequest).getContent().stream()
 				.map((order) -> new OrderDetailDTO(order.getId(), order.getUser().getId(), order.getAddress(),
 						order.getCreatedAt(), order.getUpdatedAt(), order.getPaymentMethod(), order.getPaymentStatus(),
 						order.getOrderStatus(), order.getTotalAmount()))
@@ -128,5 +132,8 @@ public class OrderService {
 
 	public Long getCountOfOrdersByUserId(Long id) {
 		return orderRepository.countByUserId(id);
+	}
+	public boolean doesOrderBelongToUser(Long orderId,Long userId) {
+		return orderRepository.existsByIdAndUserId(orderId,userId);
 	}
 }

@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.gaurav.entities.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long>{
-	List<Order> findAllByUserId(Long userId,Sort sort);
 	Long countByUserId(Long userId);
+	boolean existsByIdAndUserId(Long orderId,Long userId);
 }

@@ -10,18 +10,24 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gaurav.dtos.OrderCompleteDetailsDTO;
 import com.gaurav.dtos.OrderDTO;
 import com.gaurav.dtos.OrderDetailDTO;
 import com.gaurav.dtos.OrderItemDTO;
+import com.gaurav.dtos.OrderItemDetailsDTO;
 import com.gaurav.dtos.UserRegistrationDTO;
 import com.gaurav.dtos.UserSignIn;
 import com.gaurav.entities.Order;
+import com.gaurav.entities.OrderStaus;
+import com.gaurav.entities.PaymentStatus;
 import com.gaurav.entities.User;
 import com.gaurav.security.JwtUtils;
 import com.gaurav.services.OrderService;
@@ -80,11 +86,12 @@ public class UserController {
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to Place Order");
 	}
-	@GetMapping("/orders")
-	public ResponseEntity<?> getAllOrdersOfUser(){
+	@GetMapping("/orders/{pageNumber}")
+	public ResponseEntity<?> getAllOrdersOfUser(@PathVariable Integer pageNumber){
+		System.out.println("In Orders PageNumber:"+pageNumber);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user=userService.findUserByEmail(auth.getName());
-		List<OrderDetailDTO> orders=orderService.findOrdersByUserId(user.getId());
+		List<OrderDetailDTO> orders=orderService.findOrdersByUserId(user.getId(),pageNumber-1);
 		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}
 	@GetMapping("/order_count")
@@ -93,5 +100,35 @@ public class UserController {
 		User user=userService.findUserByEmail(auth.getName());
 		Long orderCount=orderService.getCountOfOrdersByUserId(user.getId());
 		return ResponseEntity.status(HttpStatus.OK).body(orderCount);
+	}
+	@GetMapping("/order/{orderId}")
+	public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user=userService.findUserByEmail(auth.getName());
+		Long userId=user.getId();
+		boolean orderExists=orderService.doesOrderBelongToUser(orderId,userId);
+		if(!orderExists)
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Order with order id "+orderId+" is not your order");
+		Order order = orderService.getOrderById(orderId);
+		OrderCompleteDetailsDTO dto = new OrderCompleteDetailsDTO(order.getId(), order.getUser().getId(),
+				order.getCreatedAt(), order.getPaymentMethod(), order.getPaymentStatus(), order.getOrderStatus(),
+				order.getTotalAmount(),
+				order.getOrderItems().stream().map((item) -> 
+				new OrderItemDetailsDTO(item.getId(),item.getBook().getId(),
+						item.getBook().getTitle(), item.getQuantity(), item.getSellingPrice(), item.getCostPrice()))
+						.toList());
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+	}
+	@DeleteMapping("/order/{orderId}")
+	public ResponseEntity<?> cancelUserOrder(@PathVariable Long orderId){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user=userService.findUserByEmail(auth.getName());
+		Long userId=user.getId();
+		boolean orderExists=orderService.doesOrderBelongToUser(orderId,userId);
+		if(!orderExists)
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Cannot cancel order with order id "+orderId+" is not your order");
+		Order order = orderService.getOrderById(orderId);
+		orderService.cancelOrder(order);
+		return ResponseEntity.status(HttpStatus.OK).body("Order Cancelled Successfully");
 	}
 }
