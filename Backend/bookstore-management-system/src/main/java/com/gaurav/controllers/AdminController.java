@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gaurav.custom_exceptions.WannaGetIntoLossException;
@@ -39,6 +40,7 @@ import com.gaurav.entities.Book;
 import com.gaurav.entities.Category;
 import com.gaurav.entities.Inventory;
 import com.gaurav.entities.Order;
+import com.gaurav.entities.OrderStaus;
 import com.gaurav.entities.PaymentStatus;
 import com.gaurav.security.JwtUtils;
 import com.gaurav.services.BookService;
@@ -245,5 +247,22 @@ public class AdminController {
 		Order order = orderService.getOrderById(orderId);
 		orderService.cancelOrder(order);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Cancelled Order With ID" + orderId + " successfully");
+	}
+	@GetMapping("/orders/last_n_day_orders")
+	public ResponseEntity<?>getLastNDaysOrderNumber(@RequestParam("last_days") String last_days){
+		Long stats=orderService.getLastXDayOrders(Long.valueOf(last_days));
+		return ResponseEntity.status(HttpStatus.OK).body(stats);
+	}
+	@GetMapping("/orders/count_orders")
+	public ResponseEntity<?>getCountOfOrdersByOrderStatus(@RequestParam("status") String status){
+		OrderStaus os = OrderStaus.valueOf(status);
+		Long stats=orderService.getCountOfOrdersByOrderStatus(os);
+		return ResponseEntity.status(HttpStatus.OK).body(stats);
+	}
+	@GetMapping("/orders/get_last_n_day_profit")
+	public ResponseEntity<?>getLastNDaysProfit(@RequestParam("last_days") String last_days){
+		Double stats=orderService.getProfitByDays(Long.valueOf(last_days));
+		System.out.println("ANS"+stats);
+		return ResponseEntity.status(HttpStatus.OK).body(stats);
 	}
 }

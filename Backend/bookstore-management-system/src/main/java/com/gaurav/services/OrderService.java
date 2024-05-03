@@ -1,6 +1,12 @@
 package com.gaurav.services;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,5 +141,21 @@ public class OrderService {
 	}
 	public boolean doesOrderBelongToUser(Long orderId,Long userId) {
 		return orderRepository.existsByIdAndUserId(orderId,userId);
+	}
+
+	public Long getLastXDayOrders(Long lastDays) {
+		LocalDateTime startTime = LocalDateTime.now();
+		System.out.println("Start:"+startTime);
+        LocalDateTime endTime = LocalDate.now().atStartOfDay().minusDays(lastDays);
+        System.out.println("End:"+endTime);
+        Timestamp s = Timestamp.valueOf(startTime);
+        Timestamp e = Timestamp.valueOf(endTime);
+		return orderRepository.countByCreatedAtBetween(e,s);
+	}
+	public Long getCountOfOrdersByOrderStatus(OrderStaus orderStatus) {
+		return orderRepository.countByOrOrderStatus(orderStatus);
+	}
+	public Double getProfitByDays(Long lastDays) {
+		return orderRepository.getTotalProfit(lastDays);
 	}
 }
