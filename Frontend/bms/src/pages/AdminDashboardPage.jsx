@@ -33,6 +33,10 @@ function AdminDashboardPage() {
                         <Link to="/admin/orders" style={{ color: "black", textDecoration: 'none' }}>Orders</Link>
                     </a>
                     <br />
+                    < a className="btn btn-light my-2">
+                        <Link to="/admin/insights" style={{ color: "black", textDecoration: 'none' }}>Insights</Link>
+                    </a>
+                    <br />
                 </div>
             </div >
         </>

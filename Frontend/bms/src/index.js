@@ -36,6 +36,7 @@ import OrdersPage from './pages/OrdersPage';
 import OrderEditPage from './pages/OrderEditPage';
 import UserOrdersPage from './pages/UserOrdersPage';
 import UserOrderDetailsPage from './pages/UserOrderDetailsPage';
+import InsightsPage from './pages/InsightsPage';
 
 const router = createBrowserRouter([
   {
@@ -140,6 +141,10 @@ const router = createBrowserRouter([
       {
         path: "inventory/edit/:inventoryId",
         element: <InventoryEditPage />,
+      },
+      {
+        path: "insights",
+        element: <InsightsPage />,
       },
     ],
   },
