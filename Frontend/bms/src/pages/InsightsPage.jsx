@@ -1,12 +1,13 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import InfoCard from '../components/InfoCard'
-
+import InsightsBarChart from '../components/InsightsBarChart'
+import InsightsPieChart from '../components/InsightsPieChart'
 function InsightsPage() {
     return (
         <>
             <Navbar />
-            <div className="container-fluid mt-2">
+            <div className="container-fluid my-3">
                 <div className='row g-2'>
                     <div className="col-4">
                         <InfoCard title={"Today's Profit"} unit={"₹"} variable={0} url={"admin/orders/get_last_n_day_profit?last_days="} />
@@ -38,7 +39,12 @@ function InsightsPage() {
                     <div className="col-4">
                         <InfoCard title={"Cancelled Orders"} variable={"CANCELLED"} url={"admin/orders/count_orders?status="} />
                     </div>
-
+                    <div className="col-6">
+                        <InsightsBarChart title={"Orders"} url={"admin/orders/get_last_n_day_orders?last_days="} />
+                    </div>
+                    <div className="col-6">
+                        <InsightsPieChart title={"Orders by Order Status"} url={"admin/orders/get_order_count_by_order_status"} />
+                    </div>
                 </div>
             </div>
         </>
