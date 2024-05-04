@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalField;
 import java.util.ArrayList;
@@ -13,12 +14,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gaurav.custom_exceptions.ListingPriceMismatchException;
 import com.gaurav.custom_exceptions.ResourceNotFoundException;
 import com.gaurav.custom_exceptions.StockNotAvailableException;
+import com.gaurav.dtos.DateAndValuesDTO;
+import com.gaurav.dtos.KeyAndValue;
 import com.gaurav.dtos.OrderCompleteDetailsDTO;
 import com.gaurav.dtos.OrderDTO;
 import com.gaurav.dtos.OrderDetailDTO;
@@ -128,8 +132,8 @@ public class OrderService {
 	}
 
 	public List<OrderDetailDTO> findOrdersByUserId(Long id,Integer pageNumber) {
-		PageRequest pageRequest = PageRequest.of(pageNumber, 4,Sort.by(Sort.Direction.DESC,"id"));
-		return orderRepository.findAll(pageRequest).getContent().stream()
+		Pageable pageRequest = PageRequest.of(pageNumber, 4,Sort.by(Sort.Direction.DESC,"id"));
+		return orderRepository.findAllByUserId(id,pageRequest).stream()
 				.map((order) -> new OrderDetailDTO(order.getId(), order.getUser().getId(), order.getAddress(),
 						order.getCreatedAt(), order.getUpdatedAt(), order.getPaymentMethod(), order.getPaymentStatus(),
 						order.getOrderStatus(), order.getTotalAmount()))
@@ -157,5 +161,34 @@ public class OrderService {
 	}
 	public Double getProfitByDays(Long lastDays) {
 		return orderRepository.getTotalProfit(lastDays);
+	}
+
+	public List<DateAndValuesDTO> getLast7DayOrders(int lastDays) {
+		List<DateAndValuesDTO>list=new ArrayList<>();
+		for(int i=0;i<lastDays;i++) {
+			int year = LocalDateTime.now().getYear();
+			int month = LocalDateTime.now().getMonth().getValue();
+			int date = LocalDateTime.now().getDayOfMonth();
+			Timestamp start=Timestamp.valueOf(LocalDateTime.of(year, month, date, 0, 0).minusDays(i));
+			Timestamp end=Timestamp.valueOf(LocalDateTime.of(year, month, date, 23, 59).minusDays(i));
+			Long count = orderRepository.countByCreatedAtBetween(start, end);
+			list.add(new DateAndValuesDTO(LocalDate.of(year, month, date).minusDays(i),count.intValue()));
+		}
+		return list;
+	}
+
+	public List<KeyAndValue> getOrderCountByOrderStatusAll() {
+		List<KeyAndValue> stats=new ArrayList<>();
+		Long cancelledCount = orderRepository.countByOrderStatus(OrderStaus.CANCELLED);
+		stats.add(new KeyAndValue(OrderStaus.CANCELLED.toString(), cancelledCount.toString()));
+		Long deliveredCount= orderRepository.countByOrderStatus(OrderStaus.DELIVERED);
+		stats.add(new KeyAndValue(OrderStaus.DELIVERED.toString(), deliveredCount.toString()));
+		Long pendingCount= orderRepository.countByOrderStatus(OrderStaus.PENDING);
+		stats.add(new KeyAndValue(OrderStaus.PENDING.toString(), pendingCount.toString()));
+		Long processingCount= orderRepository.countByOrderStatus(OrderStaus.PROCESSING);
+		stats.add(new KeyAndValue(OrderStaus.PROCESSING.toString(), processingCount.toString()));
+		Long shippedCount= orderRepository.countByOrderStatus(OrderStaus.SHIPPED);
+		stats.add(new KeyAndValue(OrderStaus.SHIPPED.toString(), shippedCount.toString()));
+		return stats;
 	}
 }

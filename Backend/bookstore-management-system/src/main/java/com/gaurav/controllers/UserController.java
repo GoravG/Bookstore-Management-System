@@ -90,7 +90,9 @@ public class UserController {
 	public ResponseEntity<?> getAllOrdersOfUser(@PathVariable Integer pageNumber){
 		System.out.println("In Orders PageNumber:"+pageNumber);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("Email:"+auth.getName());
 		User user=userService.findUserByEmail(auth.getName());
+		System.out.println("UserID:"+user.getId());
 		List<OrderDetailDTO> orders=orderService.findOrdersByUserId(user.getId(),pageNumber-1);
 		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}

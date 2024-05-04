@@ -28,9 +28,11 @@ import com.gaurav.dtos.BookDTO;
 import com.gaurav.dtos.BookDetailsDTO;
 import com.gaurav.dtos.BookEditDTO;
 import com.gaurav.dtos.CategoryDTO;
+import com.gaurav.dtos.DateAndValuesDTO;
 import com.gaurav.dtos.InventoryDTO;
 import com.gaurav.dtos.InventoryEditDTO;
 import com.gaurav.dtos.InventoryWithTitleDTO;
+import com.gaurav.dtos.KeyAndValue;
 import com.gaurav.dtos.OrderCompleteDetailsDTO;
 import com.gaurav.dtos.OrderDetailDTO;
 import com.gaurav.dtos.OrderItemDetailsDTO;
@@ -262,7 +264,16 @@ public class AdminController {
 	@GetMapping("/orders/get_last_n_day_profit")
 	public ResponseEntity<?>getLastNDaysProfit(@RequestParam("last_days") String last_days){
 		Double stats=orderService.getProfitByDays(Long.valueOf(last_days));
-		System.out.println("ANS"+stats);
 		return ResponseEntity.status(HttpStatus.OK).body(stats);
+	}
+	@GetMapping("/orders/get_last_n_day_orders")
+	public ResponseEntity<?> getLast7DayOrders(@RequestParam("last_days") String last_days){
+		List<DateAndValuesDTO> orders=orderService.getLast7DayOrders(Integer.valueOf(last_days));
+		return ResponseEntity.status(HttpStatus.OK).body(orders);
+	}
+	@GetMapping("/orders/get_order_count_by_order_status")
+	public ResponseEntity<?> getOrderCountByOrderStatus(){
+		List<KeyAndValue> list=orderService.getOrderCountByOrderStatusAll();
+		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 }
