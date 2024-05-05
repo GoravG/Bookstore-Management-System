@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { clearCart } from '../features/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 function CheckoutForm() {
     const cart = useSelector(state => state.cart);
+    const navigate = useNavigate();
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [pincode, setPincode] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("CASH");
+    const dispatch = useDispatch();
 
     const baseURL = process.env.REACT_APP_API_URL;
     const token = sessionStorage.getItem("token");
@@ -48,6 +52,8 @@ function CheckoutForm() {
             const response = await axios.request(config);
             console.log(JSON.stringify(response.data));
             toast.success("Placed order successfully");
+            dispatch(clearCart());
+            navigate("/");
         }
         catch (error) {
             console.log(error);

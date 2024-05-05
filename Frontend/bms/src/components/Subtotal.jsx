@@ -26,7 +26,7 @@ function Subtotal() {
                     </tr>
                 </thead>
                 <tbody>
-                    {cart.items.map((item) => (<tr>
+                    {cart.items.map((item, index) => (<tr key={index}>
                         <td className='fw-light'>{item.title} x {item.qty}</td>
                         <td className='text-end'>{item.sellingPrice * item.qty}</td>
                     </tr>))}

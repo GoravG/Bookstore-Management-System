@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         element: <AdminDashboardPage />,
       },
       {
-        path: "orders",
+        path: "orders/:pageNumber",
         element: <OrdersPage />,
       },
       {

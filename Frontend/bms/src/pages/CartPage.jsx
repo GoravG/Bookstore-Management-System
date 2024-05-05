@@ -34,8 +34,8 @@ function CartPage() {
                 :
                 <>
                     <div className="container">
-                        {cart.items.map((item) => {
-                            return <CartItemRow item={item} />
+                        {cart.items.map((item, index) => {
+                            return <CartItemRow key={index} item={item} />
                         })}
                         <div className='text-center fw-bolder  fs-4 mt-4 mb-2'>Total Amount: ₹ {totalAmount}</div>
                         <div className='text-center text-success fw-bold  fs-5 mt-2 mb-2'>Total Savings: ₹ {totalSaving}</div>

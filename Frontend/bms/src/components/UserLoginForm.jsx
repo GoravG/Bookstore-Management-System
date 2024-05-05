@@ -43,7 +43,7 @@ export default function UserLoginFrom() {
             .then((response) => {
                 sessionStorage.setItem("token", response.data);
                 toast.success("Login Successful");
-                navigate('/user/dashboard');
+                navigate('/');
             })
             .catch((error) => {
                 toast.warn("Login Failed");

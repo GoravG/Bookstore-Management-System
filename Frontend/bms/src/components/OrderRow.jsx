@@ -17,7 +17,7 @@ function OrderRow({ order }) {
             <td>{order.paymentStatus}</td>
             <td>{order.orderStatus}</td>
             <td>{order.totalAmount}</td>
-            <td><button className="btn btn-primary btn-sm" onClick={navigateToUpdatePage} disabled={order.orderStatus == "CANCELLED"} >Update</button></td>
+            <td><button className="btn btn-primary btn-sm" onClick={navigateToUpdatePage} disabled={order.orderStatus == "CANCELLED" || order.orderStatus === "DELIVERED"} >Update</button></td>
         </tr>
     )
 }

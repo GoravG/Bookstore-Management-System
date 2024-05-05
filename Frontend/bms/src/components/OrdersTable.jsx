@@ -2,22 +2,27 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import OrderRow from './OrderRow';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function OrdersTable() {
+    const navigate = useNavigate();
+    const [dep, setDep] = useState(false);
+    const { pageNumber } = useParams()
     const [orders, setOrders] = useState([]);
     const baseURL = process.env.REACT_APP_API_URL;
     const token = sessionStorage.getItem("token");
-
-    let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: baseURL + 'admin/orders',
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    };
+    const [pages, setPages] = useState([]);
 
     async function getOrders() {
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: baseURL + 'admin/orders/' + Number(pageNumber - 1),
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        };
         try {
             const response = await axios.request(config);
             console.log(response.data);
@@ -27,9 +32,43 @@ function OrdersTable() {
             console.log(error);
         }
     }
+    async function getPages() {
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: baseURL + 'admin/orders/no_of_pages',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        };
+        try {
+            const response = await axios.request(config);
+            let temp = [];
+            for (let i = 1; i <= response.data; i++) {
+                temp.push(i);
+            }
+            setPages(temp);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
     useEffect(() => {
+        getPages();
         getOrders();
-    }, [])
+    }, [dep])
+    const handlePrevButton = () => {
+        if (pageNumber == 1)
+            return;
+        navigate("/admin/orders/" + (pageNumber - 1));
+        setDep(!dep);
+    }
+    const handleNextButton = () => {
+        if (pageNumber == pages.length)
+            return;
+        navigate("/admin/orders/" + (Number(pageNumber) + 1));
+        setDep(!dep);
+    }
     return (
         <>
             <table class="table table-hover text-center">
@@ -53,6 +92,13 @@ function OrdersTable() {
                     )}
                 </tbody>
             </table >
+            <nav className='mt-2'>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><button class="page-link" onClick={handlePrevButton} disabled={pageNumber == 1}>Previous</button></li>
+                    {pages.map((page) => <li class="page-item"><a class="page-link" href={'/admin/orders/' + page}>{page}</a></li>)}
+                    <li class="page-item"><button class="page-link btn-primary" onClick={handleNextButton} disabled={pageNumber == pages.length}>Next</button></li>
+                </ul>
+            </nav>
         </>
     )
 }
