@@ -127,39 +127,39 @@ function EditBookForm() {
                                     <div className="col-4">
                                         <img src={imgURL} className="card-img-top mt-3 rounded shadow" alt="..." width={150} />
                                         <div className="mb-3">
-                                            <label for="coverImage" className="form-label">Choose Cover Image</label>
+                                            <label htmlFor="coverImage" className="form-label">Choose Cover Image</label>
                                             <input className="form-control" type="file" id="coverImage" onChange={(e) => handleCoverImageUpload(e)} />
                                         </div>
                                     </div>
                                     <div className="col-8">
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control mt-3" id="bookId" placeholder="BookID" value={bookId} disabled />
-                                            <label for="isbn">BookID</label>
+                                        <div className="form-floating mb-3">
+                                            <input type="text" className="form-control mt-3" id="bookId" placeholder="BookID" value={bookId} disabled />
+                                            <label htmlFor="isbn">BookID</label>
                                         </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control mt-2" id="isbn" placeholder="ISBN" value={isbn} onChange={(e) => setISBN(e.target.value)} />
-                                            <label for="isbn">ISBN</label>
+                                        <div className="form-floating mb-3">
+                                            <input type="text" className="form-control mt-2" id="isbn" placeholder="ISBN" value={isbn} onChange={(e) => setISBN(e.target.value)} />
+                                            <label htmlFor="isbn">ISBN</label>
                                         </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                                            <label for="title">Title</label>
+                                        <div className="form-floating mb-3">
+                                            <input type="text" className="form-control" id="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                                            <label htmlFor="title">Title</label>
                                         </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="author" placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} />
-                                            <label for="author">Author</label>
+                                        <div className="form-floating mb-3">
+                                            <input type="text" className="form-control" id="author" placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                                            <label htmlFor="author">Author</label>
                                         </div>
-                                        <div class="form-floating mb-3">
-                                            <textarea type="text" class="form-control" id="description" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} style={{ height: 100 }} />
-                                            <label for="description">Description</label>
+                                        <div className="form-floating mb-3">
+                                            <textarea type="text" className="form-control" id="description" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} style={{ height: 100 }} />
+                                            <label htmlFor="description">Description</label>
                                         </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control" id="noOfPages" placeholder="NoOfPages" value={noOfPages} onChange={(e) => setNoOfPages(e.target.value)} />
-                                            <label for="noOfPages">No Of Pages</label>
+                                        <div className="form-floating mb-3">
+                                            <input type="number" className="form-control" id="noOfPages" placeholder="NoOfPages" value={noOfPages} onChange={(e) => setNoOfPages(e.target.value)} />
+                                            <label htmlFor="noOfPages">No Of Pages</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-grid gap-2 mb-3">
-                                    <button class="btn btn-success" type="button" onClick={handleSubmitAction}>Update Book Details</button>
+                                <div className="d-grid gap-2 mb-3">
+                                    <button className="btn btn-success" type="button" onClick={handleSubmitAction}>Update Book Details</button>
                                 </div>
                             </div>
 

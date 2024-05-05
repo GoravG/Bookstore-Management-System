@@ -40,9 +40,9 @@ function UserOrdersPage() {
             <div className="container mt-2 mb-2">
                 <nav className='mt-2'>
                     <UserOrders pageNumber={pageNumber} />
-                    <ul class="pagination justify-content-center">
-                        {pages.map((page) =>
-                            <li class="page-item"><a class="page-link" href={!(page == pageNumber) ? '/user/orders/' + page : null} >{page}</a></li>)}
+                    <ul className="pagination justify-content-center">
+                        {pages.map((page, index) =>
+                            <li key={index} className="page-item"><a className="page-link" href={!(page == pageNumber) ? '/user/orders/' + page : null} >{page}</a></li>)}
                     </ul>
                 </nav>
             </div>

@@ -122,31 +122,31 @@ function UserRegistrationForm() {
                                     <div className="text-center mt- fw-bolder"><h1>Register</h1></div>
                                     <div className="form-floating mb-2">
                                         <input type="text" className="form-control" id="firstName" placeholder="Enter first name" autoFocus onChange={(e) => setFirstName(e.target.value)} value={firstName} required />
-                                        <label for="firstName">First Name</label>
+                                        <label htmlFor="firstName">First Name</label>
                                     </div>
                                     <div className="form-floating mb-2">
                                         <input type="text" className="form-control" id="lastName" placeholder="Enter last name" onChange={(e) => setLastName(e.target.value)} value={lastName} required />
-                                        <label for="lastName">Last Name</label>
+                                        <label htmlFor="lastName">Last Name</label>
                                     </div>
                                     <div className="form-floating mb-2">
                                         <input type="date" className="form-control" id="dob" placeholder="Enter date of birth" onChange={handleDobChange} value={dob} required />
-                                        <label for="lastName">Date of Birth</label>
+                                        <label htmlFor="lastName">Date of Birth</label>
                                     </div>
                                     <div className="form-floating mb-2">
                                         <input type="text" className="form-control" id="phoneNo" placeholder="Enter Phone No" onChange={(e) => setPhoneNo(e.target.value)} value={phoneNo} required />
-                                        <label for="phoneNo">Phone No</label>
+                                        <label htmlFor="phoneNo">Phone No</label>
                                     </div>
                                     <div className="form-floating mb-2">
                                         <input type="email" className="form-control" id="email" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
-                                        <label for="email">Email</label>
+                                        <label htmlFor="email">Email</label>
                                     </div>
                                     <div className="form-floating mb-2">
                                         <input type="password" className="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
-                                        <label for="pass">Password</label>
+                                        <label htmlFor="pass">Password</label>
                                     </div>
                                     <div className="form-floating mb-2">
                                         <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} required />
-                                        <label for="confirmPassword">Confirm Password</label>
+                                        <label htmlFor="confirmPassword">Confirm Password</label>
                                     </div>
                                     {formErrors.length >= 0 ? (<div className="text-danger fw-bold text-center">{formErrors}</div>) : <></>}
                                     <div className="mb-2">

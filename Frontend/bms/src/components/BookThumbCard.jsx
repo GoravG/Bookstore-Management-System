@@ -30,7 +30,6 @@ function BookThumbCard({ ttl, ms, me }) {
 
         axios.request(config)
             .then((response) => {
-                console.log("API Call")
                 setLoading(false);
                 setAuthor(response.data[0].author)
                 setTitle(response.data[0].title)

@@ -41,7 +41,7 @@ function CategoryPageContent({ categoryId }) {
                     <div className="container-fluid mt-2 mb-2">
                         <div className="row row-cols-4 g-2">
                             {books.map((book) => {
-                                return <BookCard
+                                return <BookCard key={book.bookId}
                                     bookId={book.bookId}
                                     title={book.title}
                                     author={book.author}

@@ -11,10 +11,10 @@ function OrderDetailsTable({ o }) {
     return (
         <>
             <div className='container w-50'>
-                <div class="card shadow border rounded mt-2 mb-2" id='print'>
-                    <div class="card-body">
+                <div className="card shadow border rounded mt-2 mb-2" id='print'>
+                    <div className="card-body">
                         <div className="fs-2 fw-bold text-center">Order Details</div>
-                        <table class="table table-borderless">
+                        <table className="table table-borderless">
                             <tbody>
                                 <tr>
                                     <td>OrderID:</td>
@@ -42,7 +42,7 @@ function OrderDetailsTable({ o }) {
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="table table-borderless">
+                        <table className="table table-borderless">
                             <thead>
                                 <tr>
                                     <th scope="col" className='text-center'>BookID</th>

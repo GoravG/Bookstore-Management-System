@@ -20,7 +20,6 @@ function InsightsBarChart({ title, url }) {
     async function getData() {
         try {
             const response = await axios.request(config);
-            console.log(response.data);
             setData(response.data);
         }
         catch (error) {
@@ -32,8 +31,8 @@ function InsightsBarChart({ title, url }) {
     }, [days])
     return (
         (
-            <div class="card bg-light h-100">
-                <div class="card-body">
+            <div className="card bg-light h-100">
+                <div className="card-body">
                     <h5 className='cart-title'>Last {days} Days {title}</h5>
                     <BarChart xAxis={[
                         {

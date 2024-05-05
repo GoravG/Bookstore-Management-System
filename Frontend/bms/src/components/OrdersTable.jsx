@@ -25,7 +25,6 @@ function OrdersTable() {
         };
         try {
             const response = await axios.request(config);
-            console.log(response.data);
             setOrders(response.data);
         }
         catch (error) {
@@ -71,7 +70,7 @@ function OrdersTable() {
     }
     return (
         <>
-            <table class="table table-hover text-center">
+            <table className="table table-hover text-center">
                 <thead>
                     <tr>
                         <th scope="col">OrderID</th>
@@ -93,10 +92,10 @@ function OrdersTable() {
                 </tbody>
             </table >
             <nav className='mt-2'>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><button class="page-link" onClick={handlePrevButton} disabled={pageNumber == 1}>Previous</button></li>
-                    {pages.map((page) => <li class="page-item"><a class="page-link" href={'/admin/orders/' + page}>{page}</a></li>)}
-                    <li class="page-item"><button class="page-link btn-primary" onClick={handleNextButton} disabled={pageNumber == pages.length}>Next</button></li>
+                <ul className="pagination justify-content-center">
+                    <li className="page-item"><button className="page-link" onClick={handlePrevButton} disabled={pageNumber == 1}>Previous</button></li>
+                    {pages.map((page, index) => <li key={index} className="page-item"><a className="page-link" href={'/admin/orders/' + page}>{page}</a></li>)}
+                    <li className="page-item"><button className="page-link btn-primary" onClick={handleNextButton} disabled={pageNumber == pages.length}>Next</button></li>
                 </ul>
             </nav>
         </>

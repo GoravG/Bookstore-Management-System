@@ -23,9 +23,7 @@ function InventoryTable() {
         async function makeRequest() {
             try {
                 const response = await axios.request(config);
-                console.log(JSON.stringify(response.data));
                 setInventory(response.data);
-                console.log(inventory);
             }
             catch (error) {
                 console.log(error);
@@ -122,6 +120,7 @@ function InventoryTable() {
                 </thead>
                 <tbody>
                     {inventory.map((item) => <InventoryTableRow
+                        key={item.id}
                         inventoryId={item.id}
                         title={item.title}
                         bookId={item.bookId}

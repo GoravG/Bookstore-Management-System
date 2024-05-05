@@ -46,14 +46,14 @@ function BookCard({ bookId, title, author, description, noOfPages, coverImage, s
                         <><h6 className='fw-bold'>Price: ₹{sellingPrice} ({calcDiscount()}% discount)</h6>
                             <h6 className='text-decoration-line-through fw-light mb-0'>MRP:₹ {mrp}</h6></>}
                 </div>
-                <div class="card-footer text-center">
+                <div className="card-footer text-center">
                     {stock == 0 ?
-                        <button type="button" class="btn btn-secondary m-1" disabled>Not Available</button>
+                        <button type="button" className="btn btn-secondary m-1" disabled>Not Available</button>
                         :
                         <>
-                            <button type="button" class="btn btn-success m-1" onClick={handleAddToCart} >Add to Cart</button>
+                            <button type="button" className="btn btn-success m-1" onClick={handleAddToCart} >Add to Cart</button>
                         </>}
-                    <button type="button" class="btn btn-warning m-1" onClick={handleViewDetails}>View Details</button>
+                    <button type="button" className="btn btn-warning m-1" onClick={handleViewDetails}>View Details</button>
                 </div>
             </div >
         </div>

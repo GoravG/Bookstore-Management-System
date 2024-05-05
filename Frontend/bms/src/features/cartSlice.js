@@ -10,9 +10,6 @@ export const cartSlice = createSlice({
     //reduceers manage the state of slice
     reducers: {
         addItem: (state, item) => {
-            console.log("Inside add item");
-            console.log(item.payload);
-
             const { bookId } = item.payload;
             const items = state.items;
             var updated = false;
@@ -28,7 +25,6 @@ export const cartSlice = createSlice({
                 state.items.push(item.payload);
         },
         updateQuantity: (state, item) => {
-            console.log(item);
             const { bookId, qty } = item.payload;
             const items = state.items;
             for (let index = 0; index < items.length; index++) {

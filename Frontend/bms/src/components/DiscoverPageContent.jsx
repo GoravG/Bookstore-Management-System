@@ -20,7 +20,6 @@ function DiscoverPageContent() {
     async function getBooks() {
         try {
             const response = await axios.request(config);
-            console.log(response.data);
             setBooks(response.data);
         }
         catch (error) {
@@ -98,9 +97,9 @@ function DiscoverPageContent() {
         <div className="container mt-2 mb-2">
             <div className="row">
                 <div className="teext-center">
-                    <button className="btn btn-light border border-2 me-2" onClick={handleSortByPriceAsc}>Sort By Price Low to High <i class="bi bi-sort-numeric-up"></i></button>
-                    <button className="btn btn-light border border-2 me-2" onClick={handleSoryByPriceDesc}>Sort By Price High to Low <i class="bi bi-sort-numeric-down-alt"></i></button>
-                    <button className="btn btn-light border border-2 me-2" onClick={handleSoryByDiscount}>Sort By Highest Discount <i class="bi bi-sort-numeric-down-alt"></i></button>
+                    <button className="btn btn-light border border-2 me-2" onClick={handleSortByPriceAsc}>Sort By Price Low to High <i className="bi bi-sort-numeric-up"></i></button>
+                    <button className="btn btn-light border border-2 me-2" onClick={handleSoryByPriceDesc}>Sort By Price High to Low <i className="bi bi-sort-numeric-down-alt"></i></button>
+                    <button className="btn btn-light border border-2 me-2" onClick={handleSoryByDiscount}>Sort By Highest Discount <i className="bi bi-sort-numeric-down-alt"></i></button>
                 </div>
                 <div className="container-fluid mt-2 mb-2">
                     <div className="row row-cols-4 g-2">
@@ -120,10 +119,10 @@ function DiscoverPageContent() {
                     </div>
                 </div>
                 <nav className='mt-2'>
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item"><button class="page-link" onClick={handlePrevButton} disabled={pageNumber == 1}>Previous</button></li>
-                        {pages.map((page) => <li class="page-item"><a class="page-link" href={'/discover/' + page}>{page}</a></li>)}
-                        <li class="page-item"><button class="page-link btn-primary" onClick={handleNextButton} disabled={pageNumber == pages.length}>Next</button></li>
+                    <ul className="pagination justify-content-center">
+                        <li className="page-item"><button className="page-link" onClick={handlePrevButton} disabled={pageNumber == 1}>Previous</button></li>
+                        {pages.map((page, index) => <li className="page-item" key={index}><a className="page-link" href={'/discover/' + page}>{page}</a></li>)}
+                        <li className="page-item"><button className="page-link btn-primary" onClick={handleNextButton} disabled={pageNumber == pages.length}>Next</button></li>
                     </ul>
                 </nav>
             </div>

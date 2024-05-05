@@ -37,9 +37,9 @@ function OrderItem({ order }) {
     }
     return (
         <>
-            <div class="card mt-2 mb-2 shadow">
-                <div class="card-body">
-                    <table class="table table-borderless">
+            <div className="card mt-2 mb-2 shadow">
+                <div className="card-body">
+                    <table className="table table-borderless">
                         <tbody>
                             <tr>
                                 <td>OrderID:</td>
@@ -76,7 +76,7 @@ function OrderItem({ order }) {
                         </tbody>
                     </table>
                     <div className='text-center'>
-                        <button type="button" class="btn btn-primary me-2" onClick={handleViewOrderDetails}>
+                        <button type="button" className="btn btn-primary me-2" onClick={handleViewOrderDetails}>
                             View Order Details
                         </button>
                         <button className="btn btn-danger" onClick={handleCancelOrder} disabled={order.orderStatus === "CANCELLED" || order.orderStatus === "DELIVERED"}>Cancel Order</button>

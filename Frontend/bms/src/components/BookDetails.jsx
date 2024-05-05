@@ -19,7 +19,6 @@ function BookDetails({ bookId }) {
         try {
             const response = await axios.request(config);
             const data = response.data;
-            console.log(data);
             setAuthor(data.author);
             setCategory(data.categoryName);
             setDesc(data.description);
@@ -42,7 +41,6 @@ function BookDetails({ bookId }) {
             setStock(data.stock);
             setTitle(data.title);
             setCoverImage(data.coverImage);
-            console.log(data.title);
         }
         catch (error) {
             console.log(error);
@@ -82,7 +80,7 @@ function BookDetails({ bookId }) {
                             <img src={imageURL} alt={title} width={220} className='rounded m-2 shadow' />
                         </div>
                         <div className="col-6">
-                            <p class="display-4 fw-bold mb-1">{title}</p>
+                            <p className="display-4 fw-bold mb-1">{title}</p>
                             <p className='text-secondary fw-normal fs-3 mb-2'>by {author}</p>
                             <p className='fs-6 mb-2'><strong>About the book: </strong>{desc}</p>
                             <p className='fs-6 mb-2'><strong>No of Pages: </strong>{noOfPages}</p>
@@ -93,7 +91,7 @@ function BookDetails({ bookId }) {
                         </div>
                         <div className="col-3">
                             {stock > 0 &&
-                                <table class="table table-borderless">
+                                <table className="table table-borderless">
                                     <tbody>
                                         <tr className='fw-bold'>
                                             <td className='text-end text-danger'>Selling Price:</td>

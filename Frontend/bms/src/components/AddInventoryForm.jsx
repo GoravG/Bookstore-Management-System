@@ -102,23 +102,23 @@ function AddInventoryForm() {
                                                 <select className="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => setBookID(e.target.value)}>
                                                     {titles.map((book) => <option key={book.id} value={book.id}>{book.title}</option>)}
                                                 </select>
-                                                <label for="floatingSelect">Select a Title</label>
+                                                <label htmlFor="floatingSelect">Select a Title</label>
                                             </div>
                                             <div className="form-floating mb-2">
                                                 <input type="number" className="form-control" id="costPrice" placeholder="Enter cost price" onChange={(e) => setCostPrice(e.target.value)} value={costPrice} min={0} step={1} required />
-                                                <label for="costPrice">Cost Price</label>
+                                                <label htmlFor="costPrice">Cost Price</label>
                                             </div>
                                             <div className="form-floating mb-2">
                                                 <input type="number" className="form-control" id="sellingPrice" onChange={(e) => setSellingPrice(e.target.value)} value={sellingPrice} required min={0} step={1} placeholder="Enter selling price" />
-                                                <label for="sellingPrice">Selling Price</label>
+                                                <label htmlFor="sellingPrice">Selling Price</label>
                                             </div>
                                             <div className="form-floating mb-2">
                                                 <input type="number" className="form-control" id="mrp" onChange={(e) => setMRP(e.target.value)} value={mrp} required min={0} step={1} placeholder="Enter MRP" />
-                                                <label for="mrp">Maximum Retail Price</label>
+                                                <label htmlFor="mrp">Maximum Retail Price</label>
                                             </div>
                                             <div className="form-floating mb-2">
                                                 <input type="number" className="form-control" id="stock" onChange={(e) => setStock(e.target.value)} value={stock} required min={0} step={1} placeholder="Enter stock" />
-                                                <label for="stock">Stock</label>
+                                                <label htmlFor="stock">Stock</label>
                                             </div>
                                         </div>
                                         <div className="d-grid text-center mb-2">

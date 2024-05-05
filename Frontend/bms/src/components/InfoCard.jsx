@@ -21,7 +21,6 @@ function InfoCard({ title, variable, url, unit }) {
         setLoading(true);
         try {
             const response = await axios.request(config);
-            console.log(response.data);
             setData(response.data);
             setLoading(false);
         }
@@ -34,20 +33,20 @@ function InfoCard({ title, variable, url, unit }) {
         getData();
     }, [])
     return (
-        (loading == true ? <div class="card text-bg-light h-100">
-            <div class="card-body">
-                <h5 class="card-title placeholder-glow">
-                    <span class="placeholder col-6"></span>
+        (loading == true ? <div className="card text-bg-light h-100">
+            <div className="card-body">
+                <h5 className="card-title placeholder-glow">
+                    <span className="placeholder col-6"></span>
                 </h5>
-                <p class="card-text placeholder-glow">
-                    <span class="placeholder col-7"></span>
+                <p className="card-text placeholder-glow">
+                    <span className="placeholder col-7"></span>
                 </p>
             </div>
         </div> :
-            <div class="card bg-light h-100">
-                <div class="card-body">
-                    < h5 class="card-title text-center" > {title}</h5 >
-                    <p class="card-text text-center">{unit} {data}</p>
+            <div className="card bg-light h-100">
+                <div className="card-body">
+                    < h5 className="card-title text-center" > {title}</h5 >
+                    <p className="card-text text-center">{unit} {data}</p>
                 </div >
             </div >)
     )

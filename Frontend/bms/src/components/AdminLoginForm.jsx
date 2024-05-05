@@ -62,21 +62,21 @@ function AdminLoginForm() {
                                         <div className="text-center mt-2 fw-bolder"><h1>Admin Login</h1></div>
                                         <div className="form-floating mb-2">
                                             <input type="email" className="form-control" id="email" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email} required />
-                                            <label for="email">Email</label>
+                                            <label htmlFor="email">Email</label>
                                         </div>
                                     </div>
                                     <div className="form-floating mb-2">
                                         <input type="password" className="form-control" id="pass" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
-                                        <label for="pass">Password</label>
+                                        <label htmlFor="pass">Password</label>
                                     </div>
                                     <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassword} />
-                                    <label className="form-check-label ms-2" for="flexCheckDefault">
+                                    <label className="form-check-label ms-2" htmlFor="flexCheckDefault">
                                         Show password
                                     </label>
                                     <div className="mb-3">
                                         <div className="d-grid gap-2 text-center">
                                             <button type="submit" className="btn btn-primary mt-2" onClick={handleSubmit}>Submit</button>
-                                            <h6 className='mt-2'>Not Admin? Go to <Link to="/user/register">User Login</Link></h6>
+                                            <h6 className='mt-2'>Not Admin? Go to <Link to="/user/login">User Login</Link></h6>
                                         </div>
                                     </div>
                                 </form>

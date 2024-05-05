@@ -84,40 +84,40 @@ function InventoryEditPage() {
             <Navbar />
             <div className="container w-50">
                 <h2 className="fw-bold text-center mt-2">Edit Inventory</h2>
-                <div class="form-floating mb-1">
-                    <input type="text" class="form-control" id="inventoryId" placeholder="InventoryID"
+                <div className="form-floating mb-1">
+                    <input type="text" className="form-control" id="inventoryId" placeholder="InventoryID"
                         value={id} readOnly disabled />
-                    <label for="inventoryId">Inventory ID</label>
+                    <label htmlFor="inventoryId">Inventory ID</label>
                 </div>
-                <div class="form-floating mb-1">
-                    <input type="text" class="form-control" id="title" placeholder="Title"
+                <div className="form-floating mb-1">
+                    <input type="text" className="form-control" id="title" placeholder="Title"
                         value={title} readOnly disabled />
-                    <label for="title">Title</label>
+                    <label htmlFor="title">Title</label>
                 </div>
-                <div class="form-floating mb-1">
-                    <input type="text" class="form-control" id="bookId" placeholder="Book ID"
+                <div className="form-floating mb-1">
+                    <input type="text" className="form-control" id="bookId" placeholder="Book ID"
                         value={bookId} readOnly disabled />
-                    <label for="bookId">Book ID</label>
+                    <label htmlFor="bookId">Book ID</label>
                 </div>
-                <div class="form-floating mb-1">
-                    <input type="number" class="form-control" id="costPrice" placeholder="Cost Price"
+                <div className="form-floating mb-1">
+                    <input type="number" className="form-control" id="costPrice" placeholder="Cost Price"
                         value={costPrice} onChange={(e) => setCostPrice(e.target.value)} />
-                    <label for="costPrice">Cost Price</label>
+                    <label htmlFor="costPrice">Cost Price</label>
                 </div>
-                <div class="form-floating mb-1">
-                    <input type="number" class="form-control" id="sellingPrice" placeholder="Selling Price"
+                <div className="form-floating mb-1">
+                    <input type="number" className="form-control" id="sellingPrice" placeholder="Selling Price"
                         value={sellingPrice} min={costPrice} max={mrp} step={1} onChange={(e) => setSellingPrice(e.target.value)} />
-                    <label for="sellingPrice">Selling Price</label>
+                    <label htmlFor="sellingPrice">Selling Price</label>
                 </div>
-                <div class="form-floating mb-1">
-                    <input type="number" class="form-control" id="mrp" placeholder="Maximum Retail Price"
+                <div className="form-floating mb-1">
+                    <input type="number" className="form-control" id="mrp" placeholder="Maximum Retail Price"
                         value={mrp} min={sellingPrice} onChange={(e) => setMrp(e.target.value)} />
-                    <label for="mrp">Maximum Retail Price</label>
+                    <label htmlFor="mrp">Maximum Retail Price</label>
                 </div>
-                <div class="form-floating mb-1">
-                    <input type="number" class="form-control" id="stock" placeholder="Stock"
+                <div className="form-floating mb-1">
+                    <input type="number" className="form-control" id="stock" placeholder="Stock"
                         value={stock} min={0} onChange={(e) => setStock(e.target.value)} />
-                    <label for="stock">Stock</label>
+                    <label htmlFor="stock">Stock</label>
                 </div>
                 <div className="d-grid">
                     <button className="btn btn-success" onClick={handleEditDetails}>Edit Details</button>

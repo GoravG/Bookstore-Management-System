@@ -85,34 +85,34 @@ function OrderEditPage() {
                     <div className="h5 text-center">Order Details</div>
                     <div className="row g-1">
                         <div className="col">
-                            <div class="form-floating mb-1">
-                                <input type="text" class="form-control" id="OrderID" placeholder="OrderID" value={orderId} disabled />
+                            <div className="form-floating mb-1">
+                                <input type="text" className="form-control" id="OrderID" placeholder="OrderID" value={orderId} disabled />
                                 <label for="OrderID">Order ID</label>
                             </div>
                         </div>
                         <div className="col">
-                            <div class="form-floating mb-1">
-                                <input type="text" class="form-control" id="userId" placeholder="userId" value={userId} disabled />
+                            <div className="form-floating mb-1">
+                                <input type="text" className="form-control" id="userId" placeholder="userId" value={userId} disabled />
                                 <label for="userId">User ID</label>
                             </div>
                         </div>
                     </div>
                     <div className="row g-1">
                         <div className="col">
-                            <div class="form-floating mb-1">
-                                <input type="text" class="form-control" id="createdAt" placeholder="createdAt" value={new Date(createdAt).toLocaleString('en-IN')} disabled />
+                            <div className="form-floating mb-1">
+                                <input type="text" className="form-control" id="createdAt" placeholder="createdAt" value={new Date(createdAt).toLocaleString('en-IN')} disabled />
                                 <label for="createdAt">Created At</label>
                             </div>
                         </div>
                         <div className="col">
-                            <div class="form-floating mb-1">
-                                <input type="text" class="form-control" id="paymentMethod" placeholder="paymentMethod" value={paymentMethod} disabled />
+                            <div className="form-floating mb-1">
+                                <input type="text" className="form-control" id="paymentMethod" placeholder="paymentMethod" value={paymentMethod} disabled />
                                 <label for="paymentMethod">Payment Method</label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-floating mb-1">
-                        <select class="form-select" id="paymentStatus" aria-label="paymentStatus" onChange={(e) => setPaymentStatus(e.target.value)}>
+                    <div className="form-floating mb-1">
+                        <select className="form-select" id="paymentStatus" aria-label="paymentStatus" onChange={(e) => setPaymentStatus(e.target.value)}>
                             <option selected>{paymentStatus}</option>
                             <option value="PENDING">PENDING</option>
                             <option value="SUCCESSFUL">SUCCESSFUL</option>
@@ -120,8 +120,8 @@ function OrderEditPage() {
                         </select>
                         <label for="paymentStatus">Payment Status</label>
                     </div>
-                    <div class="form-floating mb-1">
-                        <select class="form-select" id="orderStatus" aria-label="orderStatus" onChange={(e) => setOrderStatus(e.target.value)}>
+                    <div className="form-floating mb-1">
+                        <select className="form-select" id="orderStatus" aria-label="orderStatus" onChange={(e) => setOrderStatus(e.target.value)}>
                             <option selected>{orderStatus}</option>
                             <option value="PENDING">PENDING</option>
                             <option value="PROCESSING">PROCESSING</option>
@@ -137,7 +137,7 @@ function OrderEditPage() {
                 </div>
                 <div className='col-6'>
                     <div className="h5 text-center">Order Summery</div>
-                    <table class="table table-bordered table-hover text-center">
+                    <table className="table table-bordered table-hover text-center">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>

@@ -30,7 +30,6 @@ function AddNewBookForm() {
         await axios.request(config)
             .then((response) => {
                 setCategories(response.data);
-                console.log(response.data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -56,7 +55,6 @@ function AddNewBookForm() {
     const uploadFormData = async (e) => {
         const myHeaders = new Headers();
         const token = sessionStorage.getItem("token");
-
         const formdata = new FormData();
         formdata.append('isbn', isbn);
         formdata.append('title', title);
@@ -102,7 +100,7 @@ function AddNewBookForm() {
                     </div>
                     <div className="col-8">
                         <div className="container  p-3">
-                            <form action="submit" enctype="multipart/form-data">
+                            <form action="submit" encType="multipart/form-data">
                                 <div className="mb-3">
                                     <div className="text-center mt-2 fw-bolder">
                                         <h1>Add New Book</h1>
@@ -111,13 +109,13 @@ function AddNewBookForm() {
                                         <div className="col">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="isbn" placeholder="Enter isbn" onChange={(e) => setIsbn(e.target.value)} value={isbn} required />
-                                                <label for="isbn">ISBN</label>
+                                                <label htmlFor="isbn">ISBN</label>
                                             </div>
                                         </div>
                                         <div className="col">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="title" placeholder="Enter title" onChange={(e) => setTitle(e.target.value)} value={title} required />
-                                                <label for="title">Title</label>
+                                                <label htmlFor="title">Title</label>
                                             </div>
                                         </div>
                                     </div>
@@ -126,30 +124,30 @@ function AddNewBookForm() {
                                     <div className="col">
                                         <div className="form-floating mb-2">
                                             <input type="text" className="form-control" id="author" placeholder="Enter author" onChange={(e) => setAuthor(e.target.value)} value={author} required />
-                                            <label for="author">Author</label>
+                                            <label htmlFor="author">Author</label>
                                         </div>
                                     </div>
                                     <div className="col">
                                         <div className="form-floating mb-2">
                                             <input type="number" className="form-control" id="noOfPages" placeholder="Enter No Of Pages" onChange={(e) => setNoOfPages(e.target.value)} value={noOfPages} required min={0} />
-                                            <label for="noOfPages">No of Pages</label>
+                                            <label htmlFor="noOfPages">No of Pages</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-floating mb-2">
-                                    <textarea type="text" className="form-control" id="title" placeholder="Enter desc" onChange={(e) => setDesc(e.target.value)} value={desc} required style={{ height: 150 }} />
-                                    <label for="desc">Description</label>
+                                    <textarea type="text" className="form-control" id="desc" placeholder="Enter desc" onChange={(e) => setDesc(e.target.value)} value={desc} required style={{ height: 150 }} />
+                                    <label htmlFor="desc">Description</label>
                                 </div>
 
                                 <div className="mb-3">
-                                    <label for="coverImage" className="form-label">Choose Cover Image</label>
+                                    <label htmlFor="coverImage" className="form-label">Choose Cover Image</label>
                                     <input className="form-control" type="file" id="coverImage" onChange={(e) => handleCoverImageUpload(e)} />
                                 </div>
                                 <div className="form-floating">
                                     <select className="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={(e) => handleTextBoxChange(e)}>
                                         {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
                                     </select>
-                                    <label for="floatingSelect">Select a Category</label>
+                                    <label htmlFor="floatingSelect">Select a Category</label>
                                 </div>
                                 <div className="mb-3">
                                     <div className="d-grid gap-2 text-center">

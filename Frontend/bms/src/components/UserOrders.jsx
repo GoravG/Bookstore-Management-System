@@ -32,8 +32,8 @@ function UserOrders({ pageNumber }) {
             <div className='container'>
                 {orders.length == 0 && <div className='text-center fs-2 fw-bold mt-5'>
                     You have no orders currently.</div>}
-                <div class="row">
-                    <div class="col">
+                <div className="row">
+                    <div className="col">
                         {orders.map((order) =>
                             <OrderItem key={order.orderId} order={order} />
                         )}

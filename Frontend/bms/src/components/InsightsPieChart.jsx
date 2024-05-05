@@ -20,7 +20,6 @@ function InsightsPieChart({ title }) {
     async function getData() {
         try {
             const response = await axios.request(config);
-            console.log(response.data);
             setData(response.data);
         }
         catch (error) {
@@ -31,8 +30,8 @@ function InsightsPieChart({ title }) {
         getData();
     }, [])
     return (
-        <div class="card bg-light h-100">
-            <div class="card-body">
+        <div className="card bg-light h-100">
+            <div className="card-body">
                 <h5 className='cart-title'>{title}</h5>
                 <PieChart
                     colors={["#f94144", "#f8961e", "#f9c74f", "#90be6d", "#577590"]}
