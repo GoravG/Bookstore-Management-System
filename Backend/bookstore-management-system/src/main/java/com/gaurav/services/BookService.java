@@ -26,7 +26,6 @@ public class BookService {
 	}
 
 	public List<BookTitleDTO> getAllBookTitles() {
-//		return bookRepo.getAllTitles().stream().map((book)->mapper.map(book, BookTitleDTO.class)).toList();
 		return bookRepo.findAll().stream().map((book) -> mapper.map(book, BookTitleDTO.class)).toList();
 	}
 

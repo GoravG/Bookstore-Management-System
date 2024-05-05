@@ -30,20 +30,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			// => req header contains JWT
 			String jwt = authHeader.substring(7);
 			// validate JWT
-			System.out.println("Class : JWTAuthFIlter, method : doFileterInternal " + jwt);
 			Claims payloadClaims = utils.validateJwtToken(jwt);
 			// get user name from the claims
 			String email = utils.getUserNameFromJwtToken(payloadClaims);
 			// get granted authorities as a custom claim
 			List<GrantedAuthority> authorities = utils.getAuthoritiesFromClaims(payloadClaims);
-			System.out.println("Authorities:"+authorities);
 			// add username/email n granted authorities in Authentication object
 			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, null,
 					authorities);
 			// save this auth token under spring sec so that subsequent filters will NOT
 			// retry the auth again
 			SecurityContextHolder.getContext().setAuthentication(token);
-			System.out.println("saved auth token in sec ctx");
 		}
 		filterChain.doFilter(request, response);// to continue with remaining chain of spring sec filters
 	}

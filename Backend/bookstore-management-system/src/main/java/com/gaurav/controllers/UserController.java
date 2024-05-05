@@ -39,7 +39,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	OrderService orderService;
 
@@ -65,67 +65,64 @@ public class UserController {
 		return ResponseEntity.ok(utils.generateJwtToken(verifiedAuth));
 	}
 
-	@GetMapping("/dashboard")
-	public ResponseEntity<?> userDashboard() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null)
-			return ResponseEntity.ok("Happy");
-		return ResponseEntity.ok("NOt Happy");
-	}
-
 	@PostMapping("/place_order")
-	public ResponseEntity<?> placeOrder(@RequestBody @Valid OrderDTO order){
+	public ResponseEntity<?> placeOrder(@RequestBody @Valid OrderDTO order) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user=userService.findUserByEmail(auth.getName());
-		Order placedOrder=orderService.placeOrder(order, user);
-		if(placedOrder!=null)
-			return ResponseEntity.status(HttpStatus.CREATED).body("Order with Order ID:"+placedOrder.getId()+" placed successfully");
+		User user = userService.findUserByEmail(auth.getName());
+		Order placedOrder = orderService.placeOrder(order, user);
+		if (placedOrder != null)
+			return ResponseEntity.status(HttpStatus.CREATED)
+					.body("Order with Order ID:" + placedOrder.getId() + " placed successfully");
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to Place Order");
 	}
+
 	@GetMapping("/orders/{pageNumber}")
-	public ResponseEntity<?> getAllOrdersOfUser(@PathVariable Integer pageNumber){
-		System.out.println("In Orders PageNumber:"+pageNumber);
+	public ResponseEntity<?> getAllOrdersOfUser(@PathVariable Integer pageNumber) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("Email:"+auth.getName());
-		User user=userService.findUserByEmail(auth.getName());
-		System.out.println("UserID:"+user.getId());
-		List<OrderDetailDTO> orders=orderService.findOrdersByUserId(user.getId(),pageNumber-1);
+		User user = userService.findUserByEmail(auth.getName());
+		List<OrderDetailDTO> orders = orderService.findOrdersByUserId(user.getId(), pageNumber - 1);
 		return ResponseEntity.status(HttpStatus.OK).body(orders);
 	}
+
 	@GetMapping("/order_count")
-	public ResponseEntity<?> getNoOfOrdersOfUser(){
+	public ResponseEntity<?> getNoOfOrdersOfUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user=userService.findUserByEmail(auth.getName());
-		Long orderCount=orderService.getCountOfOrdersByUserId(user.getId());
+		User user = userService.findUserByEmail(auth.getName());
+		Long orderCount = orderService.getCountOfOrdersByUserId(user.getId());
 		return ResponseEntity.status(HttpStatus.OK).body(orderCount);
 	}
+
 	@GetMapping("/order/{orderId}")
-	public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId){
+	public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user=userService.findUserByEmail(auth.getName());
-		Long userId=user.getId();
-		boolean orderExists=orderService.doesOrderBelongToUser(orderId,userId);
-		if(!orderExists)
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Order with order id "+orderId+" is not your order");
+		User user = userService.findUserByEmail(auth.getName());
+		Long userId = user.getId();
+		boolean orderExists = orderService.doesOrderBelongToUser(orderId, userId);
+		if (!orderExists)
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body("Order with order id " + orderId + " is not your order");
 		Order order = orderService.getOrderById(orderId);
 		OrderCompleteDetailsDTO dto = new OrderCompleteDetailsDTO(order.getId(), order.getUser().getId(),
 				order.getCreatedAt(), order.getPaymentMethod(), order.getPaymentStatus(), order.getOrderStatus(),
 				order.getTotalAmount(),
-				order.getOrderItems().stream().map((item) -> 
-				new OrderItemDetailsDTO(item.getId(),item.getBook().getId(),
-						item.getBook().getTitle(), item.getQuantity(), item.getSellingPrice(), item.getCostPrice()))
+				order.getOrderItems().stream()
+						.map((item) -> new OrderItemDetailsDTO(item.getId(), item.getBook().getId(),
+								item.getBook().getTitle(), item.getQuantity(), item.getSellingPrice(),
+								item.getCostPrice()))
 						.toList());
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
 	}
+
 	@DeleteMapping("/order/{orderId}")
-	public ResponseEntity<?> cancelUserOrder(@PathVariable Long orderId){
+	public ResponseEntity<?> cancelUserOrder(@PathVariable Long orderId) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user=userService.findUserByEmail(auth.getName());
-		Long userId=user.getId();
-		boolean orderExists=orderService.doesOrderBelongToUser(orderId,userId);
-		if(!orderExists)
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Cannot cancel order with order id "+orderId+" is not your order");
+		User user = userService.findUserByEmail(auth.getName());
+		Long userId = user.getId();
+		boolean orderExists = orderService.doesOrderBelongToUser(orderId, userId);
+		if (!orderExists)
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body("Cannot cancel order with order id " + orderId + " is not your order");
 		Order order = orderService.getOrderById(orderId);
 		orderService.cancelOrder(order);
 		return ResponseEntity.status(HttpStatus.OK).body("Order Cancelled Successfully");

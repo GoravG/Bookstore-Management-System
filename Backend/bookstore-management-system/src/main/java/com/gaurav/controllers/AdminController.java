@@ -96,13 +96,6 @@ public class AdminController {
 
 	@PostMapping("/add_book")
 	public ResponseEntity<?> addBook(BookDTO req) throws IOException {
-		log.info(req.getIsbn());
-		log.info(req.getTitle());
-		log.info(req.getAuthor());
-		log.info(req.getDescription());
-		log.info(req.getCoverImage().getContentType());
-		log.info(req.getCategoryId());
-		System.out.println("In Add Book");
 		Book book = new Book();
 		book.setIsbn(req.getIsbn());
 		book.setAuthor(req.getAuthor());

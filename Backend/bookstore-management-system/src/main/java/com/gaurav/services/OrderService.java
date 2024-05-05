@@ -63,7 +63,6 @@ public class OrderService {
 		order.setPaymentStatus(PaymentStatus.PENDING);
 		for (int i = 0; i < orderItemsDTO.size(); i++) {
 			int index = i;
-			// DTO specific
 			Long bookID = orderItemsDTO.get(index).getBookId();
 			Integer quantity = orderItemsDTO.get(index).getQuantity();
 			Long amount = orderItemsDTO.get(index).getAmount();
@@ -144,9 +143,7 @@ public class OrderService {
 
 	public Long getLastXDayOrders(Long lastDays) {
 		LocalDateTime startTime = LocalDateTime.now();
-		System.out.println("Start:"+startTime);
         LocalDateTime endTime = LocalDate.now().atStartOfDay().minusDays(lastDays);
-        System.out.println("End:"+endTime);
         Timestamp s = Timestamp.valueOf(startTime);
         Timestamp e = Timestamp.valueOf(endTime);
 		return orderRepository.countByCreatedAtBetween(e,s);
