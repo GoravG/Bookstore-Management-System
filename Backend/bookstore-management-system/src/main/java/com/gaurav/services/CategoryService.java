@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.gaurav.custom_exceptions.ResourceNotFoundException;
 import com.gaurav.dtos.BookCardDTO;
-import com.gaurav.entities.Book;
 import com.gaurav.entities.Category;
 import com.gaurav.entities.Inventory;
 import com.gaurav.repositories.CategoryRepository;

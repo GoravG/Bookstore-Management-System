@@ -1,5 +1,6 @@
 package com.gaurav.custom_exceptions;
 
+@SuppressWarnings("serial")
 public class StockNotAvailableException extends RuntimeException {
 
 	public StockNotAvailableException(Long bookID, Integer stock, Integer quantity) {

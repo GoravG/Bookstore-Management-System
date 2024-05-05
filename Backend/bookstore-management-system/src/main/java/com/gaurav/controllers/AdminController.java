@@ -43,7 +43,6 @@ import com.gaurav.entities.Category;
 import com.gaurav.entities.Inventory;
 import com.gaurav.entities.Order;
 import com.gaurav.entities.OrderStaus;
-import com.gaurav.entities.PaymentStatus;
 import com.gaurav.security.JwtUtils;
 import com.gaurav.services.BookService;
 import com.gaurav.services.CategoryService;
