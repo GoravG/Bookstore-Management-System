@@ -99,8 +99,9 @@ public class OrderService {
 		return ordered;
 	}
 
-	public List<OrderDetailDTO> findAllOrders() {
-		return orderRepository.findAll().stream()
+	public List<OrderDetailDTO> findAllOrdersByPageNumber(Long pageNumber) {
+		Pageable pageRequest = PageRequest.of(pageNumber.intValue(), 12,Sort.by(Sort.Direction.DESC,"id"));
+		return orderRepository.findAll(pageRequest).stream()
 				.map((order) -> new OrderDetailDTO(order.getId(), order.getUser().getId(), order.getAddress(),
 						order.getCreatedAt(), order.getUpdatedAt(), order.getPaymentMethod(), order.getPaymentStatus(),
 						order.getOrderStatus(), order.getTotalAmount()))
@@ -190,5 +191,9 @@ public class OrderService {
 		Long shippedCount= orderRepository.countByOrderStatus(OrderStaus.SHIPPED);
 		stats.add(new KeyAndValue(OrderStaus.SHIPPED.toString(), shippedCount.toString()));
 		return stats;
+	}
+
+	public Long getCountOfAllOrders() {
+		return orderRepository.count();
 	}
 }

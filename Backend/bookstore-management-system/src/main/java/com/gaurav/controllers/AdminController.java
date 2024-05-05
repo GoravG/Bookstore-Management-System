@@ -208,10 +208,16 @@ public class AdminController {
 				.body("Inventory with ID: " + req.getInventoryId() + " edited successfully");
 	}
 
-	@GetMapping("/orders")
-	public ResponseEntity<?> getAllOrders() {
-		List<OrderDetailDTO> orders = orderService.findAllOrders();
+	@GetMapping("/orders/{pageNo}")
+	public ResponseEntity<?> getAllOrders(@PathVariable Long pageNo) {
+		List<OrderDetailDTO> orders = orderService.findAllOrdersByPageNumber(pageNo);
 		return ResponseEntity.status(HttpStatus.OK).body(orders);
+	}
+	@GetMapping("/orders/no_of_pages")
+	public ResponseEntity<?> getNumberOfPagesOfOrders(){
+		Long totalOrders=orderService.getCountOfAllOrders();
+		Double numberOfPages=(double)Math.ceil(totalOrders.doubleValue()/12.0);
+		return ResponseEntity.status(HttpStatus.OK).body(numberOfPages);
 	}
 
 	@GetMapping("/order/{orderId}")
