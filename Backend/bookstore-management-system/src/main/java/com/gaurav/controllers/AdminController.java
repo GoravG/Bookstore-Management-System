@@ -50,12 +50,10 @@ import com.gaurav.services.InventoryService;
 import com.gaurav.services.OrderService;
 
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/admin")
 @CrossOrigin("*")
-@Slf4j
 public class AdminController {
 
 	@Autowired
@@ -129,8 +127,6 @@ public class AdminController {
 	public ResponseEntity<?> addOrUpdateInventory(@Valid @RequestBody InventoryDTO req) {
 		Long cost = req.getCostPrice();
 		Long selling = req.getSellingPrice();
-		System.out.println(req.getBookId().getClass());
-		log.info(req.getMrp().toString());
 		if (cost > selling)
 			throw new WannaGetIntoLossException();
 		Book book = bookService.findById(req.getBookId());

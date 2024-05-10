@@ -28,8 +28,8 @@ public class SecurityConfig {
 				// as this is a REST Application
 				.authorizeHttpRequests((authorize) -> authorize // again, old method is deprecated so this is the latest
 																// API
-						.requestMatchers("/api/user/register", "/swagger-ui/**", "/v3/api-docs/**", "/api/user/signin",
-								"/api/services/newsletter", "/api/admin/signin", "/api/commons/categories",
+						.requestMatchers("/api/user/register","/actuator/health", "/swagger-ui/**", "/v3/api-docs/**", "/api/user/signin",
+								"/api/services/newsletter", "/api/admin/signin",
 								"/api/commons/**")
 						.permitAll() // ant matchers is also deprecated, so this is the replacement
 						.requestMatchers("/api/admin/add_book", "/api/admin/add_or_update_inventory",
