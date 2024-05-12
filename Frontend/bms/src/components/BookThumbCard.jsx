@@ -8,7 +8,7 @@ function BookThumbCard({ ttl, ms, me }) {
     const [title, setTitle] = useState("");
     const [imgURL, setImgURL] = useState("");
     const [author, setAuthor] = useState("");
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const navigate = useNavigate();
 
 

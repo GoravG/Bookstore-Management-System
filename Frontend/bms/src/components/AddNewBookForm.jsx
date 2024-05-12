@@ -13,7 +13,7 @@ function AddNewBookForm() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [catId, setCatId] = useState("");
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     useEffect(() => {
         loadCategories();
     }, [])

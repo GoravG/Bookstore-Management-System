@@ -9,7 +9,7 @@ import Footer from './Footer';
 
 export default function UserLoginFrom() {
     const navigate = useNavigate();
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleSubmit = (e) => {

@@ -8,7 +8,7 @@ function EditBookForm() {
         getBookDetails();
     }
     const getBookDetails = () => {
-        const baseURL = process.env.REACT_APP_API_URL;
+        const baseURL = window._env_.API_URL;
         const token = sessionStorage.getItem("token");
         let config = {
             method: 'get',
@@ -54,7 +54,7 @@ function EditBookForm() {
             });
     }
     const updateBookDetails = async () => {
-        const baseURL = process.env.REACT_APP_API_URL;
+        const baseURL = window._env_.API_URL;
         const token = sessionStorage.getItem("token");
         const data = new FormData();
         const headers = new Headers();

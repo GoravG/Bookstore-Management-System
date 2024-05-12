@@ -9,7 +9,7 @@ function UserOrderDetailsPage() {
     const { orderNumber } = useParams();
     const [orderDetails, setOrderDetails] = useState();
     const getOrderDetails = () => {
-        const baseURL = process.env.REACT_APP_API_URL;
+        const baseURL = window._env_.API_URL;
         let config = {
             method: 'get',
             maxBodyLength: Infinity,

@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 function UserRegistrationForm() {
     const navigate = useNavigate();
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");

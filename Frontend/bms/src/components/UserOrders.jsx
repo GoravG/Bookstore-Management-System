@@ -3,7 +3,7 @@ import OrderItem from './OrderItem';
 import axios from 'axios';
 
 function UserOrders({ pageNumber }) {
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const [orders, setOrders] = useState([]);
     async function getOrders() {
         let config = {

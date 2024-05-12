@@ -4,7 +4,7 @@ import InventoryTableRow from './InventoryTableRow';
 
 function InventoryTable() {
     const [inventory, setInventory] = useState([]);
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const token = sessionStorage.getItem("token");
     useEffect(() => {
         getInventory();

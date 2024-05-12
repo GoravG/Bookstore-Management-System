@@ -7,7 +7,7 @@ function OrderItem({ order }) {
     const navigate = useNavigate();
     const handleCancelOrder = () => {
         if (window.confirm('Are you sure you want to cancel this order?')) {
-            const baseURL = process.env.REACT_APP_API_URL;
+            const baseURL = window._env_.API_URL;
             let config = {
                 method: 'delete',
                 maxBodyLength: Infinity,

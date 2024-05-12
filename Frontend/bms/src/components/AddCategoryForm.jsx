@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 function AddCategoryForm() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
 
     const submitForm = async () => {
         const token = sessionStorage.getItem("token");

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addItem } from '../features/cartSlice';
 function BookDetails({ bookId }) {
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     let config = {
         method: 'get',
         maxBodyLength: Infinity,

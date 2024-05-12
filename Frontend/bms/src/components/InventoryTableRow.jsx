@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function InventoryTableRow({ inventoryId, title, bookId, costPrice, sellingPrice, stock, mrp }) {
     const navigate = useNavigate();
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const token = sessionStorage.getItem("token");
     let config = {
         method: 'delete',

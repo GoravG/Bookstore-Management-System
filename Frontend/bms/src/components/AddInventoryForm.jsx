@@ -3,7 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 
 function AddInventoryForm() {
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const [loading, setLoading] = useState(false);
     const [titles, setTitles] = useState([]);
     const token = sessionStorage.getItem("token");

@@ -10,7 +10,7 @@ function OrdersTable() {
     const [dep, setDep] = useState(false);
     const { pageNumber } = useParams()
     const [orders, setOrders] = useState([]);
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const token = sessionStorage.getItem("token");
     const [pages, setPages] = useState([]);
 

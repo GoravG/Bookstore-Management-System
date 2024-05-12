@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import UserOrders from '../components/UserOrders';
 
 function UserOrdersPage() {
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const [pages, setPages] = useState([]);
     const { pageNumber } = useParams();
     async function getNoOfPages() {

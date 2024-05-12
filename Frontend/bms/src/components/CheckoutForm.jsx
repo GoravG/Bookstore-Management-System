@@ -15,7 +15,7 @@ function CheckoutForm() {
     const [paymentMethod, setPaymentMethod] = useState("CASH");
     const dispatch = useDispatch();
 
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const token = sessionStorage.getItem("token");
     const isLoggedIn = () => {
         const token = sessionStorage.getItem('token');

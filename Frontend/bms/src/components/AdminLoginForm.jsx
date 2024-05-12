@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 function AdminLoginForm() {
     const navigate = useNavigate();
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     var isPassword = true;

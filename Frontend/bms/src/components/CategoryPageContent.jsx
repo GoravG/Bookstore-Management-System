@@ -5,7 +5,7 @@ import BookCard from './BookCard';
 function CategoryPageContent({ categoryId }) {
     const [books, setBooks] = useState([]);
     const getBooksByCategory = () => {
-        const baseURL = process.env.REACT_APP_API_URL;
+        const baseURL = window._env_.API_URL;
         let config = {
             method: 'get',
             maxBodyLength: Infinity,

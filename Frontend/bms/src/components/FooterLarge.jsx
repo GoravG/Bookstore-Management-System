@@ -13,7 +13,7 @@ function FooterLarge() {
         setEmail("");
     }
     const apiCall = async () => {
-        const baseURL = process.env.REACT_APP_API_URL;
+        const baseURL = window._env_.API_URL;
         let data = JSON.stringify({
             "email": email
         });

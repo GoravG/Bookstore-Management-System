@@ -1,5 +1,18 @@
 version: '3.8'
 services:
+  db:
+    build: ./db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: manager
+      MYSQL_DATABASE: bms
+      MYSQL_PASSWORD: manager
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/myback.sql:/docker-entrypoint-initdb.d/in2c.sql
+  
   backend:
     build: ./Backend/bookstore-management-system
     ports:
@@ -19,28 +32,15 @@ services:
     ports:
       - "3000:80"
     environment:
-      BACKEND_HOST: backend
+      BACKEND_HOST: ${LOCAL_IP}
       BACKEND_PORT: 8080
-      REACT_APP_API_URL: http://backend:8080/api/
+      API_URL: http://${LOCAL_IP}:8080/api/
     depends_on:
       backend:
         condition: service_healthy
       db:
         condition: service_healthy
     restart: on-failure
-
-  db:
-    build: ./db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: manager
-      MYSQL_DATABASE: bms
-      MYSQL_PASSWORD: manager
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./db/myback.sql:/docker-entrypoint-initdb.d/in2c.sql
-
+    
 volumes:
   mysql_data:

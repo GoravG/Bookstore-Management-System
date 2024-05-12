@@ -9,7 +9,7 @@ function DiscoverPageContent() {
     const [books, setBooks] = useState([]);
     const { pageNumber } = useParams();
     const [pages, setPages] = useState([]);
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     let config = {
         method: 'get',
         maxBodyLength: Infinity,

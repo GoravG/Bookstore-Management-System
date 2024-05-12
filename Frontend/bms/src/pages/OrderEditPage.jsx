@@ -13,7 +13,7 @@ function OrderEditPage() {
     const [orderStatus, setOrderStatus] = useState("");
     const [totalAmount, setTotalAmount] = useState("");
     const [items, setItems] = useState([]);
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
 
 
     async function getOrderDetails() {

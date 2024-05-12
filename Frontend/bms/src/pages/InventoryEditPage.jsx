@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 function InventoryEditPage() {
     const { inventoryId } = useParams();
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const [id, setId] = useState("");
     const [title, setTitle] = useState("");
     const [bookId, setBookId] = useState();
@@ -41,7 +41,7 @@ function InventoryEditPage() {
         }
     }
     const handleEditDetails = () => {
-        const baseURL = process.env.REACT_APP_API_URL;
+        const baseURL = window._env_.API_URL;
         let data = JSON.stringify({
             "inventoryId": inventoryId,
             "costPrice": costPrice,

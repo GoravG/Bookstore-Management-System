@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 function InsightsPieChart({ title }) {
     const [data, setData] = useState([]);
-    const baseURL = process.env.REACT_APP_API_URL;
+    const baseURL = window._env_.API_URL;
     const token = sessionStorage.getItem("token");
 
     let config = {
