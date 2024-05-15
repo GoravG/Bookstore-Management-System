@@ -13,6 +13,8 @@ get_local_ip() {
     ip route get 1 | awk '{print $7; exit}'
 }
 
+service mysql stop0
+
 # Trap SIGINT signal (Ctrl+C) and call cleanup function
 trap cleanup SIGINT
 
@@ -41,18 +43,20 @@ if ! command -v docker &> /dev/null; then
 else
     echo "Docker is already installed."
 fi
-# Build Docker Compose services
-echo "Building Docker Compose services..."
-sudo docker compose build
-echo "Docker Compose services have been built successfully."
-sudo docker compose up -d
 
-# Bring up Docker Compose services in detached mode
-echo "Bringing up Docker Compose services..."
+LOCAL_IP=$(hostname -I | awk '{print $1}')
+
+# Inject the local IP address into the Docker Compose file
+sudo export LOCAL_IP=$(hostname -I | awk '{print $1}')
+
+echo $LOCAL_IP
+
+sudo -E LOCAL_IP=$LOCAL_IP docker compose up -d
+
+echo "Docker Compose services have been built successfully."
+
 sudo docker compose up -d
 echo "Docker Compose services have been started successfully."
-
-local_ip=$(get_local_ip)
 
 # Display custom message after successfully bringing up Docker Compose services
 echo "   ┌───────────────────────────────────────────┐"
@@ -60,9 +64,8 @@ echo "   │                                           │"
 echo "   │   Serving!                                │"
 echo "   │                                           │"
 echo "   │   - Local:    http://localhost:3000       │"
-echo "   │   - Network:  http://$local_ip:3000       │"
+echo "   │   - Network:  http://$local_ip:3000   │"
 echo "   │                                           │"
-echo "   │   Copied local address to clipboard!      │"
 echo "   │                                           │"
 echo "   └───────────────────────────────────────────┘"
 
