@@ -31,6 +31,7 @@ A live demo of the application can be found [![here](https://img.youtube.com/vi/
 ### Third-Party Libraries
 - dotenv
 - react-toastify
+- react-redux
 
 ## Installation Instructions
 
