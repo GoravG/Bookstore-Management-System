@@ -1,6 +1,6 @@
 # BookStore Management System
 
-![Build](https://github.com/GoravG/Bookstore-Management-System/workflows/Build/badge.svg)
+![docker-build](https://github.com/GoravG/Bookstore-Management-System/workflows/docker-build/badge.svg)
 
 ## Description
 The Bookstore Management System is a web application designed to help manage a bookstore. It provides features to manage books, authors, customers, and sales transactions. The system aims to simplify the process of managing a bookstore and enhance the customer experience.
