@@ -27,6 +27,7 @@ A live demo of the application can be found [![here](https://img.youtube.com/vi/
 ### Tools
 - Docker
 - Git
+- GitHub Actions
 
 ### Third-Party Libraries
 - dotenv
@@ -63,7 +64,6 @@ sudo docker-compose down
 
 ### 2. Accessing The Application
 - Once the application is running, you can access it in your web browser at: http://localhost:3000 or link provided by script
-
 
 ## Contributing
 
